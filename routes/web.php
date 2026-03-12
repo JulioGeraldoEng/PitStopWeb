@@ -18,3 +18,22 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Rotas protegidas (só para usuários logados)
+Route::middleware(['auth'])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    // Recursos do sistema
+    Route::resource('clientes', ClienteController::class);
+    Route::resource('produtos', ProdutoController::class);
+    Route::resource('vendas', VendaController::class);
+    Route::resource('recebimentos', RecebimentoController::class);
+});
+
+// Redireciona raiz para dashboard ou login
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
