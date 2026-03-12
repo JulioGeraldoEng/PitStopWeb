@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/recebimento.css') }}">
+@endpush
+
 @section('content')
 <div class="container">
     <h1>Recebimentos</h1>

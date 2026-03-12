@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/produto.css') }}">
+@endpush
+
 @section('content')
 <div class="container">
     <h1>{{ isset($produto) ? 'Editar' : 'Novo' }} Produto</h1>

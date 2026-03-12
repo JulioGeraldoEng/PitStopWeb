@@ -5,9 +5,12 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\VendaController;
 use App\Http\Controllers\RecebimentoController;
+use App\Http\Controllers\RelatorioController;
+use App\Http\Controllers\WhatsAppController;
+use App\Http\Controllers\SobreController;
 use Illuminate\Support\Facades\Route;
 
-// Página inicial redireciona para dashboard se logado, ou login se não
+// Página inicial redireciona para dashboard
 Route::get('/', function () {
     return redirect('/dashboard');
 });
@@ -19,7 +22,7 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
     
-    // Perfil
+    // Perfil (do Breeze)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -28,15 +31,20 @@ Route::middleware('auth')->group(function () {
     Route::resource('clientes', ClienteController::class);
     Route::resource('produtos', ProdutoController::class);
     Route::resource('vendas', VendaController::class);
-    Route::resource('recebimentos', RecebimentoController::class);
-
-    Route::resource('produtos', ProdutoController::class);
-
-    Route::resource('vendas', VendaController::class);
-
     Route::resource('recebimentos', RecebimentoController::class)->only(['index']);
-
-    Route::get('/relatorios', [App\Http\Controllers\RelatorioController::class, 'index'])->name('relatorios.index');
+    
+    // Relatórios
+    Route::get('/relatorios', [RelatorioController::class, 'index'])->name('relatorios.index');
+    
+    // WhatsApp
+    Route::get('/whatsapp', function () {
+        return view('whatsapp.index');
+    })->name('whatsapp.index');
+    
+    // Sobre
+    Route::get('/sobre', function () {
+        return view('sobre.index');
+    })->name('sobre.index');
 });
 
 require __DIR__.'/auth.php';

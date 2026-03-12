@@ -1,0 +1,62 @@
+/* Container da Tabela */
+#clientesContainer {
+  max-width: 900px;
+  margin: 30px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Tabela */
+#tabelaClientes {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+#tabelaClientes th {
+  background-color: #0078d7;
+  color: white;
+  padding: 12px;
+  text-align: center;
+}
+
+#tabelaClientes td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+#tabelaClientes input[type="text"] {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Botões na tabela */
+#tabelaClientes button {
+  padding: 6px 12px;
+  margin: 2px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#tabelaClientes button:hover {
+  background-color: #218838;
+}
+
+#tabelaClientes button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+#tabelaClientes button:nth-child(2):hover {
+  background-color: #c82333;
+}

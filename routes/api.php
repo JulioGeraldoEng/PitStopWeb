@@ -32,3 +32,30 @@ Route::put('/recebimentos/{id}', [RecebimentoController::class, 'update']);
 Route::get('/relatorios/vendas', [RelatorioController::class, 'vendas']);
 Route::post('/relatorios/pdf', [RelatorioController::class, 'gerarPDF']);
 Route::get('/relatorios/pdf/{arquivo}', [RelatorioController::class, 'downloadPDF']);
+
+// Dashboard
+Route::prefix('dashboard')->group(function () {
+    Route::get('/vendas-hoje', function () {
+        $total = \App\Models\Venda::whereDate('data', today())->count();
+        return response()->json(['total' => $total]);
+    });
+    
+    Route::get('/vendas-mes', function () {
+        $total = \App\Models\Venda::whereMonth('data', now()->month)
+            ->whereYear('data', now()->year)
+            ->count();
+        return response()->json(['total' => $total]);
+    });
+    
+    Route::get('/vendas-total', function () {
+        $total = \App\Models\Venda::count();
+        return response()->json(['total' => $total]);
+    });
+    
+    Route::get('/vendas-por-status', function () {
+        $status = \App\Models\Recebimento::select('status', \DB::raw('count(*) as total'))
+            ->groupBy('status')
+            ->get();
+        return response()->json($status);
+    });
+});

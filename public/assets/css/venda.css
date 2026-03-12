@@ -1,0 +1,126 @@
+/* Tabela de venda */
+#tabela-venda1,
+#tabela-venda {
+  margin-top: 30px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabela-venda th,
+.tabela-venda td {
+  border: 1px solid #ccc;
+  padding: 4px 6px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.tabela-venda th {
+  background-color: #0078d7;
+  color: white;
+}
+
+/* Colunas específicas */
+.tabela-venda th:nth-child(1),
+.tabela-venda td:nth-child(1) {
+  width: 20%;
+}
+
+.tabela-venda th:nth-child(2),
+.tabela-venda td:nth-child(2) {
+  width: 20%;
+}
+
+.tabela-venda th:nth-child(3),
+.tabela-venda td:nth-child(3) {
+  width: 10%;
+}
+
+.tabela-venda th:nth-child(4),
+.tabela-venda td:nth-child(4) {
+  width: 10%;
+}
+
+.tabela-venda th:nth-child(5),
+.tabela-venda td:nth-child(5) {
+  width: 10%;
+}
+
+.tabela-venda th:nth-child(6),
+.tabela-venda td:nth-child(6) {
+  width: 10%;
+}
+
+.tabela-venda th:nth-child(7),
+.tabela-venda td:nth-child(7) {
+  width: 20%;
+}
+
+/* Resumo */
+.resumo-venda {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.resumo-venda p {
+  margin: 6px 0;
+  font-size: 1.1em;
+  color: #0742c4;
+}
+
+/* Autocomplete (cliente e produto) */
+#cliente-input-container,
+#produto-input-container {
+  position: relative;
+}
+
+#sugestoes-cliente,
+#sugestoes-produto {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+}
+
+#sugestoes-cliente .sugestao,
+#sugestoes-produto .sugestao {
+  padding: 8px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+#sugestoes-cliente .sugestao:last-child,
+#sugestoes-produto .sugestao:last-child {
+  border-bottom: none;
+}
+
+#sugestoes-cliente .sugestao:hover,
+#sugestoes-produto .sugestao:hover {
+  background-color: #f0f0f0;
+}
+
+/* Campo de quantidade com largura menor */
+#quantidade {
+  max-width: 100px;
+}
+
+.mensagem-status {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}

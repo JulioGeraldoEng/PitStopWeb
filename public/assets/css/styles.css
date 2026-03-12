@@ -1,0 +1,253 @@
+/* Estilo geral do corpo da página */
+body {
+  font-family: 'Times New Roman', Times, serif, sans-serif;
+  background-color: rgb(173, 216, 230);
+  padding: 0; /* Removido o padding: 30px */
+  text-align: center;
+  color: #000000;
+  padding-top: 70px; /* ADICIONADO: espaço para a top-bar fixa */
+  padding-bottom: 60px; /* ADICIONADO: espaço para o footer fixo */
+  margin: 0;
+}
+
+main {
+  max-width: auto;
+  margin: 20px auto;
+  background: rgb(240, 240, 240, 0.7);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* Barra superior com visual moderno e suave */
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: rgba(240, 240, 240, 0.7);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin: 0 auto;
+  width: auto;
+  max-width: 100%;
+  position: relative;
+  color: #333;
+}
+
+/* NOVO: Container da top-bar fixo */
+#top-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgb(173, 216, 230); /* mesma cor do body */
+  padding: 5px 0;
+  display: flex;           /* ← ADICIONE */
+  justify-content: center; /* ← ADICIONE */
+}
+
+@media (max-width: 500px) {
+  .top-bar {
+    justify-content: center;
+  }
+
+  .top-bar button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+/* Estilo moderno dos botões da barra */
+.top-bar button,
+.menu button {
+  padding: 10px 16px;
+  background-color: rgba(100, 100, 255, 0.12);
+  color: #333;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.top-bar button:hover,
+.menu button:hover {
+  background-color: rgba(38, 38, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.top-bar i {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.top-bar button:hover i {
+  transform: scale(1.15);
+}
+
+/* Formulário */
+.formulario {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Campos do formulário */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Layout em linha */
+.form-linha {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.form-linha .campo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 150px;
+}
+
+.form-linha .botao {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 150px;
+}
+
+.form-linha .botao button,
+.form-linha button {
+  height: 42px;
+  padding: 10px 15px;
+  margin-top: 0;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-linha button:hover {
+  background-color: #218838;
+}
+
+/* Botões secundários */
+.btn-secundario {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 12px;
+  width: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.btn-secundario:hover {
+  background-color: #0056b3;
+}
+
+/* Botões de alterar */
+.btn-alterar {
+  background: none;
+  border: none;
+  color: blue;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn-alterar:hover {
+  color: darkblue;
+}
+
+/* Botao de remover */
+.btn-remover {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn-remover:hover {
+  color: darkred;
+}
+
+/* Botao de salvar */
+.btn-salvar {
+  background: none;
+  border: none;
+  color: rgba(30, 255, 0, 0.801);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn-salvar:hover {
+  color: rgb(0, 139, 12);
+}
+
+/* Menu inferior */
+.menu {
+  margin-top: 30px;
+}
+
+.menu button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Footer fixo */
+#app-footer {
+  background-color: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 10px;
+  font-size: 0.85em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+#app-footer-content p {
+  margin: 0;
+  white-space: nowrap;
+  display: inline-block;
+  min-width: 100%;
+  text-align: center;
+}

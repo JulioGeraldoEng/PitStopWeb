@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/relatorio.css') }}">
+@endpush
+
 @section('content')
 <div class="container">
     <h1>Relatório de Vendas</h1>
