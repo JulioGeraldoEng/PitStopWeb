@@ -19,6 +19,6 @@ class Recebimento extends Model
     // Um recebimento pertence a uma venda
     public function venda()
     {
-        return $this->belongsTo(Venda::class);
+        return $this->belongsTo(Venda::class, 'venda_id');
     }
 }

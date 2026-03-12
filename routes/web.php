@@ -1,39 +1,42 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\VendaController;
+use App\Http\Controllers\RecebimentoController;
 use Illuminate\Support\Facades\Route;
 
+// Página inicial redireciona para dashboard se logado, ou login se não
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+// Rotas que precisam de autenticação
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
-
-// Rotas protegidas (só para usuários logados)
-Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
     
-    // Recursos do sistema
+    // Perfil
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Recursos do sistema (CRUDs)
     Route::resource('clientes', ClienteController::class);
     Route::resource('produtos', ProdutoController::class);
     Route::resource('vendas', VendaController::class);
     Route::resource('recebimentos', RecebimentoController::class);
+
+    Route::resource('produtos', ProdutoController::class);
+
+    Route::resource('vendas', VendaController::class);
+
+    Route::resource('recebimentos', RecebimentoController::class)->only(['index']);
+
+    Route::get('/relatorios', [App\Http\Controllers\RelatorioController::class, 'index'])->name('relatorios.index');
 });
 
-// Redireciona raiz para dashboard ou login
-Route::get('/', function () {
-    return redirect('/dashboard');
-});
+require __DIR__.'/auth.php';
