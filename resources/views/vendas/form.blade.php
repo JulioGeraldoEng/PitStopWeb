@@ -23,32 +23,46 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    <!-- Cliente -->
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group position-relative">
                             <label for="cliente">Cliente:</label>
                             <input type="text" class="form-control" id="cliente" 
-                                   value="{{ $venda->cliente->nome ?? '' }}" 
-                                   placeholder="Nome do cliente" autocomplete="off" required>
+                                value="{{ $venda->cliente->nome ?? '' }}" 
+                                placeholder="Nome do cliente" autocomplete="off" required>
                             <input type="hidden" id="cliente_id" name="cliente_id" 
-                                   value="{{ $venda->cliente_id ?? '' }}">
-                            <div id="sugestoes-cliente" class="list-group position-absolute" 
-                                 style="z-index: 1000; width: 90%; display: none;"></div>
+                                value="{{ $venda->cliente_id ?? '' }}">
+                            <div id="sugestoes-cliente" class="list-group"></div>
                         </div>
                     </div>
+                    
+                    <!-- Data da Venda com ícone -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="dataVenda">Data da Venda:</label>
-                            <input type="text" class="form-control datepicker-field" id="dataVenda" 
-                                   name="data" placeholder="dd/mm/aaaa" maxlength="10"
-                                   value="{{ isset($venda) ? date('d/m/Y', strtotime($venda->data)) : '' }}" required>
+                            <label for="dataVenda" class="form-label">
+                                <i class="fas fa-calendar-alt"></i> Data da Venda:
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                                <input type="text" class="form-control datepicker-field" id="dataVenda" 
+                                    name="data" placeholder="dd/mm/aaaa" maxlength="10"
+                                    value="{{ isset($venda) ? date('d/m/Y', strtotime($venda->data)) : '' }}" required>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Vencimento com ícone -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="vencimento">Vencimento:</label>
-                            <input type="text" class="form-control datepicker-field" id="vencimento" 
-                                   name="data_vencimento" placeholder="dd/mm/aaaa" maxlength="10"
-                                   value="{{ isset($venda) && $venda->data_vencimento ? date('d/m/Y', strtotime($venda->data_vencimento)) : '' }}">
+                            <label for="vencimento" class="form-label">
+                                <i class="fas fa-calendar-check"></i> Vencimento:
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                                <input type="text" class="form-control datepicker-field" id="vencimento" 
+                                    name="data_vencimento" placeholder="dd/mm/aaaa" maxlength="10"
+                                    value="{{ isset($venda) && $venda->data_vencimento ? date('d/m/Y', strtotime($venda->data_vencimento)) : '' }}">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,19 +78,25 @@
                 <!-- Linha para adicionar novo item -->
                 <div class="row mb-3">
                     <div class="col-md-5">
-                        <label>Produto:</label>
-                        <input type="text" class="form-control" id="produto" placeholder="Nome do produto" autocomplete="off">
-                        <input type="hidden" id="produto_id">
-                        <input type="hidden" id="preco_unitario">
-                        <div id="sugestoes-produto" class="list-group position-absolute" style="z-index: 1000; width: 90%; display: none;"></div>
+                        <div class="form-group position-relative">
+                            <label>Produto:</label>
+                            <input type="text" class="form-control" id="produto" placeholder="Nome do produto" autocomplete="off">
+                            <input type="hidden" id="produto_id">
+                            <input type="hidden" id="preco_unitario">
+                            <div id="sugestoes-produto" class="list-group"></div>
+                        </div>
                     </div>
                     <div class="col-md-2">
-                        <label>Quantidade:</label>
-                        <input type="number" class="form-control" id="quantidade" min="1" value="1">
+                        <div class="form-group">
+                            <label>Quantidade:</label>
+                            <input type="number" class="form-control" id="quantidade" min="1" value="1">
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        <label>Preço Unitário:</label>
-                        <input type="text" class="form-control" id="preco_display" readonly placeholder="R$ 0,00">
+                        <div class="form-group">
+                            <label>Preço Unitário:</label>
+                            <input type="text" class="form-control" id="preco_display" readonly placeholder="R$ 0,00">
+                        </div>
                     </div>
                     <div class="col-md-2 d-flex align-items-end">
                         <button type="button" class="btn btn-success w-100" id="btnAdicionarItem">
@@ -206,7 +226,14 @@ function configurarAutocompleteCliente() {
     inputCliente.addEventListener('keyup', async () => {
         const termo = inputCliente.value.trim();
         sugestoes.innerHTML = '';
-        sugestoes.style.display = 'none';
+        // Depois de adicionar os itens
+        sugestoes.style.position = 'absolute';
+        sugestoes.style.top = '100%';
+        sugestoes.style.left = '0';
+        sugestoes.style.width = '100%';
+        sugestoes.style.display = 'block';
+        sugestoes.style.zIndex = '999999';
+        // NÃO DEFINIR maxHeight NEM overflowY
 
         if (termo.length < 2) return;
 
@@ -219,7 +246,7 @@ function configurarAutocompleteCliente() {
             clientes.forEach(cliente => {
                 const div = document.createElement('a');
                 div.href = '#';
-                div.className = 'list-group-item list-group-item-action';
+                div.className = 'list-group-item';
                 div.textContent = cliente.nome;
                 div.onclick = (e) => {
                     e.preventDefault();
@@ -231,7 +258,16 @@ function configurarAutocompleteCliente() {
                 sugestoes.appendChild(div);
             });
 
+            // POSICIONAMENTO E ALTURA
+            sugestoes.style.position = 'absolute';
+            sugestoes.style.top = '100%';
+            sugestoes.style.left = '0';
+            sugestoes.style.width = '100%';
+            sugestoes.style.maxHeight = '300px';
+            sugestoes.style.overflowY = 'auto';
             sugestoes.style.display = 'block';
+            sugestoes.style.zIndex = '999999';
+
         } catch (error) {
             console.error('Erro ao buscar clientes:', error);
         }
@@ -266,7 +302,7 @@ function configurarAutocompleteProduto() {
             produtos.forEach(produto => {
                 const div = document.createElement('a');
                 div.href = '#';
-                div.className = 'list-group-item list-group-item-action';
+                div.className = 'list-group-item';
                 div.textContent = `${produto.nome} - R$ ${parseFloat(produto.preco).toFixed(2).replace('.', ',')}`;
                 div.onclick = (e) => {
                     e.preventDefault();
@@ -280,7 +316,14 @@ function configurarAutocompleteProduto() {
                 sugestoes.appendChild(div);
             });
 
+            // POSICIONAMENTO SIMPLIFICADO
+            sugestoes.style.position = 'absolute';
+            sugestoes.style.top = '100%';
+            sugestoes.style.left = '0';
+            sugestoes.style.width = '100%';
             sugestoes.style.display = 'block';
+            sugestoes.style.zIndex = '999999';
+
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
         }
@@ -387,6 +430,13 @@ document.addEventListener('DOMContentLoaded', () => {
             input4.value = item.preco_unitario;
             document.getElementById('vendaForm').appendChild(input4);
         });
+
+        // Adicionar o total como campo hidden
+        const totalInput = document.createElement('input');
+        totalInput.type = 'hidden';
+        totalInput.name = 'total';
+        totalInput.value = itensVenda.reduce((sum, item) => sum + (item.quantidade * item.preco_unitario), 0);
+        document.getElementById('vendaForm').appendChild(totalInput);
     });
 });
 </script>

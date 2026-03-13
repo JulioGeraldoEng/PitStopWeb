@@ -26,13 +26,16 @@ class VendaController extends Controller
         DB::beginTransaction();
         
         try {
+            // Criar a venda
             $venda = Venda::create([
                 'cliente_id' => $request->cliente_id,
-                'data' => $request->data,
-                'data_vencimento' => $request->data_vencimento,
-                'total' => $request->total
+                'data' => \Carbon\Carbon::createFromFormat('d/m/Y', $request->data)->format('Y-m-d'),
+                'data_vencimento' => $request->data_vencimento ? 
+                    \Carbon\Carbon::createFromFormat('d/m/Y', $request->data_vencimento)->format('Y-m-d') : null,
+                'total' => $request->total ?? collect($request->itens)->sum(fn($item) => $item['quantidade'] * $item['preco_unitario'])
             ]);
 
+            // Adicionar itens
             foreach ($request->itens as $item) {
                 ItemVenda::create([
                     'venda_id' => $venda->id,
@@ -41,25 +44,33 @@ class VendaController extends Controller
                     'quantidade' => $item['quantidade'],
                     'preco_unitario' => $item['preco_unitario']
                 ]);
-
-                // Atualizar estoque (opcional)
-                // Produto::where('id', $item['produto_id'])->decrement('quantidade', $item['quantidade']);
             }
 
             // Criar recebimento
             Recebimento::create([
                 'venda_id' => $venda->id,
-                'data_vencimento' => $request->data_vencimento,
-                'valor_total' => $request->total,
+                'data_vencimento' => $venda->data_vencimento,
+                'valor_total' => $venda->total,
                 'status' => 'pendente'
             ]);
 
             DB::commit();
+            
+            // Se for requisição AJAX (da API)
+            if ($request->wantsJson()) {
+                return response()->json(['success' => true, 'venda' => $venda]);
+            }
+            
             return redirect()->route('vendas.index')->with('success', 'Venda registrada com sucesso!');
             
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Erro ao registrar venda: ' . $e->getMessage());
+            
+            if ($request->wantsJson()) {
+                return response()->json(['success' => false, 'message' => 'Erro ao registrar venda: ' . $e->getMessage()], 422);
+            }
+            
+            return back()->with('error', 'Erro ao registrar venda: ' . $e->getMessage())->withInput();
         }
     }
 

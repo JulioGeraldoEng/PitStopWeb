@@ -53,10 +53,29 @@ Route::prefix('dashboard')->group(function () {
         return response()->json(['total' => $total]);
     });
     
+    // ==================== ROTA CORRIGIDA - VENDAS POR STATUS ====================
     Route::get('/vendas-por-status', function () {
-        $status = \App\Models\Recebimento::select('status', \DB::raw('count(*) as total'))
-            ->groupBy('status')
-            ->get();
-        return response()->json($status);
+        $hoje = now()->format('Y-m-d');
+        
+        // Contar pagos e cancelados diretamente
+        $pagos = \App\Models\Recebimento::where('status', 'pago')->count();
+        $cancelados = \App\Models\Recebimento::where('status', 'cancelado')->count();
+        
+        // Pendentes (com data >= hoje)
+        $pendentes = \App\Models\Recebimento::where('status', 'pendente')
+            ->where('data_vencimento', '>=', $hoje)
+            ->count();
+        
+        // Atrasados (pendentes com data < hoje)
+        $atrasados = \App\Models\Recebimento::where('status', 'pendente')
+            ->where('data_vencimento', '<', $hoje)
+            ->count();
+        
+        return response()->json([
+            'pago' => $pagos,
+            'pendente' => $pendentes,
+            'atrasado' => $atrasados,
+            'cancelado' => $cancelados
+        ]);
     });
 });

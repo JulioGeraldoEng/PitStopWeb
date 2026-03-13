@@ -315,3 +315,92 @@ input {
 .datepicker .today {
     color: #f39c12;
 }
+
+/* ==================== INPUT GROUP COM ÍCONES ==================== */
+.input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: 2px solid #e9ecef;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    font-size: 1rem;
+}
+
+.input-group .form-control {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    flex: 1;
+}
+
+.input-group .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* ==================== AUTOCOMPLETE CORRIGIDO ==================== */
+#sugestoes-cliente,
+#sugestoes-produto {
+    position: absolute;
+    z-index: 9999 !important;  /* Forçar ficar acima de tudo */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    max-height: 250px;
+    overflow-y: auto;
+    width: auto;
+    min-width: 300px;
+    margin-top: 2px;
+}
+
+#sugestoes-cliente .list-group-item,
+#sugestoes-produto .list-group-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#sugestoes-cliente .list-group-item:hover,
+#sugestoes-produto .list-group-item:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* Garantir que o container pai tenha position relative */
+.cliente-input-container,
+.produto-input-container,
+.form-group.position-relative {
+    position: relative !important;
+}
+
+/* Garantir que o autocomplete fique visível */
+.position-relative {
+    position: relative !important;
+}
+
+.position-absolute {
+    position: absolute !important;
+}
+
+.list-group.position-absolute {
+    z-index: 9999 !important;
+    background: white;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}

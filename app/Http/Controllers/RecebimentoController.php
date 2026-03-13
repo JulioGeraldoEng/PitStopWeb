@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 
 class RecebimentoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // Se veio com status na URL, passar para a view
+        if ($request->has('status')) {
+            return view('recebimentos.index', ['filtroStatus' => $request->status]);
+        }
+        
         return view('recebimentos.index');
     }
 
@@ -19,8 +24,8 @@ class RecebimentoController extends Controller
                 ->join('vendas', 'recebimentos.venda_id', '=', 'vendas.id')
                 ->select('recebimentos.*', 'vendas.data as data_venda');
 
-            // 🔥 CORREÇÃO: Só aplicar filtro de cliente se tiver algo preenchido
-            if ($request->filled('clienteId') && $request->clienteId !== 'null' && $request->clienteId !== '') {
+            // Filtro por cliente
+            if ($request->filled('clienteId') && $request->clienteId !== 'null') {
                 $query->whereHas('venda.cliente', function($q) use ($request) {
                     $q->where('clientes.id', $request->clienteId);
                 });
@@ -30,28 +35,57 @@ class RecebimentoController extends Controller
                 });
             }
 
-            // 🔥 CORREÇÃO: Só aplicar filtro de status se tiver algo preenchido
+            // FILTRO POR STATUS - CORRIGIDO
             if ($request->filled('status') && $request->status !== '') {
+                $hoje = now()->format('Y-m-d');
+                
                 if ($request->status === 'atrasado') {
-                    $query->where(function($q) {
-                        $q->where('recebimentos.status', 'pendente')
-                        ->where('recebimentos.data_vencimento', '<', now()->format('Y-m-d'));
-                    })->orWhere('recebimentos.status', 'atrasado');
-                } elseif ($request->status === 'pendente') {
+                    // Atrasados: status pendente E data de vencimento < hoje
                     $query->where('recebimentos.status', 'pendente')
-                        ->where('recebimentos.data_vencimento', '>=', now()->format('Y-m-d'));
+                        ->where('recebimentos.data_vencimento', '<', $hoje);
+                } elseif ($request->status === 'pendente') {
+                    // Pendentes: status pendente E data de vencimento >= hoje
+                    $query->where('recebimentos.status', 'pendente')
+                        ->where('recebimentos.data_vencimento', '>=', $hoje);
                 } else {
+                    // Pago, cancelado: filtro direto
                     $query->where('recebimentos.status', $request->status);
                 }
             }
 
-            // 🔥 IMPORTANTE: Ordenar por vencimento
+            // Filtro por data da venda
+            if ($request->filled('dataInicio') && trim($request->dataInicio) !== '') {
+                $dataInicio = \Carbon\Carbon::createFromFormat('d/m/Y', $request->dataInicio)->format('Y-m-d');
+                $query->whereDate('vendas.data', '>=', $dataInicio);
+            }
+
+            if ($request->filled('dataFim') && trim($request->dataFim) !== '') {
+                $dataFim = \Carbon\Carbon::createFromFormat('d/m/Y', $request->dataFim)->format('Y-m-d');
+                $query->whereDate('vendas.data', '<=', $dataFim);
+            }
+
+            // Filtro por vencimento
+            if ($request->filled('vencimentoInicio') && trim($request->vencimentoInicio) !== '') {
+                $vencInicio = \Carbon\Carbon::createFromFormat('d/m/Y', $request->vencimentoInicio)->format('Y-m-d');
+                $query->whereDate('recebimentos.data_vencimento', '>=', $vencInicio);
+            }
+
+            if ($request->filled('vencimentoFim') && trim($request->vencimentoFim) !== '') {
+                $vencFim = \Carbon\Carbon::createFromFormat('d/m/Y', $request->vencimentoFim)->format('Y-m-d');
+                $query->whereDate('recebimentos.data_vencimento', '<=', $vencFim);
+            }
+
             $recebimentos = $query->orderBy('recebimentos.data_vencimento')->get();
 
-            // 🔥 DEBUG: Verificar quantos registros foram encontrados (opcional)
-            \Log::info('Total de recebimentos encontrados: ' . $recebimentos->count());
-
-            $resultado = $recebimentos->map(function($rec) {
+            $resultado = $recebimentos->map(function($rec) use ($request) {
+                $status = $rec->status;
+                $hoje = now()->format('Y-m-d');
+                
+                // Se for pendente e data de vencimento passada, considerar como atrasado
+                if ($status === 'pendente' && $rec->data_vencimento < $hoje) {
+                    $status = 'atrasado';
+                }
+                
                 return [
                     'id' => $rec->id,
                     'venda_id' => $rec->venda_id,
@@ -61,7 +95,7 @@ class RecebimentoController extends Controller
                     'valor_total' => $rec->valor_total,
                     'valor_pago' => $rec->valor_pago,
                     'data_pagamento' => $rec->data_pagamento,
-                    'status' => $rec->status,
+                    'status' => $status, // Status corrigido
                     'forma_pagamento' => $rec->forma_pagamento
                 ];
             });
