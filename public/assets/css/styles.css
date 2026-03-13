@@ -7,7 +7,7 @@ body {
   color: #000000;
   padding-top: 70px; /* ADICIONADO: espaço para a top-bar fixa */
   padding-bottom: 60px; /* ADICIONADO: espaço para o footer fixo */
-  margin: 0;
+  margin: 50px;
 }
 
 main {
@@ -250,4 +250,68 @@ input {
   display: inline-block;
   min-width: 100%;
   text-align: center;
+}
+
+/* ==================== DATEPICKER ==================== */
+.datepicker {
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.datepicker table {
+    width: 100%;
+}
+
+.datepicker table tr td.active.active {
+    background: linear-gradient(135deg, #0078d7 0%, #0056b3 100%) !important;
+    color: white !important;
+    border-radius: 50%;
+}
+
+.datepicker table tr td.today {
+    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%) !important;
+    color: #212529 !important;
+    border-radius: 50%;
+}
+
+.datepicker table tr td:hover {
+    background-color: #e9ecef !important;
+    border-radius: 50%;
+}
+
+.datepicker table tr td.old,
+.datepicker table tr td.new {
+    color: #adb5bd;
+}
+
+.datepicker table tr td.highlighted {
+    background-color: #fff3cd;
+}
+
+.datepicker .datepicker-switch:hover,
+.datepicker .prev:hover,
+.datepicker .next:hover,
+.datepicker .today:hover,
+.datepicker .clear:hover {
+    background-color: #e9ecef;
+}
+
+.datepicker .datepicker-switch {
+    font-weight: bold;
+    color: #0078d7;
+}
+
+.datepicker .prev,
+.datepicker .next {
+    color: #6c757d;
+}
+
+.datepicker .clear {
+    color: #dc3545;
+}
+
+.datepicker .today {
+    color: #f39c12;
 }

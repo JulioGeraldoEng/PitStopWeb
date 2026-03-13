@@ -23,6 +23,7 @@ Route::delete('/produtos/{id}', [ProdutoController::class, 'apiDestroy']);
 
 // Vendas
 Route::post('/vendas', [VendaController::class, 'apiStore']);
+Route::get('/vendas/busca', [VendaController::class, 'busca']);
 
 // Recebimentos
 Route::get('/recebimentos/busca', [RecebimentoController::class, 'busca']);
