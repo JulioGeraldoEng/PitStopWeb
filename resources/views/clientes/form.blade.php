@@ -34,8 +34,12 @@
             <textarea class="form-control" id="observacao" name="observacao" rows="3">{{ $cliente->observacao ?? '' }}</textarea>
         </div>
         
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="{{ route('clientes.index') }}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+        <a href="{{ route('clientes.index') }}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Cancelar
+        </a>
     </form>
 
     @if(!isset($cliente))

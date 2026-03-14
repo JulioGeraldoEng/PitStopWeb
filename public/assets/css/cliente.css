@@ -270,12 +270,8 @@
     outline: none;
 }
 
-/* ==================== AUTOCOMPLETE ==================== */
-.form-group.position-relative {
-    position: relative !important;
-}
-
-#sugestoes-cliente {
+/* ==================== AUTOCOMPLETE DA BUSCA ==================== */
+#sugestoes-busca {
     position: absolute !important;
     top: 100% !important;
     left: 0 !important;
@@ -284,14 +280,14 @@
     background: white !important;
     border: 2px solid #0078d7 !important;
     border-radius: 8px !important;
-    max-height: 300px !important;
+    max-height: 250px !important;
     overflow-y: auto !important;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
     margin-top: 2px !important;
     display: none;
 }
 
-#sugestoes-cliente .list-group-item {
+#sugestoes-busca .list-group-item {
     display: block !important;
     padding: 12px 15px !important;
     text-decoration: none !important;
@@ -301,23 +297,25 @@
     transition: all 0.2s ease !important;
     font-size: 14px !important;
     font-weight: 500 !important;
+    background: white !important;
 }
 
-#sugestoes-cliente .list-group-item:hover {
+#sugestoes-busca .list-group-item:hover {
     background: linear-gradient(135deg, #0078d7, #0056b3) !important;
     color: white !important;
 }
 
-#sugestoes-cliente .list-group-item:last-child {
+#sugestoes-busca .list-group-item:last-child {
     border-bottom: none !important;
 }
 
-/* ==================== ANIMAÇÕES ==================== */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Garantir que os botões não sejam empurrados */
+.row.mt-3 {
+    position: relative;
+    z-index: 1;
 }
 
-.tabela-cliente tbody tr {
-    animation: fadeIn 0.3s ease forwards;
+/* Garantir que o card permita que a lista flutue */
+.card, .card-body {
+    overflow: visible !important;
 }
