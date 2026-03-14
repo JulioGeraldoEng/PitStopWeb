@@ -1,62 +1,323 @@
-/* Container da Tabela */
-#clientesContainer {
-  max-width: 900px;
-  margin: 30px auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+/* ==================== TABELA DE CLIENTES MODERNA ==================== */
+#tabela-cliente {
+    margin-top: 30px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-/* Tabela */
-#tabelaClientes {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  font-size: 15px;
+.tabela-cliente {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Segoe UI', 'Times New Roman', Times, serif;
 }
 
-#tabelaClientes th {
-  background-color: #0078d7;
-  color: white;
-  padding: 12px;
-  text-align: center;
+/* Cabeçalho da tabela */
+.tabela-cliente thead tr {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-#tabelaClientes td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
+.tabela-cliente th {
+    color: white;
+    padding: 16px 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: none;
 }
 
-#tabelaClientes input[type="text"] {
-  width: 100%;
-  padding: 6px 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
+.tabela-cliente th:first-child {
+    border-top-left-radius: 12px;
 }
 
-/* Botões na tabela */
-#tabelaClientes button {
-  padding: 6px 12px;
-  margin: 2px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
+.tabela-cliente th:last-child {
+    border-top-right-radius: 12px;
 }
 
-#tabelaClientes button:hover {
-  background-color: #218838;
+/* Linhas do corpo */
+.tabela-cliente tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e9ecef;
 }
 
-#tabelaClientes button:nth-child(2) {
-  background-color: #dc3545;
+.tabela-cliente tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-#tabelaClientes button:nth-child(2):hover {
-  background-color: #c82333;
+.tabela-cliente td {
+    padding: 14px 12px;
+    text-align: center;
+    color: #495057;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tabela-cliente tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Efeito zebrado suave */
+.tabela-cliente tbody tr:nth-child(even) {
+    background-color: #fafbfc;
+}
+
+.tabela-cliente tbody tr:nth-child(even):hover {
+    background-color: #f1f3f5;
+}
+
+/* Larguras das colunas */
+.tabela-cliente th:nth-child(1),
+.tabela-cliente td:nth-child(1) { width: 30%; } /* Nome */
+
+.tabela-cliente th:nth-child(2),
+.tabela-cliente td:nth-child(2) { width: 20%; } /* Telefone */
+
+.tabela-cliente th:nth-child(3),
+.tabela-cliente td:nth-child(3) { width: 30%; } /* Observação */
+
+.tabela-cliente th:nth-child(4),
+.tabela-cliente td:nth-child(4) { width: 20%; } /* Ações */
+
+/* ==================== BOTÕES DE AÇÃO NA TABELA ==================== */
+.acao-container {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-editar, .btn-excluir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    min-width: 70px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Botão EDITAR - Amarelo com texto escuro */
+.btn-editar {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    color: #212529;
+}
+
+.btn-editar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+    background: linear-gradient(135deg, #e0a800 0%, #c69500 100%);
+    color: white;
+}
+
+/* Botão EXCLUIR - Vermelho CLARO com texto ESCURO no normal */
+.btn-excluir {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);  /* Vermelho claro */
+    color: #721c24;  /* Texto escuro */
+}
+
+.btn-excluir:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);  /* Vermelho escuro */
+    color: white;  /* Texto claro no hover */
+}
+
+/* Ícones nos botões */
+.btn-editar i, .btn-excluir i {
+    transition: color 0.3s ease;
+}
+
+.btn-editar:hover i, .btn-excluir:hover i {
+    color: white !important;
+}
+
+/* ==================== BOTÕES PADRÃO (Buscar, Limpar, Novo, Salvar, Cancelar) ==================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    height: 48px;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+/* Ícones nos botões */
+.btn i {
+    transition: color 0.3s ease;
+}
+
+.btn:hover i {
+    color: white !important;
+}
+
+/* Botão Buscar (azul) */
+.btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: #212529 !important;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
+    color: white !important;
+}
+
+/* Botão Limpar (amarelo) */
+.btn-secondary {
+    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+    color: #212529 !important;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+    color: white !important;
+}
+
+/* Botão Novo / Salvar (verde) */
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: #212529 !important;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
+    color: white !important;
+}
+
+/* Botão Cancelar (cinza) - usando a mesma classe .btn-secondary */
+/* Já definido acima */
+
+/* Botão Listar (info) */
+.btn-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: #212529 !important;
+}
+
+.btn-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3);
+    background: linear-gradient(135deg, #138496 0%, #0f6674 100%);
+    color: white !important;
+}
+
+/* ==================== CARD DE FILTROS ==================== */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    margin-bottom: 2rem;
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: none;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.3rem;
+}
+
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+/* ==================== AUTOCOMPLETE ==================== */
+.form-group.position-relative {
+    position: relative !important;
+}
+
+#sugestoes-cliente {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 999999 !important;
+    background: white !important;
+    border: 2px solid #0078d7 !important;
+    border-radius: 8px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+    margin-top: 2px !important;
+    display: none;
+}
+
+#sugestoes-cliente .list-group-item {
+    display: block !important;
+    padding: 12px 15px !important;
+    text-decoration: none !important;
+    color: #333 !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+#sugestoes-cliente .list-group-item:hover {
+    background: linear-gradient(135deg, #0078d7, #0056b3) !important;
+    color: white !important;
+}
+
+#sugestoes-cliente .list-group-item:last-child {
+    border-bottom: none !important;
+}
+
+/* ==================== ANIMAÇÕES ==================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tabela-cliente tbody tr {
+    animation: fadeIn 0.3s ease forwards;
 }

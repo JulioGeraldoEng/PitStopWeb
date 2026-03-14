@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 // Clientes
 Route::get('/clientes', [ClienteController::class, 'apiIndex']);
 Route::get('/clientes/busca', [ClienteController::class, 'apiBusca']);
+Route::get('/clientes/busca-clientes', [ClienteController::class, 'apiBuscaClientes']);
+Route::get('/clientes/verificar', [ClienteController::class, 'verificarCliente']);
 Route::post('/clientes', [ClienteController::class, 'apiStore']);
 Route::put('/clientes/{id}', [ClienteController::class, 'apiUpdate']);
 Route::delete('/clientes/{id}', [ClienteController::class, 'apiDestroy']);

@@ -6,11 +6,11 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ isset($cliente) ? 'Editar' : 'Novo' }} Cliente</h1>
+    <h1>{{ isset($cliente) ? 'Editar Cliente #' . $cliente->id : 'Novo Cliente' }}</h1>
     
     <div id="mensagem" class="alert" style="display: none;"></div>
     
-    <form id="clienteForm" method="POST">
+    <form id="clienteForm" method="POST" action="{{ isset($cliente) ? route('clientes.update', $cliente->id) : route('clientes.store') }}">
         @csrf
         @if(isset($cliente))
             @method('PUT')
@@ -26,7 +26,7 @@
         <div class="mb-3">
             <label for="telefone" class="form-label">Telefone</label>
             <input type="text" class="form-control" id="telefone" name="telefone" 
-                   value="{{ isset($cliente) ? formatTelefone($cliente->telefone) : '' }}">
+                   value="{{ isset($cliente) ? \App\Helpers\FormatarTelefone::formatar($cliente->telefone) : '' }}">
         </div>
         
         <div class="mb-3">

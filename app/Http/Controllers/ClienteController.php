@@ -67,9 +67,33 @@ class ClienteController extends Controller
     {
         $termo = $request->get('termo');
         $clientes = Cliente::where('nome', 'LIKE', "%{$termo}%")
-                           ->orderBy('nome')
-                           ->get(['id', 'nome']);
+                        ->orderBy('nome')
+                        ->get(['id', 'nome', 'telefone', 'observacao']);
         return response()->json($clientes);
+    }
+
+    public function apiBuscaClientes(Request $request)
+    {
+        $nome = $request->get('nome');
+        
+        $query = Cliente::query();
+        
+        if (!empty($nome)) {
+            $query->where('nome', 'LIKE', "%{$nome}%");
+        }
+        
+        $clientes = $query->orderBy('nome')->get();
+        
+        return response()->json($clientes);
+    }
+
+    public function verificarCliente(Request $request)
+    {
+        $nome = $request->get('nome');
+        
+        $existe = Cliente::where('nome', $nome)->exists();
+        
+        return response()->json(['existe' => $existe]);
     }
 
     public function apiStore(Request $request)

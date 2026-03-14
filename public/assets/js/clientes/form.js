@@ -197,9 +197,12 @@ function mostrarMensagem(texto, tipo) {
     }, 3000);
 }
 
+// ===================== SALVAR CLIENTE (SEM AJAX) =====================
+// Este código permite que o formulário seja enviado normalmente
+// Se quiser usar AJAX, descomente a função abaixo
+
 // ===================== INICIALIZAÇÃO =====================
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('clienteForm');
     const inputTelefone = document.getElementById('telefone');
     const inputNome = document.getElementById('nome');
     const btnClientes = document.getElementById('btnClientesCadastrados');
@@ -210,58 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (inputNome) {
         configurarAutocompleteNome(inputNome);
-    }
-
-    if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const nome = document.getElementById('nome').value.trim();
-            const telefone = document.getElementById('telefone').value.trim().replace(/\D/g, '');
-            const observacao = document.getElementById('observacao').value.trim();
-
-            if (!nome) {
-                mostrarMensagem('O nome é obrigatório.', 'danger');
-                return;
-            }
-
-            if (telefone.length < 10) {
-                mostrarMensagem('Telefone inválido. Use com DDD.', 'danger');
-                return;
-            }
-
-            const method = form.querySelector('input[name="_method"]')?.value || 'POST';
-            const url = method === 'PUT' 
-                ? `/api/clientes/${id}`
-                : '/api/clientes';
-
-            try {
-                const response = await fetch(url, {
-                    method: method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({ nome, telefone, observacao })
-                });
-
-                const resultado = await response.json();
-                
-                if (resultado.success) {
-                    mostrarMensagem('Cliente salvo com sucesso!', 'success');
-                    if (method === 'POST') {
-                        form.reset();
-                    } else {
-                        setTimeout(() => window.location.href = '{{ route("clientes.index") }}', 1500);
-                    }
-                } else {
-                    mostrarMensagem(resultado.message || 'Erro ao salvar cliente.', 'danger');
-                }
-            } catch (error) {
-                console.error('Erro:', error);
-                mostrarMensagem('Erro ao salvar cliente.', 'danger');
-            }
-        });
     }
 
     if (btnClientes) {
