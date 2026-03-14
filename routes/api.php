@@ -18,10 +18,12 @@ Route::delete('/clientes/{id}', [ClienteController::class, 'apiDestroy']);
 
 // Produtos
 Route::get('/produtos', [ProdutoController::class, 'apiIndex']);
-Route::get('/produtos/busca', [ProdutoController::class, 'apiBusca']);
+Route::get('/produtos/busca', [ProdutoController::class, 'apiBusca']);                // Para autocomplete
+Route::get('/produtos/busca-produtos', [ProdutoController::class, 'apiBuscaProdutos']); // Para busca com filtros
 Route::post('/produtos', [ProdutoController::class, 'apiStore']);
 Route::put('/produtos/{id}', [ProdutoController::class, 'apiUpdate']);
 Route::delete('/produtos/{id}', [ProdutoController::class, 'apiDestroy']);
+Route::get('/produtos/verificar', [ProdutoController::class, 'verificarProduto']);
 
 // Vendas
 Route::post('/vendas', [VendaController::class, 'apiStore']);
@@ -55,20 +57,14 @@ Route::prefix('dashboard')->group(function () {
         return response()->json(['total' => $total]);
     });
     
-    // ==================== ROTA CORRIGIDA - VENDAS POR STATUS ====================
     Route::get('/vendas-por-status', function () {
         $hoje = now()->format('Y-m-d');
         
-        // Contar pagos e cancelados diretamente
         $pagos = \App\Models\Recebimento::where('status', 'pago')->count();
         $cancelados = \App\Models\Recebimento::where('status', 'cancelado')->count();
-        
-        // Pendentes (com data >= hoje)
         $pendentes = \App\Models\Recebimento::where('status', 'pendente')
             ->where('data_vencimento', '>=', $hoje)
             ->count();
-        
-        // Atrasados (pendentes com data < hoje)
         $atrasados = \App\Models\Recebimento::where('status', 'pendente')
             ->where('data_vencimento', '<', $hoje)
             ->count();

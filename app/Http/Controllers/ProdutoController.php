@@ -70,8 +70,30 @@ class ProdutoController extends Controller
     {
         $termo = $request->get('termo');
         $produtos = Produto::where('nome', 'LIKE', "%{$termo}%")
-                           ->orderBy('nome')
-                           ->get(['id', 'nome', 'preco']);
+                        ->orderBy('nome')
+                        ->get(['id', 'nome', 'preco', 'quantidade']); // ← ADICIONAR 'quantidade'
+        return response()->json($produtos);
+    }
+
+    /**
+     * Método para busca com filtros (usado na tabela de resultados)
+     */
+    public function apiBuscaProdutos(Request $request)
+    {
+        $nome = $request->get('nome');
+        
+        $query = Produto::query();
+        
+        if (!empty($nome)) {
+            $query->where('nome', 'LIKE', "%{$nome}%");
+        }
+        
+        //$produtos = $query->orderBy('nome')->get();
+        // Ordenação case insensitive
+        $produtos = $query->orderBy('nome')->get()
+            ->sortBy('nome', SORT_STRING | SORT_FLAG_CASE)
+            ->values();
+        
         return response()->json($produtos);
     }
 
@@ -84,10 +106,15 @@ class ProdutoController extends Controller
                 'quantidade' => 'required|integer|min:0'
             ]);
 
-            $produto = Produto::create($request->all());
+            $produto = Produto::create([
+                'nome' => $request->nome,
+                'preco' => $request->preco,
+                'quantidade' => $request->quantidade
+            ]);
+            
             return response()->json(['success' => true, 'produto' => $produto]);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Erro ao salvar produto.'], 422);
+            return response()->json(['success' => false, 'message' => 'Erro ao salvar produto: ' . $e->getMessage()], 422);
         }
     }
 
@@ -118,5 +145,14 @@ class ProdutoController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Erro ao excluir produto.'], 422);
         }
+    }
+
+    public function verificarProduto(Request $request)
+    {
+        $nome = $request->get('nome');
+        
+        $existe = Produto::where('nome', $nome)->exists();
+        
+        return response()->json(['existe' => $existe]);
     }
 }

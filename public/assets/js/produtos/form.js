@@ -1,13 +1,34 @@
 // ===================== VARIÁVEIS GLOBAIS =====================
 const mensagem = document.getElementById('mensagem');
+let produtoSelecionado = null;
 
 // ===================== FORMATAÇÃO =====================
 function formatarPreco(valor) {
     return parseFloat(valor).toFixed(2);
 }
 
+function formatarPrecoParaExibir(valor) {
+    return parseFloat(valor).toFixed(2).replace('.', ',');
+}
+
+function formatarPrecoParaSalvar(valor) {
+    return parseFloat(valor.toString().replace(',', '.'));
+}
+
+// ===================== VERIFICAR SE PRODUTO JÁ EXISTE =====================
+async function verificarProdutoExistente(nome) {
+    try {
+        const response = await fetch(`/api/produtos/verificar?nome=${encodeURIComponent(nome)}`);
+        const data = await response.json();
+        return data.existe;
+    } catch (error) {
+        console.error('Erro ao verificar produto:', error);
+        return false;
+    }
+}
+
 // ===================== AUTOCOMPLETE =====================
-function configurarAutocompleteProduto(inputNome) {
+function configurarAutocompleteProduto(inputNome, inputPreco, inputQuantidade) {
     console.log('Configurando autocomplete para produtos:', inputNome);
     
     const sugestoes = document.getElementById('sugestoes-produtos');
@@ -43,7 +64,22 @@ function configurarAutocompleteProduto(inputNome) {
                     div.onclick = (e) => {
                         e.preventDefault();
                         inputNome.value = produto.nome;
+                        produtoSelecionado = produto;
                         sugestoes.style.display = 'none';
+                        
+                        // Preencher preço se existir
+                        if (produto.preco && inputPreco) {
+                            inputPreco.value = produto.preco;
+                            inputPreco.disabled = true;
+                            inputPreco.style.backgroundColor = '#f0f0f0';
+                        }
+                        
+                        // Preencher quantidade se existir
+                        if (produto.quantidade !== undefined && inputQuantidade) {
+                            inputQuantidade.value = produto.quantidade;
+                            inputQuantidade.disabled = true;
+                            inputQuantidade.style.backgroundColor = '#f0f0f0';
+                        }
                     };
                     sugestoes.appendChild(div);
                 });
@@ -66,6 +102,8 @@ async function carregarProdutosNaTabela() {
     const container = document.getElementById('produtosContainer');
     const tbody = document.querySelector('#tabelaProdutos tbody');
     
+    if (!container || !tbody) return;
+    
     container.style.display = 'block';
     tbody.innerHTML = '<tr><td colspan="5" class="text-center">Carregando...</td></tr>';
 
@@ -85,7 +123,7 @@ async function carregarProdutosNaTabela() {
             tr.innerHTML = `
                 <td>${produto.id}</td>
                 <td><input type="text" class="form-control form-control-sm" value="${produto.nome}" data-original="${produto.nome}" /></td>
-                <td><input type="number" class="form-control form-control-sm" value="${produto.preco}" step="0.01" data-original="${produto.preco}" /></td>
+                <td><input type="text" class="form-control form-control-sm" value="${formatarPrecoParaExibir(produto.preco)}" data-original="${produto.preco}" /></td>
                 <td><input type="number" class="form-control form-control-sm" value="${produto.quantidade}" data-original="${produto.quantidade}" /></td>
                 <td>
                     <button class="btn btn-sm btn-warning btn-alterar" onclick="atualizarProdutoTabela(${produto.id}, this)"><i class="fas fa-edit"></i></button>
@@ -105,7 +143,7 @@ async function carregarProdutosNaTabela() {
 async function atualizarProdutoTabela(id, btn) {
     const row = btn.closest('tr');
     const nome = row.querySelector('td:nth-child(2) input').value.trim();
-    const preco = parseFloat(row.querySelector('td:nth-child(3) input').value);
+    const preco = parseFloat(row.querySelector('td:nth-child(3) input').value.replace(',', '.'));
     const quantidade = parseInt(row.querySelector('td:nth-child(4) input').value);
 
     if (!nome || isNaN(preco) || preco <= 0 || isNaN(quantidade) || quantidade < 0) {
@@ -174,14 +212,39 @@ function mostrarMensagem(texto, tipo) {
     }, 3000);
 }
 
+// ===================== RESETAR CAMPOS =====================
+function resetarCampos() {
+    const inputNome = document.getElementById('nome');
+    const inputPreco = document.getElementById('preco');
+    const inputQuantidade = document.getElementById('quantidade');
+    
+    inputPreco.disabled = false;
+    inputQuantidade.disabled = false;
+    inputPreco.style.backgroundColor = '';
+    inputQuantidade.style.backgroundColor = '';
+    produtoSelecionado = null;
+}
+
 // ===================== INICIALIZAÇÃO =====================
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('produtoForm');
     const inputNome = document.getElementById('nome');
+    const inputPreco = document.getElementById('preco');
+    const inputQuantidade = document.getElementById('quantidade');
     const btnProdutos = document.getElementById('btnProdutosCadastrados');
+    const urlParams = new URLSearchParams(window.location.search);
+    const isEdit = window.location.pathname.includes('/edit');
 
-    if (inputNome) {
-        configurarAutocompleteProduto(inputNome);
+    if (inputNome && inputPreco && inputQuantidade) {
+        configurarAutocompleteProduto(inputNome, inputPreco, inputQuantidade);
+        
+        // Se for edição, não bloquear campos
+        if (isEdit) {
+            inputPreco.disabled = false;
+            inputQuantidade.disabled = false;
+            inputPreco.style.backgroundColor = '';
+            inputQuantidade.style.backgroundColor = '';
+        }
     }
 
     if (form) {
@@ -197,20 +260,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const method = form.querySelector('input[name="_method"]')?.value || 'POST';
-            const url = method === 'PUT' 
-                ? `/api/produtos/${id}`
-                : '/api/produtos';
+            // Verificar se é edição (PUT) ou criação (POST)
+            const method = document.querySelector('input[name="_method"]')?.value || 'POST';
+            
+            // Se for criação, verificar se já existe
+            if (method === 'POST') {
+                const existe = await verificarProdutoExistente(nome);
+                if (existe) {
+                    mostrarMensagem('❌ Produto já cadastrado!', 'danger');
+                    return;
+                }
+            }
+
+            // Usar a action do formulário
+            const formData = new FormData(form);
 
             try {
-                const response = await fetch(url, {
-                    method: method,
+                const response = await fetch(form.action, {
+                    method: form.method,
                     headers: {
-                        'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
-                    body: JSON.stringify({ nome, preco, quantidade })
+                    body: formData
                 });
+
+                if (response.redirected) {
+                    window.location.href = response.url;
+                    return;
+                }
 
                 const resultado = await response.json();
                 
@@ -218,6 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     mostrarMensagem('Produto salvo com sucesso!', 'success');
                     if (method === 'POST') {
                         form.reset();
+                        resetarCampos();
                     } else {
                         setTimeout(() => window.location.href = '{{ route("produtos.index") }}', 1500);
                     }

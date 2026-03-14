@@ -6,11 +6,11 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ isset($produto) ? 'Editar' : 'Novo' }} Produto</h1>
+    <h1>{{ isset($produto) ? 'Editar Produto #' . $produto->id : 'Novo Produto' }}</h1>
     
     <div id="mensagem" class="alert" style="display: none;"></div>
     
-    <form id="produtoForm" method="POST">
+    <form id="produtoForm" method="POST" action="{{ isset($produto) ? route('produtos.update', $produto->id) : route('produtos.store') }}">
         @csrf
         @if(isset($produto))
             @method('PUT')
@@ -24,7 +24,7 @@
         </div>
         
         <div class="mb-3">
-            <label for="preco" class="form-label">Preço *</label>
+            <label for="preco" class="form-label">Preço (R$) *</label>
             <input type="number" class="form-control" id="preco" name="preco" 
                    value="{{ $produto->preco ?? '' }}" step="0.01" min="0" required>
         </div>
@@ -35,8 +35,14 @@
                    value="{{ $produto->quantidade ?? 0 }}" min="0" required>
         </div>
         
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="{{ route('produtos.index') }}" class="btn btn-secondary">Cancelar</a>
+        <div class="d-flex justify-content-center gap-3 mb-4">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Salvar
+            </button>
+            <a href="{{ route('produtos.index') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
+        </div>
     </form>
 
     @if(!isset($produto))
