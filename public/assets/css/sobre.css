@@ -1,69 +1,199 @@
-/* Estilos para os itens expansíveis */
-.feature-toggle {
-    font-weight: bold;
-    cursor: pointer;
-    padding: 8px 0;
-    display: block; /* Faz o <li> se comportar mais como um botão */
-    position: relative;
-    user-select: none; /* Impede seleção de texto ao clicar */
+/* ==================== SOBRE INDEX ==================== */
+.container {
+    max-width: 1200px;
 }
 
-.feature-toggle::before {
-    content: '+ '; /* Indicador de expansão */
-    margin-right: 8px;
-    font-weight: bold;
+/* ==================== CABEÇALHO ==================== */
+.sobre-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 30px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
 }
 
-.feature-toggle.open::before {
-    content: '- '; /* Indicador quando aberto */
+.sobre-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-.feature-details {
-    display: none; /* Escondido por padrão */
-    padding-left: 25px; /* Indentação para os detalhes */
+.sobre-header p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+}
+
+/* ==================== CARDS DE INFORMAÇÕES ==================== */
+.info-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.info-card h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 15px;
+}
+
+.info-card h5 i {
+    font-size: 1.8rem;
+    color: #667eea;
+}
+
+.info-card p {
+    color: #6c757d;
+    line-height: 1.6;
     margin-bottom: 15px;
-    border-left: 2px solid #e0e0e0; /* Linha lateral para destacar */
-    background-color: #f9f9f9; /* Fundo levemente diferente */
-    padding: 10px 10px 10px 25px; /* Mais padding interno */
-    font-weight: normal; /* Resetar bold se herdado */
-    text-align: justify; /* Justificar o texto para alinhamento uniforme */
-    line-height: 1.2; /* Altura de linha para melhor legibilidade */
-    border-radius: 5px; /* Cantos arredondados para melhor estética */
 }
 
-.feature-details p, .feature-details ul {
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-.feature-details ul li {
-    margin-bottom: 3px;
-}
-.feature-details strong { /* Para destacar os nomes dos campos */
-    color: #005fa3; /* Um azul similar ao que você usa */
+.info-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.lista-features-sobre {
-    text-align: left;
-    list-style-position: inside; /* Para os marcadores ficarem dentro da área de texto alinhada */
-    padding-left: 0; /* Remove o padding padrão para controlar melhor o alinhamento */
-    list-style-type: none; /* Remove os marcadores padrão */
+.info-card ul li {
+    padding: 8px 0;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px dashed #e9ecef;
 }
 
-.lista-features-sobre > li {
-    /* Se você tiver algum estilo que possa estar centralizando o li individualmente */
-    text-align: left;
+.info-card ul li:last-child {
+    border-bottom: none;
 }
 
-.feature-toggle {
-    /* ... seus outros estilos para .feature-toggle ... */
-    /* display: inline-block; */ /* Pode não ser necessário se o li já está alinhado à esquerda */
-    /* width: auto; */
-    text-align: left; /* Garante que o texto dentro do span não seja centralizado */
+.info-card ul li i {
+    color: #28a745;
+    width: 20px;
 }
 
-.about-text {
-    text-align: justify; /* Alinha o texto nas duas margens */
-    line-height: 1.2; /* Espaçamento entre linhas para melhor leitura */
-    padding: 5px 20px; /* Espaço interno */
-    font-size: 1rem; /* Tamanho de fonte legível */
+/* ==================== BADGES DE TECNOLOGIA ==================== */
+.tech-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin: 5px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #495057;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
 }
+
+.tech-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tech-badge i {
+    margin-right: 5px;
+    color: #667eea;
+}
+
+/* ==================== CARD DE CONTATO ==================== */
+.contato-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+    margin-top: 40px;
+}
+
+.contato-card h5 {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contato-card .contato-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.contato-card .contato-item:last-child {
+    border-bottom: none;
+}
+
+.contato-card .contato-item i {
+    font-size: 1.5rem;
+    width: 30px;
+}
+
+.contato-card .contato-item a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.contato-card .contato-item a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* ==================== VERSÃO ==================== */
+.versao-badge {
+    display: inline-block;
+    padding: 10px 25px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    margin: 20px 0;
+}
+
+.versao-badge i {
+    margin-right: 8px;
+}
+
+/* ==================== ANIMAÇÕES ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-card:nth-child(1) { animation-delay: 0.1s; }
+.animate-card:nth-child(2) { animation-delay: 0.2s; }
+.animate-card:nth-child(3) { animation-delay: 0.3s; }
+.animate-card:nth-child(4) { animation-delay: 0.4s; }
