@@ -5,6 +5,7 @@ use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\VendaController;
 use App\Http\Controllers\RecebimentoController;
 use App\Http\Controllers\RelatorioController;
+use App\Http\Controllers\WhatsAppController;
 use Illuminate\Support\Facades\Route;
 
 // Clientes
@@ -37,6 +38,13 @@ Route::put('/recebimentos/{id}', [RecebimentoController::class, 'update']);
 Route::get('/relatorios/vendas', [RelatorioController::class, 'vendas']);
 Route::post('/relatorios/pdf', [RelatorioController::class, 'gerarPDF']);
 Route::get('/relatorios/pdf/{arquivo}', [RelatorioController::class, 'downloadPDF']);
+
+// WhatsApp
+Route::post('/whatsapp/conectar', [App\Http\Controllers\WhatsAppController::class, 'conectar']);
+Route::post('/whatsapp/reiniciar', [App\Http\Controllers\WhatsAppController::class, 'reiniciar']);
+Route::get('/whatsapp/status', [App\Http\Controllers\WhatsAppController::class, 'status']);
+Route::post('/whatsapp/enviar-atrasados', [App\Http\Controllers\WhatsAppController::class, 'enviarAtrasados']);
+Route::post('/whatsapp/logout', [WhatsAppController::class, 'logout']);
 
 // Dashboard
 Route::prefix('dashboard')->group(function () {

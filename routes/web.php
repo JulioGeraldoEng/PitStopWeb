@@ -37,9 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/relatorios', [RelatorioController::class, 'index'])->name('relatorios.index');
     
     // WhatsApp
-    Route::get('/whatsapp', function () {
-        return view('whatsapp.index');
-    })->name('whatsapp.index');
+    // WhatsApp
+    Route::get('/whatsapp', [WhatsAppController::class, 'index'])->name('whatsapp.index');
     
     // Sobre
     Route::get('/sobre', function () {

@@ -7,37 +7,58 @@
 @section('content')
 <div class="container">
     <h1>Integração com WhatsApp</h1>
+    
+    <!-- CARD DE STATUS -->
+    <div class="status-card" id="status-card">
+        <h5>
+            <i class="fab fa-whatsapp"></i> Status da Conexão
+        </h5>
+        <div class="status-info">
+            <span id="status-text">Verificando conexão...</span>
+            <span class="status-badge" id="status-badge">
+                <i class="fas fa-spinner fa-spin"></i> Conectando...
+            </span>
+        </div>
+    </div>
 
-    <form class="formulario">
-        <div class="form-linha">
-            <div class="campo botao">
-                <label>&nbsp;</label>
-                <div class="buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button type="button" id="btnWhatsapp">
-                        <i class="fab fa-whatsapp"></i> Conectar WhatsApp
-                    </button>
-                    <button type="button" id="btnRestartSession">
-                        <i class="fas fa-sync-alt"></i> Reiniciar Sessão
-                    </button>
-                    <button type="button" id="btnSendLateSales">
-                        <i class="fas fa-paper-plane"></i> Enviar Vendas Atrasadas
-                    </button>
-                </div>
+    <!-- CARD DO QR CODE -->
+    <div class="qrcode-card" id="qrcode-card">
+        <h5><i class="fas fa-qrcode"></i> QR Code de Conexão</h5>
+        <div class="qrcode-container" id="qrcode-container">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Aguardando QR Code...</p>
             </div>
         </div>
+    </div>
 
-        <div id="loadingMessage" style="display: none; margin-top: 15px;">
-            Carregando QR Code...
+    <!-- CARD DE AÇÕES -->
+    <div class="actions-card">
+        <h5><i class="fas fa-cog"></i> Ações</h5>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <button type="button" id="btnConectar" class="btn-whatsapp btn-whatsapp-success">
+                <i class="fas fa-plug"></i> Conectar
+            </button>
+            <button type="button" id="btnReiniciar" class="btn-whatsapp btn-whatsapp-warning">
+                <i class="fas fa-sync-alt"></i> Reiniciar
+            </button>
+            <!-- Botão Desconectar (vermelho) -->
+            <button type="button" id="btnLogout" class="btn-whatsapp btn-whatsapp-danger">
+                <i class="fas fa-sign-out-alt"></i> Desconectar
+            </button>
+
+            <!-- Botão Enviar Atrasados (azul) -->
+            <button type="button" id="btnEnviar" class="btn-whatsapp btn-whatsapp-primary">
+                <i class="fab fa-whatsapp"></i> Enviar Atrasados
+            </button>
         </div>
+    </div>
 
-        <div id="qrcode-container" style="display: none; margin-top: 15px;"></div>
-    </form>
+    <div id="mensagem" class="alert mensagem" style="display: none;"></div>
 </div>
 @endsection
 
 @push('scripts')
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-<script>
-    // Seu código do whatsapp.js aqui
-</script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="{{ asset('assets/js/whatsapp/index.js') }}"></script>
 @endpush
