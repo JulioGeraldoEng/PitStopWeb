@@ -20,9 +20,11 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Seus estilos personalizados -->
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <!-- PRIMEIRO: estilos específicos da página -->
     @stack('styles')
+
+    <!-- DEPOIS: estilos globais (para não sobrescrever os específicos) -->
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 </head>
 <body>
     <!-- Top Bar - Só aparece se NÃO for página de login -->

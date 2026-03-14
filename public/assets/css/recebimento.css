@@ -1,67 +1,154 @@
 /* ==================== TABELA DE RECEBIMENTOS MODERNA ==================== */
 #tabela-recebimentos {
     margin-top: 30px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
 }
 
 .tabela-recebimento {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0;
+    border-spacing: 0 8px;
     font-family: 'Segoe UI', 'Times New Roman', Times, serif;
+    margin-top: 5px;
 }
 
+/* Cabeçalho da tabela */
 .tabela-recebimento thead tr {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+    border-radius: 15px;
 }
 
 .tabela-recebimento th {
     color: white;
-    padding: 16px 12px;
+    padding: 18px 15px;
     text-align: center;
     font-weight: 600;
     font-size: 0.95rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
     border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.tabela-recebimento th::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
 }
 
 .tabela-recebimento th:first-child {
-    border-top-left-radius: 12px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 .tabela-recebimento th:last-child {
-    border-top-right-radius: 12px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
+/* Linhas do corpo */
 .tabela-recebimento tbody tr {
-    transition: all 0.3s ease;
-    border-bottom: 1px solid #e9ecef;
+    background: white;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    margin-bottom: 8px;
+    border: 1px solid rgba(102, 126, 234, 0.05);
 }
 
 .tabela-recebimento tbody tr:hover {
-    background-color: #f8f9fa;
-    transform: scale(1.01);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(71, 118, 230, 0.15);
+    border-color: rgba(71, 118, 230, 0.2);
 }
 
 .tabela-recebimento td {
-    padding: 14px 12px;
+    padding: 18px 15px;
     text-align: center;
-    color: #495057;
+    color: #2c3e50;
     font-size: 0.95rem;
-    border-bottom: 1px solid #e9ecef;
+    border: none;
+    background: white;
 }
 
-.tabela-recebimento tbody tr:last-child td {
-    border-bottom: none;
+.tabela-recebimento tbody tr td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
 }
 
+.tabela-recebimento tbody tr td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Efeito zebrado suave */
 .tabela-recebimento tbody tr:nth-child(even) {
-    background-color: #fafbfc;
+    background: linear-gradient(135deg, #fafbff, #ffffff);
+}
+
+/* ==================== STATUS COM BADGES ==================== */
+.status-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.status-pago {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+}
+
+.status-pendente {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+}
+
+.status-atrasado {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
+}
+
+.status-cancelado {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.2);
+    text-decoration: line-through;
+    opacity: 0.9;
+}
+
+/* ==================== ANIMAÇÕES ==================== */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tabela-recebimento tbody tr {
+    animation: slideIn 0.4s ease forwards;
+    animation-delay: calc(var(--row-index) * 0.05s);
 }
 
 /* ==================== BOTÕES DE AÇÃO ==================== */
@@ -125,63 +212,6 @@
     border-color: #667eea;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
     outline: none;
-}
-
-/* ==================== BOTÕES PADRÃO ==================== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 160px;
-    height: 48px;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    color: #212529;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
-    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
-    color: white;
-}
-
-.btn-secondary {
-    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
-    color: #212529;
-}
-
-.btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
-    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
-    color: white;
-}
-
-.btn-success {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: #212529;
-}
-
-.btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
-    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
-    color: white;
 }
 
 /* ==================== MODAL DE EDIÇÃO ==================== */
@@ -281,6 +311,35 @@
     color: white;
 }
 
+/* ==================== CORREÇÃO DE ESPAÇAMENTO DO CARD ==================== */
+.card-body {
+    padding: 1.5rem !important;
+}
+
+.card-body .row {
+    margin: 0 !important;
+}
+
+.card-body .row > [class*="col-"] {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.card-body .mb-3,
+.card-body .form-group,
+.card-body .form-control,
+.card-body .input-group {
+    margin-bottom: 0 !important;
+}
+
+.card-body label {
+    margin-bottom: 2px !important;
+}
+
+.card-body .row:last-child {
+    margin-top: 15px !important;
+}
+
 /* ==================== UTILITÁRIOS ==================== */
 .d-flex {
     display: flex !important;
@@ -300,4 +359,97 @@
 
 .mt-4 {
     margin-top: 1.5rem !important;
+}
+
+/* ==================== BOTÕES PADRÃO ==================== */
+.card .btn,
+.card .btn-success,
+.card .btn-primary,
+.card .btn-secondary,
+.card .btn-danger,
+.card .btn-whatsapp {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    font-size: 1rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    width: 160px !important;
+    height: 48px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+
+/* Botão Nova Venda */
+.card .btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    color: #212529 !important;
+}
+
+.card .btn-success:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3) !important;
+    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%) !important;
+    color: white !important;
+}
+
+/* Botão Buscar */
+.card .btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+    color: #212529 !important;
+}
+
+.card .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3) !important;
+    background: linear-gradient(135deg, #0069d9 0%, #004085 100%) !important;
+    color: white !important;
+}
+
+/* Botão Limpar */
+.card .btn-secondary {
+    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%) !important;
+    color: #212529 !important;
+}
+
+.card .btn-secondary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3) !important;
+    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%) !important;
+    color: white !important;
+}
+
+/* Botão Exportar PDF */
+.card .btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+    color: #212529 !important;
+}
+
+.card .btn-danger:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3) !important;
+    background: linear-gradient(135deg, #c82333 0%, #a71d2a 100%) !important;
+    color: white !important;
+}
+
+/* Botão WhatsApp */
+.card .btn-whatsapp {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%) !important;
+    color: #212529 !important;
+}
+
+.card .btn-whatsapp:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3) !important;
+    background: linear-gradient(135deg, #20bd5a 0%, #0e6b5f 100%) !important;
+    color: white !important;
 }

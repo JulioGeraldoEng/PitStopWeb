@@ -44,3 +44,7 @@
     </table>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('assets/js/clientes/index.js') }}"></script>
+@endpush

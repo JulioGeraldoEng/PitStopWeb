@@ -525,10 +525,9 @@ hr {
     padding: 1rem;
 }
 
-/* ==================== AUTOCOMPLETE FLUTUANTE ==================== */
+/* ==================== AUTOCOMPLETE CORRIGIDO ==================== */
 .form-group.position-relative {
     position: relative !important;
-    /* Importante: o container tem position relative mas não limita o z-index */
 }
 
 #sugestoes-cliente,
@@ -537,29 +536,29 @@ hr {
     top: 100% !important;
     left: 0 !important;
     width: 100% !important;
-    z-index: 999999 !important;  /* Z-index altíssimo para ficar acima de tudo */
+    z-index: 999999 !important;
     background: white !important;
     border: 2px solid #0078d7 !important;
-    border-radius: 4px !important;
+    border-radius: 8px !important;
     max-height: 300px !important;
     overflow-y: auto !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;  /* Sombra maior para destacar */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
     margin-top: 2px !important;
     display: none;
 }
 
 /* Garantir que o card não corte o autocomplete */
 .card {
-    overflow: visible !important;  /* Permite que elementos filhos "saiam" do card */
+    overflow: visible !important;
 }
 
 .card-body {
-    overflow: visible !important;  /* Permite que elementos filhos "saiam" do card */
+    overflow: visible !important;
 }
 
-/* Itens da lista */
-#sugestoes-cliente a,
-#sugestoes-produto a {
+/* Estilo dos itens da lista */
+#sugestoes-cliente .list-group-item,
+#sugestoes-produto .list-group-item {
     display: block !important;
     padding: 12px 15px !important;
     text-decoration: none !important;
@@ -572,26 +571,101 @@ hr {
     background: white !important;
 }
 
-#sugestoes-cliente a:hover,
-#sugestoes-produto a:hover {
+#sugestoes-cliente .list-group-item:hover,
+#sugestoes-produto .list-group-item:hover {
     background: linear-gradient(135deg, #0078d7, #0056b3) !important;
     color: white !important;
-    border-bottom-color: #0056b3 !important;
 }
 
-#sugestoes-cliente a:last-child,
-#sugestoes-produto a:last-child {
+#sugestoes-cliente .list-group-item:last-child,
+#sugestoes-produto .list-group-item:last-child {
     border-bottom: none !important;
 }
 
-/* Barra de rolagem (opcional) */
+/* Barra de rolagem */
 #sugestoes-cliente::-webkit-scrollbar,
 #sugestoes-produto::-webkit-scrollbar {
-    width: 8px;
+    width: 8px !important;
 }
 
 #sugestoes-cliente::-webkit-scrollbar-thumb,
 #sugestoes-produto::-webkit-scrollbar-thumb {
-    background: #0078d7;
-    border-radius: 4px;
+    background: #0078d7 !important;
+    border-radius: 4px !important;
+}
+
+/* ==================== CORREÇÃO: REMOVER ESPAÇAMENTO EXTRA ==================== */
+.card-body .row {
+    margin-bottom: 0 !important;
+}
+
+.card-body .row .col-md-4,
+.card-body .row .col-md-3,
+.card-body .row .col-md-6 {
+    margin-bottom: 0 !important;
+}
+
+/* Remover margens dos componentes de data */
+.card-body .mb-3 {
+    margin-bottom: 0 !important;
+}
+
+/* Garantir que não haja espaçamento entre as linhas */
+.card-body .row + .row {
+    margin-top: 0 !important;
+}
+
+/* Ajustar apenas o espaçamento dos botões */
+.card-body .row:last-child {
+    margin-top: 15px !important;
+}
+
+/* ==================== SOLUÇÃO RADICAL ==================== */
+/* Reset completo do card-body */
+.card-body {
+    padding: 1.5rem !important;
+}
+
+/* Remover TODAS as margens e paddings de todas as linhas e colunas */
+.card-body .row {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.card-body .row > [class*="col-"] {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Remover margens dos componentes de data */
+.card-body .mb-3 {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.card-body .form-group {
+    margin-bottom: 0 !important;
+}
+
+.card-body label {
+    margin-bottom: 2px !important; /* Só um pequeno espaço entre label e input */
+}
+
+/* Adicionar UM ÚNICO espaçamento antes dos botões */
+.card-body .row:last-child {
+    margin-top: 15px !important;
+}
+
+/* Garantir que os inputs tenham uma altura consistente */
+.card-body .form-control {
+    margin-bottom: 0 !important;
+}
+
+/* Remover espaçamento dos datepickers */
+.card-body .input-group {
+    margin-bottom: 0 !important;
 }

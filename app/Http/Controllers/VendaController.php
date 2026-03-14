@@ -190,30 +190,39 @@ class VendaController extends Controller
 
     public function busca(Request $request)
     {
-        \Log::info('Filtros recebidos:', $request->all()); // Para debug
+        \Log::info('Filtros recebidos:', $request->all());
         
-        $query = Venda::with('cliente', 'recebimento');
+        $query = Venda::with(['cliente', 'recebimento']);
         
-        // FILTRO POR CLIENTE (já funciona)
+        // FILTRO POR CLIENTE
         if ($request->filled('clienteId') && $request->clienteId !== 'null') {
             $query->where('cliente_id', $request->clienteId);
         }
         
-        // FILTRO POR STATUS
+        // ==================== FILTRO POR STATUS CORRIGIDO ====================
         if ($request->filled('status') && $request->status !== '') {
+            $hoje = now()->format('Y-m-d');
+            
             if ($request->status === 'atrasado') {
-                $query->whereHas('recebimento', function($q) {
+                // Atrasados: pendente E data de vencimento < hoje
+                $query->whereHas('recebimento', function($q) use ($hoje) {
                     $q->where('status', 'pendente')
-                    ->whereDate('data_vencimento', '<', now()->format('Y-m-d'));
-                })->orWhereHas('recebimento', function($q) {
-                    $q->where('status', 'atrasado');
+                    ->where('data_vencimento', '<', $hoje);
+                });
+            } elseif ($request->status === 'pendente') {
+                // Pendentes: pendente E data de vencimento >= hoje
+                $query->whereHas('recebimento', function($q) use ($hoje) {
+                    $q->where('status', 'pendente')
+                    ->where('data_vencimento', '>=', $hoje);
                 });
             } else {
+                // Pago, cancelado: filtro direto
                 $query->whereHas('recebimento', function($q) use ($request) {
                     $q->where('status', $request->status);
                 });
             }
         }
+        // ======================================================================
         
         // FILTRO POR DATA DA VENDA
         if ($request->filled('dataInicio') && trim($request->dataInicio) !== '') {
@@ -264,7 +273,7 @@ class VendaController extends Controller
         $resultado = $vendas->map(function($venda) {
             $recebimento = $venda->recebimento;
             
-            // Determinar status
+            // Determinar status correto
             $status = $recebimento->status ?? 'pendente';
             if ($status === 'pendente' && $recebimento && $recebimento->data_vencimento < now()->format('Y-m-d')) {
                 $status = 'atrasado';
