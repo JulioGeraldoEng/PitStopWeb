@@ -89,13 +89,12 @@
                             <br>
                             <small>{{ Auth::user()->email ?? 'email@exemplo.com' }}</small>
                         </div>
-                        <a href="{{ route('profile.edit') }}" class="user-dropdown-item">
+                        <a href="{{ route('perfil.edit') }}" class="user-dropdown-item">
                             <i class="fas fa-user"></i>
                             Meu Perfil
                         </a>
-                        <a href="#" class="user-dropdown-item">
-                            <i class="fas fa-cog"></i>
-                            Configurações
+                        <a href="{{ route('configuracoes') }}" class="user-dropdown-item">
+                            <i class="fas fa-cog"></i> Configurações
                         </a>
                         <div class="user-dropdown-divider"></div>
                         <a href="#" class="user-dropdown-item danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

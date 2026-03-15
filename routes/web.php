@@ -8,6 +8,7 @@ use App\Http\Controllers\RecebimentoController;
 use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\WhatsAppController;
 use App\Http\Controllers\SobreController;
+use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
 
 // Página inicial redireciona para dashboard
@@ -27,6 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
+    // NOVO: Perfil personalizado
+    Route::get('/perfil', [PerfilController::class, 'edit'])->name('perfil.edit');
+    Route::put('/perfil', [PerfilController::class, 'update'])->name('perfil.update');
+    Route::put('/perfil/senha', [PerfilController::class, 'updatePassword'])->name('perfil.password');
+
+    Route::get('/configuracoes', [PerfilController::class, 'configuracoes'])->name('configuracoes');
+    Route::put('/configuracoes', [PerfilController::class, 'updateConfiguracoes'])->name('configuracoes.update');
+
     // Recursos do sistema (CRUDs)
     Route::resource('clientes', ClienteController::class);
     Route::resource('produtos', ProdutoController::class);
