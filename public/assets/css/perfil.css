@@ -5,12 +5,12 @@
 }
 
 .perfil-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg);
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     margin-bottom: 25px;
-    border: none;
+    border: 1px solid var(--border-color);
     transition: transform 0.3s ease;
 }
 
@@ -20,13 +20,13 @@
 }
 
 .perfil-card h5 {
-    color: #2c3e50;
+    color: var(--text-color);
     font-weight: 600;
     margin-bottom: 25px;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 2px solid #e9ecef;
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 15px;
 }
 
@@ -58,12 +58,12 @@
 }
 
 .avatar-info h3 {
-    color: #2c3e50;
+    color: var(--text-color);
     margin-bottom: 5px;
 }
 
 .avatar-info p {
-    color: #6c757d;
+    color: var(--text-muted);
     margin-bottom: 0;
 }
 
@@ -74,16 +74,18 @@
 
 .form-group label {
     font-weight: 500;
-    color: #495057;
+    color: var(--text-color);
     margin-bottom: 8px;
     display: block;
 }
 
 .form-group .form-control {
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
     padding: 12px 15px;
     transition: all 0.3s ease;
+    background-color: var(--input-bg);
+    color: var(--text-color);
 }
 
 .form-group .form-control:focus {
@@ -93,8 +95,14 @@
 }
 
 .form-group .form-control[readonly] {
-    background-color: #f8f9fa;
+    background-color: var(--input-bg);
+    opacity: 0.8;
     cursor: not-allowed;
+}
+
+.form-group .form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
 }
 
 /* Botões */
@@ -114,24 +122,36 @@
     min-width: 140px;
 }
 
+/* Botão Salvar/Alterar (roxo) - Texto escuro no normal */
 .btn-perfil-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white !important;
+    color: #212529 !important;  /* Texto escuro */
 }
 
 .btn-perfil-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    color: white !important;  /* Texto claro no hover */
 }
 
+.btn-perfil-primary:hover i {
+    color: white !important;  /* Ícone claro no hover */
+}
+
+/* Botão Cancelar (amarelo) - já está escuro no normal */
 .btn-perfil-secondary {
     background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
-    color: #212529 !important;
+    color: #212529 !important;  /* Texto escuro */
 }
 
 .btn-perfil-secondary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+    color: white !important;  /* Texto claro no hover */
+}
+
+.btn-perfil-secondary:hover i {
+    color: white !important;  /* Ícone claro no hover */
 }
 
 /* Alertas */

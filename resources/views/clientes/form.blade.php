@@ -17,7 +17,7 @@
         @endif
         
         <div class="mb-3 position-relative">
-            <label for="nome" class="form-label">Nome *</label>
+            <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" name="nome" 
                    value="{{ $cliente->nome ?? '' }}" required autocomplete="off">
             <div id="sugestoes-clientes" class="list-group position-absolute" style="z-index: 1000; width: 100%; display: none;"></div>

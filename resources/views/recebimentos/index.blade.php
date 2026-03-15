@@ -21,9 +21,12 @@
                 <div class="row g-3">
                     <!-- Cliente -->
                     <div class="col-md-6">
-                        <label for="cliente" class="form-label">Cliente:</label>
-                        <input type="text" class="form-control" id="cliente" placeholder="Nome do cliente" autocomplete="off">
-                        <div id="sugestoes-cliente" class="list-group position-absolute" style="z-index: 1000; width: 90%; display: none;"></div>
+                        <div class="form-group position-relative"> 
+                                <label for="cliente" class="form-label">Cliente:</label>
+                                <input type="text" class="form-control" id="cliente" placeholder="Nome do cliente" autocomplete="off">
+                                <div id="sugestoes-cliente" class="list-group position-absolute" style="z-index: 1000; width: 90%; display: none;"></div>
+                    
+                        </div>
                     </div>
                     
                     <!-- Status -->

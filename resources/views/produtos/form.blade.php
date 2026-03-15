@@ -17,20 +17,20 @@
         @endif
         
         <div class="mb-3 position-relative">
-            <label for="nome" class="form-label">Nome *</label>
+            <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" name="nome" 
                    value="{{ $produto->nome ?? '' }}" required autocomplete="off">
             <div id="sugestoes-produtos" class="list-group position-absolute" style="z-index: 1000; width: 100%; display: none;"></div>
         </div>
         
         <div class="mb-3">
-            <label for="preco" class="form-label">Preço (R$) *</label>
+            <label for="preco" class="form-label">Preço (R$)</label>
             <input type="number" class="form-control" id="preco" name="preco" 
                    value="{{ $produto->preco ?? '' }}" step="0.01" min="0" required>
         </div>
         
         <div class="mb-3">
-            <label for="quantidade" class="form-label">Quantidade *</label>
+            <label for="quantidade" class="form-label">Quantidade</label>
             <input type="number" class="form-control" id="quantidade" name="quantidade" 
                    value="{{ $produto->quantidade ?? 0 }}" min="0" required>
         </div>

@@ -30,12 +30,13 @@
 
 /* ==================== CARDS DE INFORMAÇÕES ==================== */
 .info-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg);
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     height: 100%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .info-card:hover {
@@ -44,13 +45,13 @@
 }
 
 .info-card h5 {
-    color: #2c3e50;
+    color: var(--text-color);
     font-weight: 600;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 2px solid #e9ecef;
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 15px;
 }
 
@@ -60,7 +61,7 @@
 }
 
 .info-card p {
-    color: #6c757d;
+    color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 15px;
 }
@@ -73,11 +74,11 @@
 
 .info-card ul li {
     padding: 8px 0;
-    color: #495057;
+    color: var(--text-color);
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px dashed #e9ecef;
+    border-bottom: 1px dashed var(--border-color);
 }
 
 .info-card ul li:last-child {
@@ -97,9 +98,9 @@
     font-weight: 500;
     font-size: 0.9rem;
     margin: 5px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    color: #495057;
-    border: 1px solid #dee2e6;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
 }
 

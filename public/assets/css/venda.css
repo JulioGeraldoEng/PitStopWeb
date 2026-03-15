@@ -4,11 +4,12 @@
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #ffffff;
-    padding: 0;  /* Remove padding para a tabela ocupar toda largura */
+    background-color: var(--card-bg);
+    padding: 0;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;  /* Para bordas arredondadas */
+    overflow: hidden;
+    transition: background-color 0.3s ease;
 }
 
 .tabela-venda {
@@ -32,7 +33,6 @@
     letter-spacing: 0.5px;
     text-transform: uppercase;
     border: none;
-    position: relative;
 }
 
 .tabela-venda th:first-child {
@@ -46,27 +46,22 @@
 /* Linhas do corpo */
 .tabela-venda tbody tr {
     transition: all 0.3s ease;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.tabela-venda tbody tr:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .tabela-venda tbody tr:hover {
-    background-color: #f8f9fa;
+    background-color: var(--hover-bg);
     transform: scale(1.01);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    position: relative;
     z-index: 10;
 }
 
 .tabela-venda td {
     padding: 14px 12px;
     text-align: center;
-    color: #495057;
+    color: var(--text-color);
     font-size: 0.95rem;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .tabela-venda tbody tr:last-child td {
@@ -75,30 +70,17 @@
 
 /* Efeito zebrado suave */
 .tabela-venda tbody tr:nth-child(even) {
-    background-color: #fafbfc;
-}
-
-.tabela-venda tbody tr:nth-child(even):hover {
-    background-color: #f1f3f5;
+    background-color: rgba(0,0,0,0.02);
 }
 
 /* Larguras das colunas */
-.tabela-venda th:nth-child(1),
-.tabela-venda td:nth-child(1) { width: 25%; } /* Cliente */
+.tabela-venda th:nth-child(1), .tabela-venda td:nth-child(1) { width: 25%; }
+.tabela-venda th:nth-child(2), .tabela-venda td:nth-child(2) { width: 15%; }
+.tabela-venda th:nth-child(3), .tabela-venda td:nth-child(3) { width: 15%; }
+.tabela-venda th:nth-child(4), .tabela-venda td:nth-child(4) { width: 15%; }
+.tabela-venda th:nth-child(5), .tabela-venda td:nth-child(5) { width: 30%; }
 
-.tabela-venda th:nth-child(2),
-.tabela-venda td:nth-child(2) { width: 15%; } /* Data da Venda */
-
-.tabela-venda th:nth-child(3),
-.tabela-venda td:nth-child(3) { width: 15%; } /* Vencimento */
-
-.tabela-venda th:nth-child(4),
-.tabela-venda td:nth-child(4) { width: 15%; } /* Total */
-
-.tabela-venda th:nth-child(5),
-.tabela-venda td:nth-child(5) { width: 30%; } /* Ações */
-
-/* ==================== BOTÕES DE AÇÃO MODERNOS ==================== */
+/* ==================== BOTÕES DE AÇÃO ==================== */
 .acao-container {
     display: flex;
     justify-content: center;
@@ -115,7 +97,7 @@
     gap: 4px;
     padding: 8px 12px;
     border-radius: 20px;
-    text-decoration: none;  /* SEM SUBLINHADO */
+    text-decoration: none;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -123,52 +105,48 @@
     transition: all 0.3s ease;
     min-width: 70px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    letter-spacing: 0.3px;
 }
 
-/* Botão VER - Azul claro com texto escuro */
+/* Botão VER */
 .btn-ver {
     background: linear-gradient(135deg, #a8e6cf 0%, #d4edda 100%);
-    color: #155724;  /* Texto escuro */
+    color: #155724;
 }
 
 .btn-ver:hover {
     background: linear-gradient(135deg, #78c2ad 0%, #a3d0b2 100%);
-    color: white;  /* Texto claro no hover */
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    text-decoration: none;  /* Garante sem sublinhado */
 }
 
-/* Botão EDITAR - Amarelo com texto escuro */
+/* Botão EDITAR */
 .btn-editar {
     background: linear-gradient(135deg, #fff3cd 0%, #fff8e1 100%);
-    color: #856404;  /* Texto escuro */
+    color: #856404;
 }
 
 .btn-editar:hover {
     background: linear-gradient(135deg, #ffe69c 0%, #ffd966 100%);
-    color: white;  /* Texto claro no hover */
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    text-decoration: none;  /* Garante sem sublinhado */
 }
 
-/* Botão EXCLUIR - Vermelho claro com texto escuro */
+/* Botão EXCLUIR */
 .btn-excluir {
     background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-    color: #721c24;  /* Texto escuro */
+    color: #721c24;
 }
 
 .btn-excluir:hover {
     background: linear-gradient(135deg, #f1b0b7 0%, #e9a2a9 100%);
-    color: white;  /* Texto claro no hover */
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    text-decoration: none;  /* Garante sem sublinhado */
 }
 
-/* Ícones nos botões */
+/* Ícones nos botões de ação */
 .btn-ver i,
 .btn-editar i,
 .btn-excluir i {
@@ -182,11 +160,77 @@
     color: white;
 }
 
+/* ==================== BOTÕES PADRÃO ==================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+/* Botão Nova Venda */
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: #212529;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
+    color: white;
+}
+
+/* Botão Buscar */
+.btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: #212529;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
+    color: white;
+}
+
+/* Botão Limpar */
+.btn-secondary {
+    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+    color: #212529;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+    color: white;
+}
+
+/* Ícones nos botões padrão */
+.btn i {
+    transition: color 0.3s ease;
+}
+
+.btn:hover i {
+    color: white !important;
+}
+
 /* Mensagem de tabela vazia */
 .tabela-venda td[colspan] {
     padding: 40px;
     text-align: center;
-    color: #6c757d;
+    color: var(--text-muted);
     font-style: italic;
     font-size: 1rem;
 }
@@ -201,74 +245,173 @@
     animation: fadeIn 0.3s ease forwards;
 }
 
-/* ==================== BOTÕES PADRÃO (Nova Venda, Buscar, Limpar) ==================== */
-.btn {
-    display: inline-flex;
+/* ==================== RESUMO DA VENDA ==================== */
+.resumo-venda {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.resumo-venda p {
+    margin: 6px 0;
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+/* ==================== CARD DE FILTROS ==================== */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: var(--card-bg) !important;
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.card-title {
+    color: var(--text-color) !important;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: none;
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-muted) !important;
+    margin-bottom: 0.3rem;
+}
+
+.form-control {
+    border: 2px solid var(--border-color) !important;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+    background-color: var(--input-bg) !important;
+    color: var(--text-color) !important;
+}
+
+.form-control:focus {
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+/* 👇 NOVO: Placeholders */
+.form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* 👇 NOVO: Para selects */
+select.form-control {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+select.form-control option {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+/* ==================== AUTOCOMPLETE ==================== */
+.form-group.position-relative {
+    position: relative !important;
+    
+}
+
+#sugestoes-cliente,
+#sugestoes-produto {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 999999 !important;
+    background: var(--input-bg) !important;
+    border: 2px solid #0078d7 !important;
+    border-radius: 8px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+    margin-top: 2px !important;
+    display: none;
+}
+
+#sugestoes-cliente .list-group-item,
+#sugestoes-produto .list-group-item {
+    display: block !important;
+    padding: 12px 15px !important;
+    text-decoration: none !important;
+    color: var(--text-color) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    background: var(--input-bg) !important;
+}
+
+#sugestoes-cliente .list-group-item:hover,
+#sugestoes-produto .list-group-item:hover {
+    background: linear-gradient(135deg, #0078d7, #0056b3) !important;
+    color: white !important;
+}
+
+#sugestoes-cliente .list-group-item:last-child,
+#sugestoes-produto .list-group-item:last-child {
+    border-bottom: none !important;
+}
+
+/* ==================== INPUT GROUP COM ÍCONES ==================== */
+.input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-group-text {
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    border: none;
-    border-radius: 50px;  /* Pill style igual dashboard */
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
+    padding: 0.6rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: 2px solid var(--border-color);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
     font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 160px;
-    height: 48px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    line-height: 1;
 }
 
-/* Botão Nova Venda (verde) - Texto escuro no normal, claro no hover */
-.btn-success {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: #212529;  /* Texto escuro */
+.input-group .form-control {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    flex: 1;
 }
 
-.btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
-    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
-    color: white;  /* Texto claro no hover */
+/* ==================== PÁGINA DE DETALHES DA VENDA ==================== */
+.card-header {
+    font-weight: 600;
+    padding: 1rem 1.5rem;
 }
 
-/* Botão Buscar (azul) - Texto escuro no normal, claro no hover */
-.btn-primary {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    color: #212529;  /* Texto escuro */
+.card-header i {
+    margin-right: 8px;
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
-    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
-    color: white;  /* Texto claro no hover */
+.table-borderless th {
+    color: var(--text-muted);
+    font-weight: 500;
 }
 
-/* Botão Limpar (amarelo) - Texto escuro no normal, claro no hover */
-.btn-secondary {
-    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
-    color: #212529;  /* Texto escuro */
-}
-
-.btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
-    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
-    color: white;  /* Texto claro no hover */
-}
-
-/* Ícones nos botões padrão */
-.btn i {
-    transition: color 0.3s ease;
-}
-
-.btn:hover i {
-    color: white !important;
+.table tfoot {
+    background-color: var(--card-bg);
+    font-weight: bold;
 }
 
 /* ==================== UTILITÁRIOS ==================== */
@@ -292,60 +435,6 @@
     margin-top: 1.5rem !important;
 }
 
-
-/* ==================== RESUMO DA VENDA ==================== */
-.resumo-venda {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    text-align: center;
-}
-
-.resumo-venda p {
-    margin: 6px 0;
-    font-size: 1.1em;
-    color: #0742c4;
-}
-
-/* ==================== AUTOCOMPLETE ==================== */
-#cliente-input-container,
-#produto-input-container {
-    position: relative;
-}
-
-#sugestoes-cliente,
-#sugestoes-produto {
-    border: 1px solid #ccc;
-    background-color: #fff;
-    max-height: 200px;
-    overflow-y: auto;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: absolute;
-    z-index: 1000;
-    width: 100%;
-}
-
-#sugestoes-cliente .sugestao,
-#sugestoes-produto .sugestao {
-    padding: 8px 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
-}
-
-#sugestoes-cliente .sugestao:last-child,
-#sugestoes-produto .sugestao:last-child {
-    border-bottom: none;
-}
-
-#sugestoes-cliente .sugestao:hover,
-#sugestoes-produto .sugestao:hover {
-    background-color: #f0f0f0;
-}
-
 /* ==================== CAMPOS ==================== */
 #quantidade {
     max-width: 100px;
@@ -356,328 +445,4 @@
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
-}
-
-/* ==================== CARD DE FILTROS ==================== */
-.card {
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    margin-bottom: 2rem;
-}
-
-.card-title {
-    color: #2c3e50;
-    font-weight: 600;
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e9ecef;
-}
-
-.form-label {
-    font-weight: 500;
-    color: #495057;
-    margin-bottom: 0.3rem;
-}
-
-.form-control {
-    border: 2px solid #e9ecef;
-    border-radius: 8px;
-    padding: 0.6rem 1rem;
-    transition: all 0.3s ease;
-}
-
-.form-control:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-    outline: none;
-}
-
-/* Autocomplete */
-.list-group-item {
-    border: 1px solid #e9ecef;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.list-group-item:hover {
-    background-color: #f8f9fa;
-    border-color: #667eea;
-}
-
-
-/* ==================== INPUT GROUP COM ÍCONES ==================== */
-.input-group {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.input-group-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: 2px solid #e9ecef;
-    border-right: none;
-    border-radius: 8px 0 0 8px;
-    font-size: 1rem;
-}
-
-.input-group .form-control {
-    border-left: none;
-    border-radius: 0 8px 8px 0;
-    flex: 1;
-}
-
-.input-group .form-control:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-}
-
-/* ==================== REMOVER LINHAS INDESEJADAS NO CARD ==================== */
-.card {
-    border: none !important;
-    overflow: hidden;
-}
-
-.card-body {
-    padding: 1.5rem;
-}
-
-.card-title {
-    border-bottom: none !important;  /* Remove a linha abaixo do título */
-    margin-bottom: 1rem;
-    padding-bottom: 0;
-}
-
-/* Garantir que não haja bordas nos elementos internos */
-.form-control,
-.input-group-text {
-    border: 1px solid #e9ecef;
-}
-
-/* Remover qualquer hr que possa existir */
-hr {
-    display: none;
-}
-
-/* Ajustar o espaçamento */
-.row.mt-3 {
-    margin-top: 1rem !important;
-}
-
-.row.mt-4 {
-    margin-top: 1.5rem !important;
-}
-
-/* ==================== PÁGINA DE DETALHES DA VENDA ==================== */
-.card-header {
-    font-weight: 600;
-    padding: 1rem 1.5rem;
-}
-
-.card-header i {
-    margin-right: 8px;
-}
-
-.table-borderless th,
-.table-borderless td {
-    border: none;
-    padding: 0.5rem 0;
-}
-
-.table-borderless th {
-    color: #6c757d;
-    font-weight: 500;
-}
-
-.badge {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-}
-
-.badge-success {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: white;
-}
-
-.badge-warning {
-    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
-    color: #212529;
-}
-
-.badge-danger {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
-}
-
-.badge-secondary {
-    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
-    color: white;
-}
-
-/* Tabela de itens na página de detalhes */
-.table thead th {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: white;
-    border: none;
-}
-
-.table tfoot {
-    background-color: #f8f9fa;
-    font-weight: bold;
-}
-
-.table tfoot td {
-    padding: 1rem;
-}
-
-/* ==================== AUTOCOMPLETE CORRIGIDO ==================== */
-.form-group.position-relative {
-    position: relative !important;
-}
-
-#sugestoes-cliente,
-#sugestoes-produto {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    width: 100% !important;
-    z-index: 999999 !important;
-    background: white !important;
-    border: 2px solid #0078d7 !important;
-    border-radius: 8px !important;
-    max-height: 300px !important;
-    overflow-y: auto !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
-    margin-top: 2px !important;
-    display: none;
-}
-
-/* Garantir que o card não corte o autocomplete */
-.card {
-    overflow: visible !important;
-}
-
-.card-body {
-    overflow: visible !important;
-}
-
-/* Estilo dos itens da lista */
-#sugestoes-cliente .list-group-item,
-#sugestoes-produto .list-group-item {
-    display: block !important;
-    padding: 12px 15px !important;
-    text-decoration: none !important;
-    color: #333 !important;
-    border-bottom: 1px solid #e0e0e0 !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    background: white !important;
-}
-
-#sugestoes-cliente .list-group-item:hover,
-#sugestoes-produto .list-group-item:hover {
-    background: linear-gradient(135deg, #0078d7, #0056b3) !important;
-    color: white !important;
-}
-
-#sugestoes-cliente .list-group-item:last-child,
-#sugestoes-produto .list-group-item:last-child {
-    border-bottom: none !important;
-}
-
-/* Barra de rolagem */
-#sugestoes-cliente::-webkit-scrollbar,
-#sugestoes-produto::-webkit-scrollbar {
-    width: 8px !important;
-}
-
-#sugestoes-cliente::-webkit-scrollbar-thumb,
-#sugestoes-produto::-webkit-scrollbar-thumb {
-    background: #0078d7 !important;
-    border-radius: 4px !important;
-}
-
-/* ==================== CORREÇÃO: REMOVER ESPAÇAMENTO EXTRA ==================== */
-.card-body .row {
-    margin-bottom: 0 !important;
-}
-
-.card-body .row .col-md-4,
-.card-body .row .col-md-3,
-.card-body .row .col-md-6 {
-    margin-bottom: 0 !important;
-}
-
-/* Remover margens dos componentes de data */
-.card-body .mb-3 {
-    margin-bottom: 0 !important;
-}
-
-/* Garantir que não haja espaçamento entre as linhas */
-.card-body .row + .row {
-    margin-top: 0 !important;
-}
-
-/* Ajustar apenas o espaçamento dos botões */
-.card-body .row:last-child {
-    margin-top: 15px !important;
-}
-
-/* ==================== SOLUÇÃO RADICAL ==================== */
-/* Reset completo do card-body */
-.card-body {
-    padding: 1.5rem !important;
-}
-
-/* Remover TODAS as margens e paddings de todas as linhas e colunas */
-.card-body .row {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-}
-
-.card-body .row > [class*="col-"] {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-/* Remover margens dos componentes de data */
-.card-body .mb-3 {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-.card-body .form-group {
-    margin-bottom: 0 !important;
-}
-
-.card-body label {
-    margin-bottom: 2px !important; /* Só um pequeno espaço entre label e input */
-}
-
-/* Adicionar UM ÚNICO espaçamento antes dos botões */
-.card-body .row:last-child {
-    margin-top: 15px !important;
-}
-
-/* Garantir que os inputs tenham uma altura consistente */
-.card-body .form-control {
-    margin-bottom: 0 !important;
-}
-
-/* Remover espaçamento dos datepickers */
-.card-body .input-group {
-    margin-bottom: 0 !important;
 }

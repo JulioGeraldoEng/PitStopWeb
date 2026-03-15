@@ -1,11 +1,12 @@
 /* ==================== TABELA DE RECEBIMENTOS MODERNA ==================== */
 #tabela-recebimentos {
     margin-top: 30px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: var(--card-bg);
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     padding: 25px;
-    border: 1px solid rgba(102, 126, 234, 0.1);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .tabela-recebimento {
@@ -58,12 +59,12 @@
 
 /* Linhas do corpo */
 .tabela-recebimento tbody tr {
-    background: white;
+    background: var(--card-bg);
     border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
     margin-bottom: 8px;
-    border: 1px solid rgba(102, 126, 234, 0.05);
+    border: 1px solid var(--border-color);
 }
 
 .tabela-recebimento tbody tr:hover {
@@ -75,10 +76,10 @@
 .tabela-recebimento td {
     padding: 18px 15px;
     text-align: center;
-    color: #2c3e50;
+    color: var(--text-color);
     font-size: 0.95rem;
     border: none;
-    background: white;
+    background: var(--card-bg);
 }
 
 .tabela-recebimento tbody tr td:first-child {
@@ -93,7 +94,7 @@
 
 /* Efeito zebrado suave */
 .tabela-recebimento tbody tr:nth-child(even) {
-    background: linear-gradient(135deg, #fafbff, #ffffff);
+    background: var(--card-bg);
 }
 
 /* ==================== STATUS COM BADGES ==================== */
@@ -134,23 +135,6 @@
     opacity: 0.9;
 }
 
-/* ==================== ANIMAÇÕES ==================== */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.tabela-recebimento tbody tr {
-    animation: slideIn 0.4s ease forwards;
-    animation-delay: calc(var(--row-index) * 0.05s);
-}
-
 /* ==================== BOTÕES DE AÇÃO ==================== */
 .btn-acao-modal {
     display: inline-flex;
@@ -182,12 +166,13 @@
     border: none;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg) !important;
     margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
 }
 
 .card-title {
-    color: #2c3e50;
+    color: var(--text-color) !important;
     font-weight: 600;
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
@@ -197,21 +182,40 @@
 
 .form-label {
     font-weight: 500;
-    color: #495057;
+    color: var(--text-muted) !important;
     margin-bottom: 0.3rem;
 }
 
 .form-control {
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-color) !important;
     border-radius: 8px;
     padding: 0.6rem 1rem;
     transition: all 0.3s ease;
+    background-color: var(--input-bg) !important;
+    color: var(--text-color) !important;
 }
 
 .form-control:focus {
-    border-color: #667eea;
+    border-color: #667eea !important;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
     outline: none;
+}
+
+/* Placeholders */
+.form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Selects */
+select.form-control {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+select.form-control option {
+    background-color: var(--input-bg);
+    color: var(--text-color);
 }
 
 /* ==================== MODAL DE EDIÇÃO ==================== */
@@ -219,11 +223,15 @@
     border-radius: 15px;
     border: none;
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    background: var(--card-bg);
+    color: var(--text-color);
 }
 
 .modal-header {
     border-radius: 15px 15px 0 0;
     padding: 15px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
 }
 
 .modal-header .btn-close {
@@ -232,52 +240,139 @@
 
 .modal-body {
     padding: 20px;
+    color: var(--text-color);
 }
 
 .modal-footer {
-    border-top: 1px solid #e9ecef;
+    border-top: 1px solid var(--border-color);
     padding: 15px 20px;
 }
 
+/* Cards dentro do modal */
 .modal .card {
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     margin-bottom: 0;
+    background: var(--card-bg);
 }
 
 .modal .card-header {
     border-radius: 10px 10px 0 0;
     font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    padding: 12px 15px;
+}
+
+.modal .card-header i {
+    color: white;
+}
+
+.modal .card-body {
+    background: var(--card-bg);
+    padding: 15px;
+}
+
+/* 👇 CORREÇÃO PRINCIPAL: Informações da venda */
+.modal .table-borderless {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.modal .table-borderless tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal .table-borderless tr:last-child {
+    border-bottom: none;
 }
 
 .modal .table-borderless th {
     width: 40%;
-    color: #6c757d;
+    color: var(--text-muted) !important;
+    font-weight: 500;
+    padding: 10px 5px;
+    text-align: left;
 }
 
+/* 👇 OS VALORES (Venda, Cliente, Data, etc.) */
 .modal .table-borderless td {
     font-weight: 500;
+    color: var(--text-color) !important;  /* FORÇA COR BRANCA NO MODO ESCURO */
+    padding: 10px 5px;
+    text-align: left;
 }
 
+/* Para garantir que IDs e números fiquem visíveis */
+.modal .table-borderless td strong,
+.modal .table-borderless td span {
+    color: var(--text-color) !important;
+}
+
+/* Se houver elementos com classes específicas */
+#modal-venda-id,
+#modal-cliente,
+#modal-data-venda,
+#modal-valor-total {
+    color: var(--text-color) !important;
+    font-weight: 600;
+}
+
+/* 👇 Títulos das seções (Informações da Venda, Dados do Pagamento) */
+.modal .card-title,
+.modal h5,
+.modal h6 {
+    color: white !important;
+}
+
+/* 👇 Labels dos campos editáveis */
+.modal label {
+    color: var(--text-muted) !important;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* 👇 Campos de input */
 .modal .form-control,
 .modal .input-group-text {
     border-radius: 8px;
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-color) !important;
     padding: 10px 12px;
+    background-color: var(--input-bg) !important;
+    color: var(--text-color) !important;
 }
 
 .modal .input-group-text {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.modal .form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* 👇 Selects */
+.modal select.form-control {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.modal select.form-control option {
+    background-color: var(--input-bg);
+    color: var(--text-color);
 }
 
 .modal .form-control:focus {
-    border-color: #0078d7;
+    border-color: #0078d7 !important;
     box-shadow: 0 0 0 3px rgba(0,120,215,0.2);
+    outline: none;
 }
 
+/* 👇 Botões */
 .modal .btn {
     padding: 10px 20px;
     border-radius: 50px;
@@ -287,10 +382,14 @@
 }
 
 /* ==================== AUTOCOMPLETE ==================== */
+.form-group.position-relative {
+    position: relative !important;
+}
+
 #sugestoes-cliente {
     position: absolute;
     z-index: 999999 !important;
-    background: white;
+    background: var(--input-bg);
     border: 2px solid #0078d7;
     border-radius: 4px;
     max-height: 300px;
@@ -302,8 +401,10 @@
 #sugestoes-cliente .list-group-item {
     padding: 10px 15px;
     cursor: pointer;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--border-color);
     transition: all 0.2s ease;
+    color: var(--text-color);
+    background: var(--input-bg);
 }
 
 #sugestoes-cliente .list-group-item:hover {
@@ -338,27 +439,6 @@
 
 .card-body .row:last-child {
     margin-top: 15px !important;
-}
-
-/* ==================== UTILITÁRIOS ==================== */
-.d-flex {
-    display: flex !important;
-}
-
-.justify-content-center {
-    justify-content: center !important;
-}
-
-.gap-3 {
-    gap: 1rem !important;
-}
-
-.flex-wrap {
-    flex-wrap: wrap !important;
-}
-
-.mt-4 {
-    margin-top: 1.5rem !important;
 }
 
 /* ==================== BOTÕES PADRÃO ==================== */
@@ -452,4 +532,41 @@
     box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3) !important;
     background: linear-gradient(135deg, #20bd5a 0%, #0e6b5f 100%) !important;
     color: white !important;
+}
+
+/* ==================== UTILITÁRIOS ==================== */
+.d-flex {
+    display: flex !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.gap-3 {
+    gap: 1rem !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+/* ==================== ANIMAÇÕES ==================== */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tabela-recebimento tbody tr {
+    animation: slideIn 0.4s ease forwards;
 }

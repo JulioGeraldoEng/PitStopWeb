@@ -4,11 +4,13 @@
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #ffffff;
+    background: var(--card-bg);
     padding: 0;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .tabela-produto {
@@ -45,11 +47,11 @@
 /* Linhas do corpo */
 .tabela-produto tbody tr {
     transition: all 0.3s ease;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .tabela-produto tbody tr:hover {
-    background-color: #f8f9fa;
+    background-color: var(--hover-bg);
     transform: scale(1.01);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
@@ -57,9 +59,9 @@
 .tabela-produto td {
     padding: 14px 12px;
     text-align: center;
-    color: #495057;
+    color: var(--text-color);
     font-size: 0.95rem;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .tabela-produto tbody tr:last-child td {
@@ -68,11 +70,11 @@
 
 /* Efeito zebrado suave */
 .tabela-produto tbody tr:nth-child(even) {
-    background-color: #fafbfc;
+    background-color: var(--card-bg-alt);
 }
 
 .tabela-produto tbody tr:nth-child(even):hover {
-    background-color: #f1f3f5;
+    background-color: var(--hover-bg);
 }
 
 /* Larguras das colunas */
@@ -213,12 +215,14 @@
     border: none;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg);
     margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .card-title {
-    color: #2c3e50;
+    color: var(--text-color);
     font-weight: 600;
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
@@ -227,15 +231,17 @@
 
 .form-label {
     font-weight: 500;
-    color: #495057;
+    color: var(--text-muted);
     margin-bottom: 0.3rem;
 }
 
 .form-control {
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     padding: 0.6rem 1rem;
     transition: all 0.3s ease;
+    background-color: var(--input-bg);
+    color: var(--text-color);
 }
 
 .form-control:focus {
@@ -244,18 +250,24 @@
     outline: none;
 }
 
+.form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
 /* ==================== AUTOCOMPLETE ==================== */
 .form-group.position-relative {
     position: relative !important;
 }
 
-#sugestoes-produto {
+#sugestoes-produto,
+#sugestoes-busca {
     position: absolute !important;
     top: 100% !important;
     left: 0 !important;
     width: 100% !important;
     z-index: 999999 !important;
-    background: white !important;
+    background: var(--input-bg) !important;
     border: 2px solid #0078d7 !important;
     border-radius: 8px !important;
     max-height: 250px !important;
@@ -265,26 +277,34 @@
     display: none;
 }
 
-#sugestoes-produto .list-group-item {
+#sugestoes-produto .list-group-item,
+#sugestoes-busca .list-group-item {
     display: block !important;
     padding: 12px 15px !important;
     text-decoration: none !important;
-    color: #333 !important;
-    border-bottom: 1px solid #e0e0e0 !important;
+    color: var(--text-color) !important;
+    border-bottom: 1px solid var(--border-color) !important;
     cursor: pointer !important;
     transition: all 0.2s ease !important;
     font-size: 14px !important;
     font-weight: 500 !important;
-    background: white !important;
+    background: var(--input-bg) !important;
 }
 
-#sugestoes-produto .list-group-item:hover {
+#sugestoes-produto .list-group-item:hover,
+#sugestoes-busca .list-group-item:hover {
     background: linear-gradient(135deg, #0078d7, #0056b3) !important;
     color: white !important;
 }
 
-#sugestoes-produto .list-group-item:last-child {
+#sugestoes-produto .list-group-item:last-child,
+#sugestoes-busca .list-group-item:last-child {
     border-bottom: none !important;
+}
+
+#sugestoes-produto:empty,
+#sugestoes-busca:empty {
+    display: none !important;
 }
 
 /* Garantir que os botões não sejam empurrados */
@@ -307,56 +327,6 @@
     animation: fadeIn 0.3s ease forwards;
 }
 
-/* ==================== AUTOCOMPLETE DA BUSCA ==================== */
-#sugestoes-busca {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    width: 100% !important;
-    z-index: 999999 !important;
-    background: white !important;
-    border: 2px solid #0078d7 !important;
-    border-radius: 8px !important;
-    max-height: 250px !important;
-    overflow-y: auto !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
-    margin-top: 2px !important;
-    display: none;
-}
-
-#sugestoes-busca .list-group-item {
-    display: block !important;
-    padding: 12px 15px !important;
-    text-decoration: none !important;
-    color: #333 !important;
-    border-bottom: 1px solid #e0e0e0 !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    background: white !important;
-}
-
-#sugestoes-busca .list-group-item:hover {
-    background: linear-gradient(135deg, #0078d7, #0056b3) !important;
-    color: white !important;
-}
-
-#sugestoes-busca .list-group-item:last-child {
-    border-bottom: none !important;
-}
-
-/* Garantir que os botões não sejam empurrados */
-.row.mt-3 {
-    position: relative;
-    z-index: 1;
-}
-
-/* Garantir que o card permita que a lista flutue */
-.card, .card-body {
-    overflow: visible !important;
-}
-
 /* ==================== BOTÕES DO MODAL ==================== */
 .modal-footer .btn {
     display: inline-flex;
@@ -372,14 +342,14 @@
     text-decoration: none;
     font-size: 1rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 120px;  /* Mesmo tamanho para todos */
-    height: 48px;  /* Mesma altura */
+    width: 120px;
+    height: 48px;
     padding: 0;
     box-sizing: border-box;
     margin: 0 5px;
 }
 
-/* Botão Cancelar (secundário) */
+/* Botão Cancelar (secundário) - VERMELHO */
 .modal-footer .btn-secondary {
     background: linear-gradient(135deg, #f31212 0%, #c70e0e 100%);
     color: #212529 !important;
@@ -388,11 +358,11 @@
 .modal-footer .btn-secondary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
-    background: linear-gradient(135deg, hsl(0, 80%, 52%) 0%, hsl(0, 72%, 40%) 100%);
+    background: linear-gradient(135deg, #f31212 0%, #a71d2a 100%);
     color: white !important;
 }
 
-/* Botão Limpar (warning) */
+/* Botão Limpar (warning) - AMARELO */
 .modal-footer .btn-warning {
     background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
     color: #212529 !important;
@@ -405,7 +375,7 @@
     color: white !important;
 }
 
-/* Botão Salvar (primário) */
+/* Botão Salvar (primário) - AZUL */
 .modal-footer .btn-primary {
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     color: #212529 !important;
@@ -425,4 +395,12 @@
 
 .modal-footer .btn:hover i {
     color: white !important;
+}
+
+/* ==================== CORREÇÃO DOS LABELS ==================== */
+form .form-label,
+.form-label {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
 }

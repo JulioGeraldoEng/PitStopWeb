@@ -13,7 +13,7 @@
 }
 
 .stat-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg);
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -22,7 +22,10 @@
     justify-content: space-between;
     transition: all 0.3s ease;
     height: 100%;
-    border-left: 5px solid transparent;
+    border: 1px solid var(--border-color);  /* Primeiro define todas as bordas */
+    border-left: 8px solid transparent;     /* Depois SOBRESCREVE apenas a esquerda */
+    cursor: pointer;
+    position: relative;
 }
 
 .stat-card:hover {
@@ -44,6 +47,23 @@
 
 .stat-card.danger {
     border-left-color: #dc3545;
+}
+
+.stat-card::after {
+    content: '\f054'; /* Ícone de seta do Font Awesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    color: rgba(0,0,0,0.2);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover::after {
+    color: var(--text-muted);
+    transform: translateX(5px);
 }
 
 .stat-icon {
@@ -82,23 +102,24 @@
     font-size: 2rem;
     font-weight: 700;
     margin: 0;
-    color: #2c3e50;
+    color: var(--text-color);
 }
 
 .stat-info p {
     margin: 5px 0 0;
-    color: #6c757d;
+    color: var(--text-muted);
     font-weight: 500;
 }
 
 /* ==================== CARDS DE CONTEÚDO ==================== */
 .content-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg);
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .content-card:hover {
@@ -111,12 +132,12 @@
     justify-content: space-between;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #e9ecef;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .card-header-custom h5 {
     margin: 0;
-    color: #2c3e50;
+    color: var(--text-color);
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -145,18 +166,18 @@
 .table-modern th {
     text-align: left;
     padding: 12px 15px;
-    color: #6c757d;
+    color: var(--text-muted);
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-bottom: 2px solid #e9ecef;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .table-modern td {
     padding: 12px 15px;
-    color: #2c3e50;
-    border-bottom: 1px solid #e9ecef;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .table-modern tbody tr {
@@ -164,7 +185,7 @@
 }
 
 .table-modern tbody tr:hover {
-    background-color: #f8f9fa;
+    background-color: var(--hover-bg);
 }
 
 /* ==================== STATUS BADGES ==================== */
@@ -225,20 +246,20 @@
     line-height: 1;
 }
 
-/* Botão Nova Venda (verde) - Texto escuro no normal, claro no hover */
+/* Botão Nova Venda (verde) */
 .quick-action-btn.success {
     background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: #212529 !important;  /* Texto escuro */
+    color: #212529 !important;
 }
 
 .quick-action-btn.success:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
     background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
-    color: white !important;  /* Texto claro no hover */
+    color: white !important;
 }
 
-/* Botão Novo Cliente (azul) - Texto escuro no normal, claro no hover */
+/* Botão Novo Cliente (azul) */
 .quick-action-btn.primary {
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     color: #212529 !important;
@@ -251,7 +272,7 @@
     color: white !important;
 }
 
-/* Botão Novo Produto (azul claro) - Texto escuro no normal, claro no hover */
+/* Botão Novo Produto (azul claro) */
 .quick-action-btn.info {
     background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
     color: #212529 !important;
@@ -264,7 +285,7 @@
     color: white !important;
 }
 
-/* Botão Recebimentos (amarelo) - Texto escuro no normal, claro no hover */
+/* Botão Recebimentos (amarelo) */
 .quick-action-btn.warning {
     background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
     color: #212529 !important;
@@ -277,7 +298,7 @@
     color: white !important;
 }
 
-/* Botão Relatórios (vermelho) - Texto escuro no normal, claro no hover */
+/* Botão Relatórios (vermelho) */
 .quick-action-btn.danger {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: #212529 !important;
@@ -296,7 +317,7 @@
 }
 
 .quick-action-btn:hover i {
-    color: white !important;  /* Ícone claro no hover */
+    color: white !important;
 }
 
 /* ==================== ANIMAÇÕES ==================== */
@@ -333,27 +354,4 @@
     .quick-action-btn {
         width: 100%;
     }
-}
-
-.stat-card {
-    cursor: pointer;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.stat-card::after {
-    content: '\f054'; /* Ícone de seta do Font Awesome */
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    bottom: 10px;
-    right: 15px;
-    color: rgba(0,0,0,0.2);
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.stat-card:hover::after {
-    color: rgba(0,0,0,0.4);
-    transform: translateX(5px);
 }

@@ -5,27 +5,28 @@
 
 /* ==================== CARD DE STATUS ==================== */
 .status-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg);
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     margin-bottom: 25px;
     border-left: 5px solid #25d366;
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .status-card.connected {
     border-left-color: #28a745;
-    background: linear-gradient(135deg, #f0fff4 0%, #e8f5e9 100%);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(32, 201, 151, 0.1) 100%);
 }
 
 .status-card.disconnected {
     border-left-color: #dc3545;
-    background: linear-gradient(135deg, #fff5f5 0%, #fee 100%);
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(200, 35, 51, 0.1) 100%);
 }
 
 .status-card h5 {
-    color: #2c3e50;
+    color: var(--text-color);
     font-weight: 600;
     margin-bottom: 15px;
     display: flex;
@@ -72,16 +73,17 @@
 
 /* ==================== QR CODE CARD ==================== */
 .qrcode-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg);
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin-bottom: 25px;
+    border: 1px solid var(--border-color);
 }
 
 .qrcode-card h5 {
-    color: #2c3e50;
+    color: var(--text-color);
     font-weight: 600;
     margin-bottom: 20px;
 }
@@ -91,10 +93,10 @@
     justify-content: center;
     align-items: center;
     min-height: 300px;
-    background: white;
+    background: var(--card-bg);
     border-radius: 10px;
     padding: 20px;
-    border: 2px dashed #e9ecef;
+    border: 2px dashed var(--border-color);
 }
 
 .qrcode-container img {
@@ -106,7 +108,7 @@
 
 .qrcode-container .loading-spinner {
     text-align: center;
-    color: #6c757d;
+    color: var(--text-muted);
 }
 
 .qrcode-container .loading-spinner i {
@@ -117,18 +119,20 @@
 
 /* ==================== BOTÕES DE AÇÃO ==================== */
 .actions-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: var(--card-bg);
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
 }
 
 .actions-card h5 {
-    color: #2c3e50;
+    color: var(--text-color);
     font-weight: 600;
     margin-bottom: 20px;
 }
 
+/* ===== BOTÕES WHATSAPP (MANTIDOS EXATAMENTE IGUAIS) ===== */
 .btn-whatsapp {
     display: inline-flex;
     align-items: center;
@@ -176,7 +180,7 @@
     color: white !important;
 }
 
-/* Botão Enviar Atrasados (azul) - NOVO */
+/* Botão Enviar Atrasados (azul) */
 .btn-whatsapp-primary {
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     color: #212529 !important;
@@ -189,7 +193,7 @@
     color: white !important;
 }
 
-/* Botão Desconectar (vermelho) - NOVO */
+/* Botão Desconectar (vermelho) */
 .btn-whatsapp-danger {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: #212529 !important;
