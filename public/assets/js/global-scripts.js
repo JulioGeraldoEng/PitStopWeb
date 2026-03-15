@@ -154,3 +154,53 @@ function logout() {
     document.body.appendChild(form);
     form.submit();
 }
+
+// ===================== MODO ESCURO =====================
+document.addEventListener('DOMContentLoaded', function() {
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const darkModeSwitch = document.getElementById('darkModeSwitch');
+    const themeIcon = themeToggle?.querySelector('i:first-child');
+    const themeText = themeToggle?.querySelector('span');
+    
+    // Verificar preferência salva
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        html.classList.add('dark');
+        if (darkModeSwitch) darkModeSwitch.checked = true;
+        if (themeIcon) themeIcon.className = 'fas fa-sun';
+        if (themeText) themeText.textContent = 'Modo Claro';
+    }
+    
+    // Função para alternar tema
+    function toggleTheme() {
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            if (darkModeSwitch) darkModeSwitch.checked = false;
+            if (themeIcon) themeIcon.className = 'fas fa-moon';
+            if (themeText) themeText.textContent = 'Modo Escuro';
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            if (darkModeSwitch) darkModeSwitch.checked = true;
+            if (themeIcon) themeIcon.className = 'fas fa-sun';
+            if (themeText) themeText.textContent = 'Modo Claro';
+        }
+    }
+    
+    // Evento de clique no item do dropdown
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function(e) {
+            // Evitar que clique no checkbox dispare duas vezes
+            if (e.target !== darkModeSwitch) {
+                toggleTheme();
+            }
+        });
+    }
+    
+    // Evento de mudança no switch
+    if (darkModeSwitch) {
+        darkModeSwitch.addEventListener('change', toggleTheme);
+    }
+});

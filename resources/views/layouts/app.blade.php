@@ -97,6 +97,13 @@
                             <i class="fas fa-cog"></i> Configurações
                         </a>
                         <div class="user-dropdown-divider"></div>
+                        <div class="user-dropdown-item" id="theme-toggle" style="cursor: pointer;">
+                            <i class="fas {{ session('theme') == 'dark' ? 'fa-sun' : 'fa-moon' }}"></i>
+                            <span>{{ session('theme') == 'dark' ? 'Modo Claro' : 'Modo Escuro' }}</span>
+                            <div class="ms-auto form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="darkModeSwitch" style="cursor: pointer;" {{ session('theme') == 'dark' ? 'checked' : '' }}>
+                            </div>
+                        </div>
                         <a href="#" class="user-dropdown-item danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fas fa-sign-out-alt"></i>
                             Sair
