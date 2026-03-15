@@ -40,10 +40,11 @@ Route::middleware('auth')->group(function () {
     // WhatsApp
     Route::get('/whatsapp', [WhatsAppController::class, 'index'])->name('whatsapp.index');
     
-    // Sobre
+    // Sobre Route::get('/sobre', function () { return view('sobre.index'); })->name('sobre.index');
+
     Route::get('/sobre', function () {
         return view('sobre.index');
-    })->name('sobre.index');
+    })->name('sobre.index')->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

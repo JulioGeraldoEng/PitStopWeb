@@ -1,255 +1,181 @@
-/* Estilo geral do corpo da página */
+/* ==================== ESTILOS GLOBAIS ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  font-family: 'Times New Roman', Times, serif, sans-serif;
-  background-color: rgb(173, 216, 230);
-  padding: 0; /* Removido o padding: 30px */
-  text-align: center;
-  color: #000000;
-  padding-top: 70px; /* ADICIONADO: espaço para a top-bar fixa */
-  padding-bottom: 60px; /* ADICIONADO: espaço para o footer fixo */
-  margin: 50px;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    background-color: rgb(173, 216, 230);
+    text-align: center;
+    color: #000000;
+    padding-top: 70px;      /* Espaço para top-bar fixa */
+    padding-bottom: 60px;    /* Espaço para footer fixo */
+    margin: 0;               /* ← IMPORTANTE: remover margem */
+    min-height: 100vh;
 }
 
 main {
-  max-width: auto;
-  margin: 20px auto;
-  background: rgb(240, 240, 240, 0.7);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    max-width: 1200px;
+    margin: 20px auto;
+    background: rgba(240, 240, 240, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
-/* Barra superior com visual moderno e suave */
-.top-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 12px;
-  align-items: center;
-  padding: 12px 20px;
-  background-color: rgba(240, 240, 240, 0.7);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  margin: 0 auto;
-  width: auto;
-  max-width: 100%;
-  position: relative;
-  color: #333;
-}
-
-/* NOVO: Container da top-bar fixo */
-#top-bar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: rgb(173, 216, 230); /* mesma cor do body */
-  padding: 5px 0;
-  display: flex;           /* ← ADICIONE */
-  justify-content: center; /* ← ADICIONE */
-}
-
-@media (max-width: 500px) {
-  .top-bar {
-    justify-content: center;
-  }
-
-  .top-bar button {
-    flex: 1 1 100%;
-    justify-content: center;
-  }
-}
-
-/* Estilo moderno dos botões da barra */
-.top-bar button,
-.menu button {
-  padding: 10px 16px;
-  background-color: rgba(100, 100, 255, 0.12);
-  color: #333;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 500;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.top-bar button:hover,
-.menu button:hover {
-  background-color: rgba(38, 38, 255, 0.25);
-  transform: translateY(-1px);
-}
-
-.top-bar i {
-  font-size: 12px;
-  transition: transform 0.3s ease;
-}
-
-.top-bar button:hover i {
-  transform: scale(1.15);
-}
-
-/* Formulário */
+/* ==================== FORMULÁRIOS ==================== */
 .formulario {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: left;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
 }
 
-/* Campos do formulário */
 label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-/* Layout em linha */
 .form-linha {
-  display: flex;
-  align-items: flex-end;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .form-linha .campo {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
 }
 
 .form-linha .botao {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 150px;
 }
 
 .form-linha .botao button,
 .form-linha button {
-  height: 42px;
-  padding: 10px 15px;
-  margin-top: 0;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    height: 42px;
+    padding: 10px 15px;
+    margin-top: 0;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .form-linha button:hover {
-  background-color: #218838;
+    background-color: #218838;
 }
 
-/* Botões secundários */
+/* ==================== BOTÕES ==================== */
 .btn-secundario {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  padding: 12px;
-  width: 100%;
-  cursor: pointer;
-  box-sizing: border-box;
-  margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 12px;
+    width: 100%;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin-top: 10px;
 }
 
 .btn-secundario:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
-/* Botões de alterar */
 .btn-alterar {
-  background: none;
-  border: none;
-  color: blue;
-  font-size: 18px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: blue;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .btn-alterar:hover {
-  color: darkblue;
+    color: darkblue;
 }
 
-/* Botao de remover */
 .btn-remover {
-  background: none;
-  border: none;
-  color: red;
-  font-size: 18px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: red;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .btn-remover:hover {
-  color: darkred;
+    color: darkred;
 }
 
-/* Botao de salvar */
 .btn-salvar {
-  background: none;
-  border: none;
-  color: rgba(30, 255, 0, 0.801);
-  font-size: 18px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: rgba(30, 255, 0, 0.801);
+    font-size: 18px;
+    cursor: pointer;
 }
 
 .btn-salvar:hover {
-  color: rgb(0, 139, 12);
+    color: rgb(0, 139, 12);
 }
 
-/* Menu inferior */
+/* ==================== MENU INFERIOR ==================== */
 .menu {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 .menu button {
-  padding: 10px 20px;
-  margin: 10px;
-  background-color: #0078d7;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-/* Footer fixo */
+/* ==================== FOOTER ==================== */
 #app-footer {
-  background-color: rgba(0, 0, 0, 0.55);
-  color: #ffffff;
-  text-align: center;
-  padding: 10px 10px;
-  font-size: 0.85em;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-sizing: border-box;
-  overflow-x: auto;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 0.85em;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    overflow-x: auto;
 }
 
 #app-footer-content p {
-  margin: 0;
-  white-space: nowrap;
-  display: inline-block;
-  min-width: 100%;
-  text-align: center;
+    margin: 0;
+    white-space: nowrap;
+    display: inline-block;
+    min-width: 100%;
+    text-align: center;
 }
 
 /* ==================== DATEPICKER ==================== */
@@ -316,7 +242,7 @@ input {
     color: #f39c12;
 }
 
-/* ==================== INPUT GROUP COM ÍCONES ==================== */
+/* ==================== INPUT GROUP ==================== */
 .input-group {
     display: flex;
     align-items: center;
@@ -347,11 +273,11 @@ input {
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
 }
 
-/* ==================== AUTOCOMPLETE CORRIGIDO ==================== */
+/* ==================== AUTOCOMPLETE ==================== */
 #sugestoes-cliente,
 #sugestoes-produto {
     position: absolute;
-    z-index: 9999 !important;  /* Forçar ficar acima de tudo */
+    z-index: 9999;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -380,56 +306,26 @@ input {
     color: white;
 }
 
-/* Garantir que o container pai tenha position relative */
-.cliente-input-container,
-.produto-input-container,
 .form-group.position-relative {
     position: relative !important;
 }
 
-/* Garantir que o autocomplete fique visível */
-.position-relative {
-    position: relative !important;
-}
-
-.position-absolute {
-    position: absolute !important;
-}
-
-.list-group.position-absolute {
-    z-index: 9999 !important;
-    background: white;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-    border-radius: 8px;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-/* ==================== SOLUÇÃO RADICAL ==================== */
-/* Reset completo do card-body */
+/* ==================== CARD BODY UTILITIES ==================== */
 .card-body {
     padding: 1.5rem !important;
 }
 
-/* Remover TODAS as margens e paddings de todas as linhas e colunas */
 .card-body .row {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin: 0 !important;
 }
 
 .card-body .row > [class*="col-"] {
-    margin-top: 0 !important;
     margin-bottom: 0 !important;
-    padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
 
-/* Remover margens dos componentes de data */
 .card-body .mb-3 {
     margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
 }
 
 .card-body .form-group {
@@ -437,20 +333,17 @@ input {
 }
 
 .card-body label {
-    margin-bottom: 2px !important; /* Só um pequeno espaço entre label e input */
+    margin-bottom: 2px !important;
 }
 
-/* Adicionar UM ÚNICO espaçamento antes dos botões */
 .card-body .row:last-child {
     margin-top: 15px !important;
 }
 
-/* Garantir que os inputs tenham uma altura consistente */
 .card-body .form-control {
     margin-bottom: 0 !important;
 }
 
-/* Remover espaçamento dos datepickers */
 .card-body .input-group {
     margin-bottom: 0 !important;
 }

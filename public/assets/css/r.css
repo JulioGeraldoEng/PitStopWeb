@@ -1,150 +1,49 @@
-/* ==================== BOTÕES DE AÇÃO (Ver, Editar, Excluir) ==================== */
-.acao-container {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
+:root {
+    --topbar-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --topbar-height: 60px;  /* REDUZIDO de 70px para 60px */
 }
 
-.btn-ver,
-.btn-editar,
-.btn-excluir {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    padding: 8px 16px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s ease;
-    min-width: 80px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    letter-spacing: 0.5px;
+/* Ajustar padding dos itens do menu */
+body .menu-item {
+    padding: 6px 15px !important;  /* REDUZIDO */
+    font-size: 0.9rem !important;  /* Fonte menor */
 }
 
-/* Botão VER */
-.btn-ver {
-    background: linear-gradient(135deg, #a8e6cf 0%, #d4edda 100%);
-    color: #155724 !important;
+/* Ajustar área do usuário */
+body .user-dropdown-btn {
+    padding: 4px 12px !important;  /* REDUZIDO */
 }
 
-.btn-ver:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
-    background: linear-gradient(135deg, #78c2ad 0%, #a3d0b2 100%);
-    color: white !important;
+body .user-avatar {
+    width: 30px !important;        /* REDUZIDO */
+    height: 30px !important;
+    font-size: 1rem !important;
 }
 
-/* Botão EDITAR */
-.btn-editar {
-    background: linear-gradient(135deg, #fff3cd 0%, #fff8e1 100%);
-    color: #856404 !important;
+body .user-name {
+    font-size: 0.9rem !important;  /* Fonte menor */
+    max-width: 120px !important;
 }
 
-.btn-editar:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.3);
-    background: linear-gradient(135deg, #ffe69c 0%, #ffd966 100%);
-    color: white !important;
+/* Ajustar pesquisa */
+body .search-box {
+    padding: 3px 12px !important;  /* REDUZIDO */
 }
 
-/* Botão EXCLUIR */
-.btn-excluir {
-    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-    color: #721c24 !important;
+body .search-box input {
+    width: 150px !important;       /* REDUZIDO */
 }
 
-.btn-excluir:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
-    background: linear-gradient(135deg, #f1b0b7 0%, #e9a2a9 100%);
-    color: white !important;
+body .search-box input:focus {
+    width: 180px !important;
 }
 
-/* Ícones nos botões de ação */
-.btn-ver i,
-.btn-editar i,
-.btn-excluir i {
-    font-size: 12px;
-    transition: color 0.3s ease;
+/* Ajustar notificações */
+body .notification-icon {
+    font-size: 1.1rem !important;  /* REDUZIDO */
 }
 
-.btn-ver:hover i,
-.btn-editar:hover i,
-.btn-excluir:hover i {
-    color: white !important;
-}
-
-/* ==================== BOTÕES PADRÃO (Nova Venda, Buscar, Limpar) ==================== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border: none;
-    border-radius: 50px;  /* Pill style igual dashboard */
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 160px;
-    height: 48px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    line-height: 1;
-}
-
-/* Botão Nova Venda (verde) */
-.btn-success {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: #212529 !important;  /* Texto escuro */
-}
-
-.btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
-    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
-    color: white !important;  /* Texto claro no hover */
-}
-
-/* Botão Buscar (azul) */
-.btn-primary {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    color: #212529 !important;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
-    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
-    color: white !important;
-}
-
-/* Botão Limpar (amarelo) */
-.btn-secondary {
-    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
-    color: #212529 !important;
-}
-
-.btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
-    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
-    color: white !important;
-}
-
-/* Ícones nos botões padrão */
-.btn i {
-    transition: color 0.3s ease;
-}
-
-.btn:hover i {
-    color: white !important;
+/* Ajustar padding do main */
+main {
+    padding-top: 60px !important;  /* IGUAL à altura da top-bar */
 }

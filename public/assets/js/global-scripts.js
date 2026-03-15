@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mudarCorBody(corSalva);
     }
 
-    carregarTopBar(); // ← chamada do carregador da top-bar
+    //carregarTopBar(); // ← chamada do carregador da top-bar
 });
 
 function aplicarCorSidebarComBaseNoBody() {

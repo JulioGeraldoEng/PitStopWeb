@@ -20,38 +20,132 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- PRIMEIRO: estilos específicos da página -->
-    @stack('styles')
-
-    <!-- DEPOIS: estilos globais (para não sobrescrever os específicos) -->
+    <!-- Seus estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/top-bar.css') }}?v={{ time() }}">
+    @stack('styles')
 </head>
 <body>
-    <!-- Top Bar - Só aparece se NÃO for página de login -->
+    <!-- Top Bar Moderna -->
     @if(!request()->routeIs('login') && !request()->routeIs('register'))
-        <div id="top-bar-container"></div>
+        <div id="top-bar-container">
+            <div class="top-bar">
+                <!-- Logo -->
+                <div class="logo-area">
+                    <div class="logo-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <span class="logo-text">PitStop</span>
+                </div>
+
+                <!-- Menu Central -->
+                <div class="menu-center">
+                    <a href="{{ route('dashboard') }}" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                        <i class="fas fa-home"></i>
+                        <span>Início</span>
+                    </a>
+                    <a href="{{ route('vendas.index') }}" class="menu-item {{ request()->routeIs('vendas.*') ? 'active' : '' }}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Vendas</span>
+                    </a>
+                    <a href="{{ route('recebimentos.index') }}" class="menu-item {{ request()->routeIs('recebimentos.*') ? 'active' : '' }}">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Recebimentos</span>
+                    </a>
+                    <a href="{{ route('relatorios.index') }}" class="menu-item {{ request()->routeIs('relatorios.*') ? 'active' : '' }}">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Relatórios</span>
+                    </a>
+                    <a href="{{ route('clientes.index') }}" class="menu-item {{ request()->routeIs('clientes.*') ? 'active' : '' }}">
+                        <i class="fas fa-users"></i>
+                        <span>Clientes</span>
+                    </a>
+                    <a href="{{ route('produtos.index') }}" class="menu-item {{ request()->routeIs('produtos.*') ? 'active' : '' }}">
+                        <i class="fas fa-box"></i>
+                        <span>Produtos</span>
+                    </a>
+                    <a href="{{ route('whatsapp.index') }}" class="menu-item {{ request()->routeIs('whatsapp.*') ? 'active' : '' }}">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="{{ route('sobre.index') }}" class="menu-item {{ request()->routeIs('sobre.*') ? 'active' : '' }}">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Sobre</span>
+                    </a>
+                </div>
+
+                <!-- Dropdown do usuário -->
+                <div class="user-area" id="user-area">
+                    <div class="user-dropdown-btn" id="userDropdownBtn">
+                        <div class="user-avatar">
+                            {{ substr(Auth::user()->name ?? 'U', 0, 1) }}
+                        </div>
+                        <span class="user-name">{{ Auth::user()->name ?? 'Usuário' }}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="user-dropdown-header">
+                            <strong>{{ Auth::user()->name ?? 'Usuário' }}</strong>
+                            <br>
+                            <small>{{ Auth::user()->email ?? 'email@exemplo.com' }}</small>
+                        </div>
+                        <a href="{{ route('profile.edit') }}" class="user-dropdown-item">
+                            <i class="fas fa-user"></i>
+                            Meu Perfil
+                        </a>
+                        <a href="#" class="user-dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            Configurações
+                        </a>
+                        <div class="user-dropdown-divider"></div>
+                        <a href="#" class="user-dropdown-item danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Sair
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
 
-    <!-- Conteúdo Principal -->
-    <main>
+    <!-- Ajuste no main para não ficar atrás da top-bar -->
+    <main style="padding-top: 70px;">
         @yield('content')
     </main>
 
-    <!-- jQuery (obrigatório para o Datepicker) -->
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Bootstrap 5 JS (necessário para o modal) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Bootstrap Datepicker JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
-    
-    <!-- Scripts Globais -->
     <script src="{{ asset('assets/js/global-scripts.js') }}" defer></script>
-    
-    <!-- Seu arquivo de inicialização do Datepicker -->
     <script src="{{ asset('assets/js/datepicker-init.js') }}"></script>
+    
+    <!-- Script da Top Bar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userBtn = document.getElementById('userDropdownBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userBtn && userDropdown) {
+                userBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    userDropdown.classList.toggle('show');
+                });
+                
+                document.addEventListener('click', function() {
+                    userDropdown.classList.remove('show');
+                });
+                
+                userDropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+        });
+    </script>
     
     @stack('scripts')
 </body>
