@@ -146,7 +146,7 @@
     justify-content: center;
     gap: 8px;
     border: none;
-    border-radius: 8px;
+    border-radius: 50px;
     font-weight: 600;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -364,7 +364,7 @@
     justify-content: center;
     gap: 8px;
     border: none;
-    border-radius: 8px;
+    border-radius: 50px;
     font-weight: 600;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -381,14 +381,14 @@
 
 /* Botão Cancelar (secundário) */
 .modal-footer .btn-secondary {
-    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+    background: linear-gradient(135deg, #f31212 0%, #c70e0e 100%);
     color: #212529 !important;
 }
 
 .modal-footer .btn-secondary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
-    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+    background: linear-gradient(135deg, hsl(0, 80%, 52%) 0%, hsl(0, 72%, 40%) 100%);
     color: white !important;
 }
 

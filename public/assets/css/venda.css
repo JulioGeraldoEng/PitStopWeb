@@ -201,6 +201,98 @@
     animation: fadeIn 0.3s ease forwards;
 }
 
+/* ==================== BOTÕES PADRÃO (Nova Venda, Buscar, Limpar) ==================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 50px;  /* Pill style igual dashboard */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+/* Botão Nova Venda (verde) - Texto escuro no normal, claro no hover */
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: #212529;  /* Texto escuro */
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
+    color: white;  /* Texto claro no hover */
+}
+
+/* Botão Buscar (azul) - Texto escuro no normal, claro no hover */
+.btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: #212529;  /* Texto escuro */
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
+    color: white;  /* Texto claro no hover */
+}
+
+/* Botão Limpar (amarelo) - Texto escuro no normal, claro no hover */
+.btn-secondary {
+    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+    color: #212529;  /* Texto escuro */
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+    color: white;  /* Texto claro no hover */
+}
+
+/* Ícones nos botões padrão */
+.btn i {
+    transition: color 0.3s ease;
+}
+
+.btn:hover i {
+    color: white !important;
+}
+
+/* ==================== UTILITÁRIOS ==================== */
+.d-flex {
+    display: flex !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.gap-3 {
+    gap: 1rem !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+
 /* ==================== RESUMO DA VENDA ==================== */
 .resumo-venda {
     max-width: 400px;
@@ -315,86 +407,6 @@
     border-color: #667eea;
 }
 
-/* ==================== BOTÕES PADRÃO (Nova Venda, Buscar, Limpar) ==================== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 160px;
-    height: 48px;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Botão Nova Venda (verde) - Texto escuro no normal, claro no hover */
-.btn-success {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: #212529;  /* Texto escuro */
-}
-
-.btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
-    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
-    color: white;  /* Texto claro no hover */
-}
-
-/* Botão Buscar (azul) - Texto escuro no normal, claro no hover */
-.btn-primary {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    color: #212529;  /* Texto escuro */
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
-    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
-    color: white;  /* Texto claro no hover */
-}
-
-/* Botão Limpar (amarelo) - Texto escuro no normal, claro no hover */
-.btn-secondary {
-    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
-    color: #212529;  /* Texto escuro */
-}
-
-.btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
-    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
-    color: white;  /* Texto claro no hover */
-}
-
-/* ==================== UTILITÁRIOS ==================== */
-.d-flex {
-    display: flex !important;
-}
-
-.justify-content-center {
-    justify-content: center !important;
-}
-
-.gap-3 {
-    gap: 1rem !important;
-}
-
-.flex-wrap {
-    flex-wrap: wrap !important;
-}
-
-.mt-4 {
-    margin-top: 1.5rem !important;
-}
 
 /* ==================== INPUT GROUP COM ÍCONES ==================== */
 .input-group {

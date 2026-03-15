@@ -218,36 +218,85 @@
     text-decoration: none;
     border: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    height: 48px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    line-height: 1;
 }
 
-.quick-action-btn.primary {
-    background: var(--primary-gradient);
-    color: white;
-}
-
+/* Botão Nova Venda (verde) - Texto escuro no normal, claro no hover */
 .quick-action-btn.success {
-    background: var(--success-gradient);
-    color: white;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: #212529 !important;  /* Texto escuro */
 }
 
-.quick-action-btn.warning {
-    background: var(--warning-gradient);
-    color: white;
-}
-
-.quick-action-btn.danger {
-    background: var(--danger-gradient);
-    color: white;
-}
-
-.quick-action-btn.info {
-    background: var(--info-gradient);
-    color: white;
-}
-
-.quick-action-btn:hover {
+.quick-action-btn.success:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
+    color: white !important;  /* Texto claro no hover */
+}
+
+/* Botão Novo Cliente (azul) - Texto escuro no normal, claro no hover */
+.quick-action-btn.primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: #212529 !important;
+}
+
+.quick-action-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    background: linear-gradient(135deg, #0069d9 0%, #004085 100%);
+    color: white !important;
+}
+
+/* Botão Novo Produto (azul claro) - Texto escuro no normal, claro no hover */
+.quick-action-btn.info {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: #212529 !important;
+}
+
+.quick-action-btn.info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3);
+    background: linear-gradient(135deg, #138496 0%, #0f6674 100%);
+    color: white !important;
+}
+
+/* Botão Recebimentos (amarelo) - Texto escuro no normal, claro no hover */
+.quick-action-btn.warning {
+    background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+    color: #212529 !important;
+}
+
+.quick-action-btn.warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+    background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+    color: white !important;
+}
+
+/* Botão Relatórios (vermelho) - Texto escuro no normal, claro no hover */
+.quick-action-btn.danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: #212529 !important;
+}
+
+.quick-action-btn.danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+    background: linear-gradient(135deg, #c82333 0%, #a71d2a 100%);
+    color: white !important;
+}
+
+/* Ícones nos botões */
+.quick-action-btn i {
+    transition: color 0.3s ease;
+}
+
+.quick-action-btn:hover i {
+    color: white !important;  /* Ícone claro no hover */
 }
 
 /* ==================== ANIMAÇÕES ==================== */

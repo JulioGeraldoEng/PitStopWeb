@@ -184,7 +184,7 @@
     justify-content: center !important;
     gap: 8px !important;
     border: none !important;
-    border-radius: 8px !important;
+    border-radius: 50px !important;
     font-weight: 600 !important;
     letter-spacing: 0.5px !important;
     cursor: pointer !important;
@@ -268,7 +268,7 @@
     
     /* Mantendo as propriedades padrão dos botões */
     border: none !important;
-    border-radius: 8px !important;
+    border-radius: 50px !important;
     font-weight: 600 !important;
     letter-spacing: 0.5px !important;
     cursor: pointer !important;
