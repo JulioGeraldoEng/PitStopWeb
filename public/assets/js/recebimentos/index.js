@@ -127,19 +127,21 @@ function configurarAutocompleteCliente() {
 // ===================== BUSCAR RECEBIMENTOS =====================
 async function buscarRecebimentos() {
     const filtros = {
-        cliente: document.getElementById('cliente').value.trim(),
+        cliente: document.getElementById('cliente')?.value.trim() || '',
         clienteId: clienteSelecionadoId,
-        status: document.getElementById('status').value,
-        dataInicio: document.getElementById('dataVendaInicio').value,
-        dataFim: document.getElementById('dataVendaFim').value,
-        vencimentoInicio: document.getElementById('vencimentoInicio').value,
-        vencimentoFim: document.getElementById('vencimentoFim').value
+        status: document.getElementById('status')?.value || '',
+        dataInicio: document.getElementById('dataVendaInicio')?.value || '',
+        dataFim: document.getElementById('dataVendaFim')?.value || '',
+        vencimentoInicio: document.getElementById('vencimentoInicio')?.value || '',
+        vencimentoFim: document.getElementById('vencimentoFim')?.value || ''
     };
 
     try {
         const btnBuscar = document.getElementById('btnBuscar');
-        btnBuscar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Buscando...';
-        btnBuscar.disabled = true;
+        if (btnBuscar) {
+            btnBuscar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Buscando...';
+            btnBuscar.disabled = true;
+        }
         
         const response = await fetch(`/api/recebimentos/busca?${new URLSearchParams(filtros)}`);
         const recebimentos = await response.json();
@@ -147,9 +149,11 @@ async function buscarRecebimentos() {
         const tbody = document.getElementById('tabela-corpo');
         tbody.innerHTML = '';
 
-        if (recebimentos.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="10" class="text-center">Nenhum recebimento encontrado.</td></tr>';
-            document.getElementById('tabela-recebimentos').style.display = 'block';
+        const tabelaContainer = document.getElementById('tabela-recebimentos');
+
+        if (!recebimentos || recebimentos.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="9" class="text-center">Nenhum recebimento encontrado.</td></tr>';
+            if (tabelaContainer) tabelaContainer.style.display = 'block';
             return;
         }
 
@@ -158,7 +162,6 @@ async function buscarRecebimentos() {
             tr.dataset.id = rec.id;
             tr.dataset.valorTotal = rec.valor_total;
             tr.innerHTML = `
-                <td>${rec.venda_id}</td>
                 <td>${rec.cliente}</td>
                 <td>${formatarData(rec.data_venda)}</td>
                 <td>${formatarData(rec.data_vencimento)}</td>
@@ -168,7 +171,7 @@ async function buscarRecebimentos() {
                 <td class="status-cell">${rec.status}</td>
                 <td class="forma-pagamento-cell">${rec.forma_pagamento || '-'}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm btn-acao-modal" 
+                    <button class="btn-acao-modal" 
                             data-id="${rec.id}"
                             data-venda="${rec.venda_id}"
                             data-cliente="${rec.cliente}"
@@ -185,15 +188,21 @@ async function buscarRecebimentos() {
             tbody.appendChild(tr);
         });
 
-        document.getElementById('tabela-recebimentos').style.display = 'block';
+        if (tabelaContainer) {
+            tabelaContainer.style.display = 'block';
+        }
+
         mostrarMensagem(`${recebimentos.length} recebimento(s) encontrado(s).`, 'success');
 
     } catch (error) {
         console.error('Erro ao buscar recebimentos:', error);
         mostrarMensagem('Erro ao buscar recebimentos.', 'danger');
     } finally {
-        document.getElementById('btnBuscar').innerHTML = '<i class="fas fa-search"></i> Buscar';
-        document.getElementById('btnBuscar').disabled = false;
+        const btnBuscar = document.getElementById('btnBuscar');
+        if (btnBuscar) {
+            btnBuscar.innerHTML = '<i class="fas fa-search"></i> Buscar';
+            btnBuscar.disabled = false;
+        }
     }
 }
 

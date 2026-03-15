@@ -95,7 +95,6 @@
             <table class="tabela-recebimento">
                 <thead>
                     <tr>
-                        <th>Venda</th>
                         <th>Cliente</th>
                         <th>Data Venda</th>
                         <th>Vencimento</th>
