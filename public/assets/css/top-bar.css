@@ -231,3 +231,25 @@ body .user-dropdown-divider {
         transform: translateY(0);
     }
 }
+
+body .user-dropdown-item.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+body .user-dropdown-item.active i,
+body .user-dropdown-item.active img {
+    filter: brightness(0) invert(1);
+}
+
+body .logo-icon {
+    background: transparent !important;  /* Remove fundo branco */
+    box-shadow: none !important;        /* Remove sombra */
+    padding: 0 !important;
+}
+
+body .logo-icon img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}

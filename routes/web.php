@@ -54,6 +54,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/sobre', function () {
         return view('sobre.index');
     })->name('sobre.index')->middleware('auth');
+
+    Route::get('/language/{locale}', function ($locale) {
+        if (!in_array($locale, ['pt-BR', 'en', 'es'])) {
+            abort(400);
+        }
+        
+        session(['locale' => $locale]);
+        return back();
+    })->name('language.switch');
 });
 
 require __DIR__.'/auth.php';

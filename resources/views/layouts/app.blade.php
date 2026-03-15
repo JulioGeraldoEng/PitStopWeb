@@ -32,8 +32,8 @@
             <div class="top-bar">
                 <!-- Logo -->
                 <div class="logo-area">
-                    <div class="logo-icon">
-                        <i class="fas fa-car"></i>
+                    <div class="logo-icon" style="background: transparent; box-shadow: none;">
+                        <img src="{{ asset('assets/icon/pitstop_icon.ico') }}" alt="PitStop" style="width: 45px; height: 45px;">
                     </div>
                     <span class="logo-text">PitStop</span>
                 </div>
@@ -89,13 +89,16 @@
                             <br>
                             <small>{{ Auth::user()->email ?? 'email@exemplo.com' }}</small>
                         </div>
+                        
+                        <!-- PERFIL E CONFIGURAÇÕES -->
                         <a href="{{ route('perfil.edit') }}" class="user-dropdown-item">
-                            <i class="fas fa-user"></i>
-                            Meu Perfil
+                            <i class="fas fa-user"></i> Meu Perfil
                         </a>
                         <a href="{{ route('configuracoes') }}" class="user-dropdown-item">
                             <i class="fas fa-cog"></i> Configurações
                         </a>
+                        
+                        <!-- MODO ESCURO (já existente) -->
                         <div class="user-dropdown-divider"></div>
                         <div class="user-dropdown-item" id="theme-toggle" style="cursor: pointer;">
                             <i class="fas {{ session('theme') == 'dark' ? 'fa-sun' : 'fa-moon' }}"></i>
@@ -104,9 +107,29 @@
                                 <input class="form-check-input" type="checkbox" id="darkModeSwitch" style="cursor: pointer;" {{ session('theme') == 'dark' ? 'checked' : '' }}>
                             </div>
                         </div>
+                        
+                        <!-- 👇 NOVO: SEÇÃO DE IDIOMAS -->
+                        <div class="user-dropdown-divider"></div>
+                        <div class="user-dropdown-header">
+                            <strong>Idioma / Language</strong>
+                        </div>
+                        <a href="{{ route('language.switch', 'pt-BR') }}" class="user-dropdown-item {{ session('locale') == 'pt-BR' ? 'active' : '' }}">
+                            <img src="{{ asset('assets/img/br.svg') }}" style="width: 20px; height: 15px; margin-right: 8px;">
+                            Português
+                        </a>
+                        <a href="{{ route('language.switch', 'en') }}" class="user-dropdown-item {{ session('locale') == 'en' ? 'active' : '' }}">
+                            <img src="{{ asset('assets/img/us.svg') }}" style="width: 20px; height: 15px; margin-right: 8px;">
+                            English
+                        </a>
+                        <a href="{{ route('language.switch', 'es') }}" class="user-dropdown-item {{ session('locale') == 'es' ? 'active' : '' }}">
+                            <img src="{{ asset('assets/img/es.svg') }}" style="width: 20px; height: 15px; margin-right: 8px;">
+                            Español
+                        </a>
+                        
+                        <!-- SAIR (já existente) -->
+                        <div class="user-dropdown-divider"></div>
                         <a href="#" class="user-dropdown-item danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Sair
+                            <i class="fas fa-sign-out-alt"></i> Sair
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
