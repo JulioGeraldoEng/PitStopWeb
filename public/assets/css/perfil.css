@@ -11,7 +11,7 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     margin-bottom: 25px;
     border: 1px solid var(--border-color);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .perfil-card:hover {
@@ -28,6 +28,7 @@
     gap: 10px;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 15px;
+    transition: border-color 0.3s ease;
 }
 
 .perfil-card h5 i {
@@ -63,8 +64,56 @@
 }
 
 .avatar-info p {
-    color: var(--text-muted);
+    color: var(--text-color);
     margin-bottom: 0;
+}
+
+/* Informações de contato nos cards */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Informações do usuário (telefone, email) */
+.user-info-text {
+    color: var(--text-color) !important;
+    font-weight: 500;
+}
+
+.user-info-small {
+    color: var(--text-color) !important;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Estilo específico para as informações nos cards de notificação */
+.form-check-label {
+    color: var(--text-color);
+}
+
+.form-check-label small {
+    color: var(--text-color);
+    opacity: 0.9;
+    font-size: 0.85rem;
+}
+
+/* Informações de WhatsApp e Email nos switches */
+.form-check-label .text-success {
+    color: #25d366 !important;
+}
+
+.form-check-label .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Texto de informações adicionais */
+small.text-muted {
+    color: var(--text-color) !important;
+    opacity: 0.8;
+}
+
+small.d-block.text-muted {
+    color: var(--text-color) !important;
+    opacity: 0.8;
 }
 
 /* Formulário */
@@ -105,7 +154,44 @@
     opacity: 0.7;
 }
 
-/* Botões */
+/* Selects */
+select.form-control {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+select.form-control option {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+/* Checkboxes e Switches */
+.form-check-input {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+}
+
+.form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.form-check-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.form-check-label {
+    color: var(--text-color);
+}
+
+.form-check-label small {
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+/* ==================== BOTÕES ==================== */
 .btn-perfil {
     display: inline-flex;
     align-items: center;
@@ -120,9 +206,10 @@
     border: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     min-width: 140px;
+    line-height: 1.2;
 }
 
-/* Botão Salvar/Alterar (roxo) - Texto escuro no normal */
+/* Botão Salvar/Alterar (roxo) */
 .btn-perfil-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #212529 !important;  /* Texto escuro */
@@ -135,10 +222,10 @@
 }
 
 .btn-perfil-primary:hover i {
-    color: white !important;  /* Ícone claro no hover */
+    color: white !important;
 }
 
-/* Botão Cancelar (amarelo) - já está escuro no normal */
+/* Botão Secundário (amarelo) */
 .btn-perfil-secondary {
     background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
     color: #212529 !important;  /* Texto escuro */
@@ -151,7 +238,84 @@
 }
 
 .btn-perfil-secondary:hover i {
-    color: white !important;  /* Ícone claro no hover */
+    color: white !important;
+}
+
+/* 🟢 CORRIGIDO: Botão Perigo (vermelho) - Texto escuro no normal, claro no hover */
+.btn-perfil-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: #212529 !important;  /* Texto ESCURO no normal */
+}
+
+.btn-perfil-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+    color: white !important;  /* Texto CLARO no hover */
+}
+
+.btn-perfil-danger:hover i {
+    color: white !important;
+}
+
+/* 🟡 CORRIGIDO: Botão Aviso (laranja) */
+.btn-perfil-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: #212529 !important;  /* Texto escuro */
+}
+
+.btn-perfil-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.3);
+    color: white !important;  /* Texto claro no hover */
+}
+
+.btn-perfil-warning:hover i {
+    color: white !important;
+}
+
+/* ==================== BOTÕES DE BACKUP ==================== */
+.btn-backup-action {
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* 🟢 CORRIGIDO: Botão Download - Texto escuro no normal, claro no hover */
+.btn-download {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: #212529 !important;  /* Texto ESCURO no normal */
+}
+
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+    color: white !important;  /* Texto CLARO no hover */
+}
+
+.btn-download:hover i {
+    color: white !important;
+}
+
+/* Botão Restore - Amarelo (mantido igual) */
+.btn-restore {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: #212529 !important;  /* Texto escuro */
+}
+
+.btn-restore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+    color: white !important;  /* Texto claro no hover */
+}
+
+.btn-restore:hover i {
+    color: white !important;
 }
 
 /* Alertas */
@@ -173,6 +337,70 @@
     color: white;
 }
 
+.alert-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: #212529;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+}
+
+.alert-warning a {
+    color: #212529;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.alert-info a {
+    color: white;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Links */
+a {
+    color: #667eea;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #764ba2;
+}
+
+/* Cards de informação */
+.card.bg-light {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.card.bg-light .card-body {
+    color: var(--text-color);
+}
+
+/* Informações de telefone e email específicas */
+#notificacoes_whatsapp ~ label small,
+#notificacoes_email ~ label small {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    opacity: 0.95;
+}
+
+/* Texto de ajuda */
+.help-text,
+small:not(.text-muted) {
+    color: var(--text-color) !important;
+    opacity: 0.8;
+}
+
+/* Frequência WhatsApp */
+#whatsappFrequency small {
+    color: var(--text-color) !important;
+    opacity: 0.9;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .avatar-section {
@@ -184,4 +412,36 @@
         width: 100%;
         margin-bottom: 10px;
     }
+    
+    .form-check {
+        margin-bottom: 15px;
+    }
+}
+
+/* Modo escuro específico */
+html.dark .form-check-label small,
+html.dark .user-info-small,
+html.dark .avatar-info p {
+    color: #ffffff !important;
+    opacity: 0.9;
+}
+
+html.dark small.text-muted,
+html.dark small.d-block.text-muted {
+    color: #ffffff !important;
+    opacity: 0.8;
+}
+
+html.dark .alert-warning small {
+    color: #212529 !important;
+}
+
+html.dark .alert-info small {
+    color: white !important;
+}
+
+/* Garantir que os ícones também mudem de cor */
+.btn-perfil i,
+.btn-backup-action i {
+    transition: color 0.3s ease;
 }

@@ -34,7 +34,12 @@
             </div>
             <div class="avatar-info">
                 <h3>{{ Auth::user()->name }}</h3>
-                <p>{{ Auth::user()->email }}</p>
+                <p><i class="fas fa-envelope"></i> {{ Auth::user()->email }}</p>
+                @if(Auth::user()->telefone)
+                    <p><i class="fab fa-whatsapp text-success"></i> {{ Auth::user()->telefone }}</p>
+                @else
+                    <p class="text-muted"><i class="fab fa-whatsapp"></i> Nenhum telefone cadastrado</p>
+                @endif
                 <p><small>Membro desde {{ Auth::user()->created_at->format('d/m/Y') }}</small></p>
             </div>
         </div>
@@ -58,7 +63,28 @@
                 </div>
             </div>
 
-            <div class="text-end">
+            <!-- NOVO CAMPO: TELEFONE PARA WHATSAPP -->
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="telefone">
+                            <i class="fab fa-whatsapp text-success"></i> WhatsApp para notificações
+                        </label>
+                        <input type="text" 
+                               class="form-control telefone-mask" 
+                               id="telefone" 
+                               name="telefone" 
+                               value="{{ Auth::user()->telefone }}" 
+                               placeholder="(18) 99798-7391">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle"></i> 
+                            Número onde você receberá as notificações de contas atrasadas e estoque baixo
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-end mt-3">
                 <button type="submit" class="btn-perfil btn-perfil-primary">
                     <i class="fas fa-save"></i> Salvar alterações
                 </button>
@@ -104,3 +130,44 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    // Máscara para telefone
+    document.addEventListener('DOMContentLoaded', function() {
+        const telefoneInput = document.getElementById('telefone');
+        
+        if (telefoneInput) {
+            telefoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+                
+                // Limita a 11 dígitos (2 DDD + 9 números)
+                if (value.length > 11) value = value.slice(0, 11);
+                
+                // Aplica a máscara
+                if (value.length > 10) {
+                    // (XX) XXXXX-XXXX
+                    value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+                } else if (value.length > 6) {
+                    // (XX) XXXX-XXXX
+                    value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+                } else if (value.length > 2) {
+                    // (XX) XXXX
+                    value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+                } else if (value.length > 0) {
+                    // (XX
+                    value = value.replace(/^(\d*)/, '($1');
+                }
+                
+                e.target.value = value;
+            });
+
+            // Formata valor inicial se existir
+            if (telefoneInput.value) {
+                const event = new Event('input', { bubbles: true });
+                telefoneInput.dispatchEvent(event);
+            }
+        }
+    });
+</script>
+@endpush

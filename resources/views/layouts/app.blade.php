@@ -23,6 +23,37 @@
     <!-- Seus estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/top-bar.css') }}?v={{ time() }}">
+    
+    <!-- Script de inicialização do tema (executa ANTES da renderização) -->
+    <script>
+        (function() {
+            // Tentar obter o tema da sessão ou configurar padrão
+            let tema = '{{ session('tema', Auth::user()->settings->tema ?? 'claro') }}';
+            const html = document.documentElement;
+            
+            // Remover qualquer classe de tema existente
+            html.classList.remove('dark', 'light', 'auto');
+            
+            // Aplicar tema
+            if (tema === 'escuro') {
+                html.classList.add('dark');
+            } else if (tema === 'auto') {
+                // Detectar preferência do sistema
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    html.classList.add('dark');
+                } else {
+                    html.classList.add('light');
+                }
+            } else {
+                // tema claro (padrão)
+                html.classList.add('light');
+            }
+            
+            // Log para debug (opcional)
+            console.log('🎨 Tema aplicado:', tema, '→', html.classList.contains('dark') ? 'Escuro' : 'Claro');
+        })();
+    </script>
+    
     @stack('styles')
 </head>
 <body>
@@ -94,7 +125,7 @@
                         <a href="{{ route('perfil.edit') }}" class="user-dropdown-item">
                             <i class="fas fa-user"></i> Meu Perfil
                         </a>
-                        <a href="{{ route('configuracoes') }}" class="user-dropdown-item">
+                        <a href="{{ route('configuracoes.index') }}" class="user-dropdown-item">
                             <i class="fas fa-cog"></i> Configurações
                         </a>
                         
