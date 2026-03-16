@@ -103,6 +103,12 @@
                         <i class="fas fa-info-circle"></i>
                         <span>Sobre</span>
                     </a>
+                    @if(Auth::user()->tipo === 'admin')
+                        <a href="{{ route('admin.dashboard') }}" class="menu-item {{ request()->routeIs('admin.*') ? 'active' : '' }}">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Admin</span>
+                        </a>
+                    @endif
                 </div>
 
                 <!-- Dropdown do usuário -->
@@ -128,6 +134,14 @@
                         <a href="{{ route('configuracoes.index') }}" class="user-dropdown-item">
                             <i class="fas fa-cog"></i> Configurações
                         </a>
+
+                        <!-- DROPDOWN DO USUÁRIO - ADICIONAR APÓS CONFIGURAÇÕES -->
+                        @if(Auth::user()->tipo === 'admin')
+                            <div class="user-dropdown-divider"></div>
+                            <a href="{{ route('admin.dashboard') }}" class="user-dropdown-item">
+                                <i class="fas fa-shield-alt"></i> Área Admin
+                            </a>
+                        @endif
                         
                         <!-- MODO ESCURO (já existente) -->
                         <div class="user-dropdown-divider"></div>

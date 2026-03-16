@@ -19,6 +19,22 @@ Route::get('/', function () {
     return redirect('/dashboard');
 });
 
+// ==================== ROTAS ADMINISTRATIVAS ====================
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    
+    // Dashboard Admin
+    Route::get('/', function () {
+        // Verificação manual de admin
+        if (auth()->user()->tipo !== 'admin') {
+            abort(403, 'Acesso negado! Apenas administradores podem acessar esta área.');
+        }
+        return view('admin.dashboard');
+    })->name('dashboard');
+    
+    // Gerenciamento de usuários
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+});
+
 // ==================== ROTAS QUE PRECISAM DE AUTENTICAÇÃO ====================
 Route::middleware('auth')->group(function () {
     
@@ -45,7 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [PerfilController::class, 'configuracoes'])->name('index');
         Route::put('/', [PerfilController::class, 'updateConfiguracoes'])->name('update');
         
-        // ===== ROTA PARA SALVAR TEMA (ADICIONADA) =====
+        // ===== ROTA PARA SALVAR TEMA =====
         Route::post('/tema', [PerfilController::class, 'salvarTema'])->name('tema');
         
         // ===== ROTAS DE BACKUP =====
@@ -111,6 +127,7 @@ Route::middleware('auth')->prefix('backups')->name('backups.')->group(function (
     Route::delete('/excluir/{id}', [BackupController::class, 'excluir'])->name('excluir');
 });
 
+// ==================== ROTA DE TESTE DE NOTIFICAÇÃO ====================
 Route::post('/testar-notificacao', function(Request $request) {
     try {
         $tipo = $request->tipo;

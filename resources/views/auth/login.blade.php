@@ -72,11 +72,13 @@
                 <span class="spinner" style="display: none;"></span>
             </button>
 
-            <div class="login-links">
-                <a href="{{ route('register') }}">
-                    <i class="fas fa-user-plus"></i> Criar nova conta
-                </a>
-            </div>
+            {{--
+                <div class="login-links">
+                    <a href="{{ route('register') }}">
+                        <i class="fas fa-user-plus"></i> Criar nova conta
+                    </a>
+                </div>
+            --}}
         </form>
     </div>
 </div>
