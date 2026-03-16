@@ -288,6 +288,7 @@
     margin-bottom: 0.3rem;
 }
 
+/* ==================== CAMPOS DE FORMULÁRIO - CORRIGIDOS ==================== */
 .form-control {
     border: 2px solid var(--border-color) !important;
     border-radius: 8px;
@@ -297,19 +298,54 @@
     color: var(--text-color) !important;
 }
 
-.form-control:focus {
-    border-color: #667eea !important;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-    outline: none;
+/* 👇 CORREÇÃO: Fundo mais claro no modo escuro */
+html.dark .form-control {
+    background-color: #2d2d2d !important;  /* Cinza mais claro que o fundo */
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
 }
 
-/* 👇 NOVO: Placeholders */
+/* 👇 CORREÇÃO: Inputs específicos */
+html.dark input.form-control,
+html.dark select.form-control,
+html.dark textarea.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* 👇 CORREÇÃO: Campos de data */
+html.dark input[type="date"].form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* 👇 CORREÇÃO: Inputs desabilitados */
+html.dark .form-control:disabled,
+html.dark .form-control[readonly] {
+    background-color: #3a3a3a !important;
+    color: #cccccc !important;
+}
+
+/* 👇 CORREÇÃO: Foco nos inputs */
+html.dark .form-control:focus {
+    background-color: #333333 !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Placeholders */
 .form-control::placeholder {
     color: var(--text-muted);
     opacity: 0.7;
 }
 
-/* 👇 NOVO: Para selects */
+/* Placeholders no modo escuro */
+html.dark .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
+}
+
+/* Selects */
 select.form-control {
     background-color: var(--input-bg);
     color: var(--text-color);
@@ -320,55 +356,18 @@ select.form-control option {
     color: var(--text-color);
 }
 
-/* ==================== AUTOCOMPLETE ==================== */
-.form-group.position-relative {
-    position: relative !important;
-    
+/* Selects no modo escuro */
+html.dark select.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
 }
 
-#sugestoes-cliente,
-#sugestoes-produto {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    width: 100% !important;
-    z-index: 999999 !important;
-    background: var(--input-bg) !important;
-    border: 2px solid #0078d7 !important;
-    border-radius: 8px !important;
-    max-height: 300px !important;
-    overflow-y: auto !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
-    margin-top: 2px !important;
-    display: none;
+html.dark select.form-control option {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
 }
 
-#sugestoes-cliente .list-group-item,
-#sugestoes-produto .list-group-item {
-    display: block !important;
-    padding: 12px 15px !important;
-    text-decoration: none !important;
-    color: var(--text-color) !important;
-    border-bottom: 1px solid var(--border-color) !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    background: var(--input-bg) !important;
-}
-
-#sugestoes-cliente .list-group-item:hover,
-#sugestoes-produto .list-group-item:hover {
-    background: linear-gradient(135deg, #0078d7, #0056b3) !important;
-    color: white !important;
-}
-
-#sugestoes-cliente .list-group-item:last-child,
-#sugestoes-produto .list-group-item:last-child {
-    border-bottom: none !important;
-}
-
-/* ==================== INPUT GROUP COM ÍCONES ==================== */
+/* Input group com ícones */
 .input-group {
     display: flex;
     align-items: center;
@@ -388,10 +387,79 @@ select.form-control option {
     font-size: 1rem;
 }
 
+/* Input group no modo escuro */
+html.dark .input-group-text {
+    background: linear-gradient(135deg, #4a4a4a 0%, #333333 100%);
+    color: white;
+    border-color: #4a4a4a;
+}
+
 .input-group .form-control {
     border-left: none;
     border-radius: 0 8px 8px 0;
     flex: 1;
+}
+
+/* ==================== AUTOCOMPLETE ==================== */
+.form-group.position-relative {
+    position: relative !important;
+}
+
+#sugestoes-cliente,
+#sugestoes-produto {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 999999 !important;
+    background: var(--input-bg) !important;
+    border: 2px solid #0078d7 !important;
+    border-radius: 8px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+    margin-top: 2px !important;
+    display: none;
+}
+
+/* Autocomplete no modo escuro */
+html.dark #sugestoes-cliente,
+html.dark #sugestoes-produto {
+    background: #2d2d2d !important;
+    border-color: #4a4a4a !important;
+}
+
+#sugestoes-cliente .list-group-item,
+#sugestoes-produto .list-group-item {
+    display: block !important;
+    padding: 12px 15px !important;
+    text-decoration: none !important;
+    color: var(--text-color) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    background: var(--input-bg) !important;
+}
+
+/* Autocomplete items no modo escuro */
+html.dark #sugestoes-cliente .list-group-item,
+html.dark #sugestoes-produto .list-group-item {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+    border-bottom-color: #4a4a4a !important;
+}
+
+#sugestoes-cliente .list-group-item:hover,
+#sugestoes-produto .list-group-item:hover {
+    background: linear-gradient(135deg, #0078d7, #0056b3) !important;
+    color: white !important;
+}
+
+#sugestoes-cliente .list-group-item:last-child,
+#sugestoes-produto .list-group-item:last-child {
+    border-bottom: none !important;
 }
 
 /* ==================== PÁGINA DE DETALHES DA VENDA ==================== */

@@ -109,8 +109,18 @@
     background: transparent !important;
 }
 
+/* Garantir que as linhas de cliente fiquem visíveis no modo escuro */
+html.dark .cliente-row td {
+    color: #ffffff !important;
+    background: rgba(71, 118, 230, 0.2) !important;
+}
+
 .produto-row td {
     color: var(--text-color);
+}
+
+html.dark .produto-row td {
+    color: #ffffff !important;
 }
 
 .cliente-total-row {
@@ -123,6 +133,11 @@
     color: var(--text-color) !important;
     font-weight: 700;
     background: transparent !important;
+}
+
+html.dark .cliente-total-row td {
+    color: #ffffff !important;
+    background: rgba(40, 167, 69, 0.2) !important;
 }
 
 .total-geral {
@@ -138,7 +153,12 @@
     background: transparent !important;
 }
 
-/* Status colors - usando badges como na tabela de recebimentos */
+html.dark .total-geral td {
+    color: #ffffff !important;
+    background: rgba(40, 167, 69, 0.2) !important;
+}
+
+/* Status colors - usando badges */
 .status-pago {
     display: inline-block;
     padding: 6px 12px;
@@ -222,6 +242,110 @@
 .tabela-venda th:nth-child(7),
 .tabela-venda td:nth-child(7) { min-width: 120px; } /* Preço Unitário */
 
+/* ==================== CARD DE FILTROS ==================== */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: var(--card-bg) !important;
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.card-title {
+    color: var(--text-color) !important;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: none;
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-muted) !important;
+    margin-bottom: 0.3rem;
+}
+
+/* ==================== CAMPOS DE FORMULÁRIO - CORRIGIDOS ==================== */
+.form-control {
+    border: 2px solid var(--border-color) !important;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+    background-color: var(--input-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* 👇 CORREÇÃO: Fundo mais claro no modo escuro */
+html.dark .form-control {
+    background-color: #2d2d2d !important;  /* Cinza mais claro que o fundo */
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
+}
+
+/* 👇 CORREÇÃO: Inputs específicos */
+html.dark input.form-control,
+html.dark select.form-control,
+html.dark textarea.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* 👇 CORREÇÃO: Campos de data */
+html.dark input[type="date"].form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* 👇 CORREÇÃO: Inputs desabilitados */
+html.dark .form-control:disabled,
+html.dark .form-control[readonly] {
+    background-color: #3a3a3a !important;
+    color: #cccccc !important;
+}
+
+/* 👇 CORREÇÃO: Foco nos inputs */
+html.dark .form-control:focus {
+    background-color: #333333 !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Placeholders */
+.form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Placeholders no modo escuro */
+html.dark .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
+}
+
+/* Selects */
+select.form-control {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+select.form-control option {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+/* Selects no modo escuro */
+html.dark select.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+html.dark select.form-control option {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
 /* ==================== BOTÕES PADRÃO ==================== */
 .card .btn,
 .card .btn-success,
@@ -302,21 +426,16 @@
     color: white !important;
 }
 
-/* ===== BOTÃO WHATSAPP ===== */
+/* Botão WhatsApp */
 .card .btn-whatsapp {
-    /* Layout e espaçamento */
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 8px !important;
     padding-left: 15px !important;
     padding-right: 15px !important;
-    
-    /* Aparência */
     background: linear-gradient(135deg, #25d366 0%, #128c7e 100%) !important;
     color: #212529 !important;
-    
-    /* Mantendo as propriedades padrão dos botões */
     border: none !important;
     border-radius: 50px !important;
     font-weight: 600 !important;
@@ -333,13 +452,11 @@
     line-height: 1 !important;
 }
 
-/* Ícone do WhatsApp */
 .card .btn-whatsapp i {
     margin-right: 5px !important;
     font-size: 1.1rem !important;
 }
 
-/* Hover do WhatsApp */
 .card .btn-whatsapp:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3) !important;
@@ -347,61 +464,8 @@
     color: white !important;
 }
 
-/* Garantir que os ícones também fiquem centralizados */
 .card .btn i {
     margin: 0 !important;
-}
-
-/* ==================== CARD DE FILTROS ==================== */
-.card {
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    background: var(--card-bg) !important;
-    margin-bottom: 2rem;
-    transition: background-color 0.3s ease;
-}
-
-.card-title {
-    color: var(--text-color) !important;
-    font-weight: 600;
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: none;
-}
-
-.form-label {
-    font-weight: 500;
-    color: var(--text-muted) !important;
-    margin-bottom: 0.3rem;
-}
-
-.form-control {
-    border: 2px solid var(--border-color) !important;
-    border-radius: 8px;
-    padding: 0.6rem 1rem;
-    transition: all 0.3s ease;
-    background-color: var(--input-bg) !important;
-    color: var(--text-color) !important;
-}
-
-.form-control:focus {
-    border-color: #667eea !important;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-    outline: none;
-}
-
-/* Placeholder dos inputs */
-.form-control::placeholder {
-    color: var(--text-muted);
-    opacity: 0.7;
-}
-
-/* Para selects */
-select.form-control {
-    background-color: var(--input-bg);
-    color: var(--text-color);
 }
 
 /* ==================== AJUSTES DE ESPAÇAMENTO ==================== */
@@ -453,6 +517,12 @@ select.form-control {
     display: none;
 }
 
+/* Autocomplete no modo escuro */
+html.dark #sugestoes-cliente {
+    background: #2d2d2d !important;
+    border-color: #4a4a4a !important;
+}
+
 #sugestoes-cliente .list-group-item {
     padding: 10px 15px;
     cursor: pointer;
@@ -460,6 +530,13 @@ select.form-control {
     transition: all 0.2s ease;
     color: var(--text-color);
     background: var(--input-bg);
+}
+
+/* Autocomplete items no modo escuro */
+html.dark #sugestoes-cliente .list-group-item {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+    border-bottom-color: #4a4a4a !important;
 }
 
 #sugestoes-cliente .list-group-item:hover {

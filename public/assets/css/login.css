@@ -1,93 +1,366 @@
+/* ==================== LOGIN MODERNO - VERSÃO COMPACTA ==================== */
+
+/* Fundo com gradiente animado */
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  margin: 0;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Times New Roman', Times, serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4776E6 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
 }
 
+/* Animação do gradiente */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Partículas decorativas */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="50" cy="50" r="40" fill="white"/></svg>') repeat;
+    pointer-events: none;
+    animation: float 20s linear infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    from { transform: translateY(0) rotate(0deg); }
+    to { transform: translateY(-100px) rotate(360deg); }
+}
+
+/* Container do login - VERSÃO MENOR */
+/* Container MAIS BAIXO */
 .login-container {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  width: 300px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1.2rem 1.8rem; /* ↓ DIMINUI a altura */
+    border-radius: 35px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    z-index: 10;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.login-container:hover {
+    transform: translateY(-3px); /* Reduzido de -5px */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Logo - MENOR */
+.login-logo {
+    text-align: center;
+    margin-bottom: 1rem; /* Reduzido de 1.5rem */
+}
+
+.login-logo i {
+    font-size: 3rem; /* Reduzido de 4rem */
+    color: #667eea;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Título - MENOR */
+h1 {
+    text-align: center;
+    margin: 0 0 0.3rem 0; /* Reduzido de 0.5rem */
+    color: #2c3e50;
+    font-size: 1.8rem; /* Reduzido de 2rem */
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+/* Subtítulo - MENOR */
+.login-subtitle {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 1.5rem; /* Reduzido de 2rem */
+    font-size: 0.85rem; /* Reduzido de 0.9rem */
+}
+
+/* Grupos de formulário - MAIS COMPACTOS */
 .form-group {
-  margin-bottom: 1rem;
+    margin-bottom: 1.2rem; /* Reduzido de 1.5rem */
+    position: relative;
 }
 
+/* Labels - MENORES */
 label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 0.3rem; /* Reduzido de 0.5rem */
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.8rem; /* Reduzido de 0.9rem */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
+/* Inputs - MAIS COMPACTOS */
 input {
-  /* Suas regras normais */
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: white;
-  color: #333;
+    width: 100%;
+    padding: 0.7rem 0.9rem; /* Reduzido de 0.8rem 1rem */
+    border: 2px solid #e9ecef;
+    border-radius: 8px; /* Reduzido de 10px */
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-size: 0.9rem; /* Reduzido de 1rem */
+    transition: all 0.3s ease;
 }
 
-/* Adicione esta regra para o container do botão */
-.button-container {
-  margin-top: 1.5rem; /* Aumente este valor para mais distância */
+input:focus {
+    outline: none;
+    border-color: #667eea;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); /* Reduzido de 4px */
 }
 
-/* Ou altere diretamente o espaçamento do formulário */
-.login-container form {
-  padding-bottom: 1rem; /* Espaço extra na base */
+/* Placeholder */
+input::placeholder {
+    color: #adb5bd;
+    opacity: 0.8;
+    font-style: italic;
+    font-size: 0.85rem; /* Fonte menor */
 }
 
-/* Alternativamente, ajuste a margem do botão */
-button[type="submit"] {
-  margin-top: 1.5rem; /* Distância acima do botão */
-  /* Mantenha suas outras propriedades existentes */
-  width: 100%;
-  padding: 0.7rem;
-  background-color: #0078d7;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
+/* Ícones dentro dos inputs */
+.input-icon {
+    position: relative;
 }
 
+.input-icon i {
+    position: absolute;
+    left: 12px; /* Reduzido de 15px */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    transition: color 0.3s ease;
+    font-size: 0.9rem; /* Ícone menor */
+}
+
+.input-icon input {
+    padding-left: 38px; /* Reduzido de 45px */
+}
+
+.input-icon input:focus + i {
+    color: #667eea;
+}
+
+/* Botão - MAIS COMPACTO */
 button {
-  width: 100%;
-  padding: 0.7rem;
-  background-color: #0078d7;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
+    width: 100%;
+    padding: 0.8rem; /* Reduzido de 1rem */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 40px; /* Reduzido de 50px */
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem; /* Reduzido de 1rem */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.8rem; /* Reduzido de 1rem */
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
 }
 
 button:hover {
-  background-color: #0066c0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(102, 126, 234, 0.5);
 }
 
-h1 {
-  text-align: center;
-  margin-top: 0;
-  color: #000000;
-}
-
-/* Adicione ao final do styles.css */
-input:focus {
-  outline: none;
-  border-color: #0078d7;
-  box-shadow: 0 0 0 2px rgba(0, 120, 215, 0.2);
+button:hover::before {
+    left: 100%;
 }
 
 button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+button:disabled::before {
+    display: none;
+}
+
+/* Links adicionais - MAIS COMPACTOS */
+.login-links {
+    margin-top: 1.2rem; /* Reduzido de 1.5rem */
+    text-align: center;
+}
+
+.login-links a {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.8rem; /* Reduzido de 0.9rem */
+    transition: color 0.3s ease;
+    margin: 0 8px; /* Reduzido de 10px */
+}
+
+.login-links a:hover {
+    color: #667eea;
+    text-decoration: underline;
+}
+
+/* Divisor */
+.login-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.2rem 0; /* Reduzido de 1.5rem */
+    color: #6c757d;
+    font-size: 0.8rem; /* Fonte menor */
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.login-divider span {
+    padding: 0 8px; /* Reduzido de 10px */
+    font-size: 0.8rem;
+}
+
+/* Mensagens de erro/sucesso */
+.alert {
+    padding: 0.8rem; /* Reduzido de 1rem */
+    border-radius: 8px;
+    margin-bottom: 1.2rem; /* Reduzido de 1.5rem */
+    font-size: 0.85rem; /* Reduzido de 0.9rem */
+    font-weight: 500;
+    text-align: center;
+    animation: slideIn 0.3s ease;
+}
+
+/* Loading spinner - MENOR */
+.spinner {
+    display: inline-block;
+    width: 16px; /* Reduzido de 20px */
+    height: 16px; /* Reduzido de 20px */
+    border: 2px solid rgba(255,255,255,.3); /* Borda mais fina */
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 6px; /* Reduzido de 8px */
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsividade - AJUSTADA */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 1.5rem; /* Reduzido de 2rem */
+        width: 280px; /* Reduzido de 340px */
+    }
+    
+    h1 {
+        font-size: 1.6rem; /* Reduzido de 1.8rem */
+    }
+    
+    .login-logo i {
+        font-size: 2.5rem; /* Reduzido de 3rem */
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1.2rem; /* Reduzido de 1.5rem */
+        width: 260px; /* Reduzido de 300px */
+    }
+    
+    h1 {
+        font-size: 1.4rem; /* Reduzido de 1.5rem */
+    }
+    
+    .login-links a {
+        display: block;
+        margin: 8px 0; /* Reduzido de 10px */
+    }
+}
+
+/* Modo escuro */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+    
+    .login-container {
+        background: rgba(30, 30, 46, 0.95);
+        backdrop-filter: blur(10px);
+    }
+    
+    h1, label {
+        color: #ffffff;
+    }
+    
+    .login-subtitle {
+        color: #a0a0a0;
+    }
+    
+    input {
+        background-color: #2d2d2d;
+        border-color: #4a4a4a;
+        color: #ffffff;
+    }
+    
+    input:focus {
+        background-color: #333333;
+    }
+    
+    .login-links a {
+        color: #a0a0a0;
+    }
+    
+    .login-links a:hover {
+        color: #667eea;
+    }
+    
+    .login-divider::before,
+    .login-divider::after {
+        border-color: #4a4a4a;
+    }
 }

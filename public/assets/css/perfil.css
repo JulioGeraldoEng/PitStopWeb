@@ -116,7 +116,7 @@ small.d-block.text-muted {
     opacity: 0.8;
 }
 
-/* Formulário */
+/* ==================== CAMPOS DE FORMULÁRIO - CORRIGIDOS ==================== */
 .form-group {
     margin-bottom: 20px;
 }
@@ -137,10 +137,32 @@ small.d-block.text-muted {
     color: var(--text-color);
 }
 
+/* 👇 CORREÇÃO: Fundo mais claro no modo escuro */
+html.dark .form-group .form-control {
+    background-color: #2d2d2d !important;  /* Cinza mais claro que o fundo */
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
+}
+
+/* 👇 CORREÇÃO: Inputs específicos */
+html.dark input.form-control,
+html.dark select.form-control,
+html.dark textarea.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
 .form-group .form-control:focus {
     border-color: #667eea;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
     outline: none;
+}
+
+/* 👇 CORREÇÃO: Foco nos inputs no modo escuro */
+html.dark .form-group .form-control:focus {
+    background-color: #333333 !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
 }
 
 .form-group .form-control[readonly] {
@@ -149,9 +171,21 @@ small.d-block.text-muted {
     cursor: not-allowed;
 }
 
+/* 👇 CORREÇÃO: Inputs readonly no modo escuro */
+html.dark .form-group .form-control[readonly] {
+    background-color: #3a3a3a !important;
+    color: #cccccc !important;
+}
+
 .form-group .form-control::placeholder {
     color: var(--text-muted);
     opacity: 0.7;
+}
+
+/* 👇 CORREÇÃO: Placeholders no modo escuro */
+html.dark .form-group .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
 }
 
 /* Selects */
@@ -166,10 +200,27 @@ select.form-control option {
     color: var(--text-color);
 }
 
+/* 👇 CORREÇÃO: Selects no modo escuro */
+html.dark select.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+html.dark select.form-control option {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
 /* Checkboxes e Switches */
 .form-check-input {
     background-color: var(--input-bg);
     border-color: var(--border-color);
+}
+
+/* 👇 CORREÇÃO: Checkboxes no modo escuro */
+html.dark .form-check-input {
+    background-color: #2d2d2d !important;
+    border-color: #4a4a4a !important;
 }
 
 .form-check-input:checked {
@@ -241,7 +292,7 @@ select.form-control option {
     color: white !important;
 }
 
-/* 🟢 CORRIGIDO: Botão Perigo (vermelho) - Texto escuro no normal, claro no hover */
+/* 🟢 Botão Perigo (vermelho) - Texto escuro no normal, claro no hover */
 .btn-perfil-danger {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: #212529 !important;  /* Texto ESCURO no normal */
@@ -257,7 +308,7 @@ select.form-control option {
     color: white !important;
 }
 
-/* 🟡 CORRIGIDO: Botão Aviso (laranja) */
+/* 🟡 Botão Aviso (laranja) */
 .btn-perfil-warning {
     background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
     color: #212529 !important;  /* Texto escuro */
@@ -286,7 +337,7 @@ select.form-control option {
     gap: 3px;
 }
 
-/* 🟢 CORRIGIDO: Botão Download - Texto escuro no normal, claro no hover */
+/* 🟢 Botão Download - Texto escuro no normal, claro no hover */
 .btn-download {
     background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: #212529 !important;  /* Texto ESCURO no normal */
@@ -302,7 +353,7 @@ select.form-control option {
     color: white !important;
 }
 
-/* Botão Restore - Amarelo (mantido igual) */
+/* Botão Restore - Amarelo */
 .btn-restore {
     background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
     color: #212529 !important;  /* Texto escuro */

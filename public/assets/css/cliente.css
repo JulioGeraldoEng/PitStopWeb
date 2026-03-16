@@ -64,6 +64,11 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+/* Garantir que o texto das células fique branco no modo escuro */
+html.dark .tabela-cliente td {
+    color: #ffffff !important;
+}
+
 .tabela-cliente tbody tr:last-child td {
     border-bottom: none;
 }
@@ -150,7 +155,7 @@
     color: white !important;
 }
 
-/* ==================== BOTÕES PADRÃO (Buscar, Limpar, Novo, Salvar, Cancelar) ==================== */
+/* ==================== BOTÕES PADRÃO ==================== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -258,6 +263,7 @@
     margin-bottom: 0.3rem;
 }
 
+/* ==================== CAMPOS DE FORMULÁRIO - CORRIGIDOS ==================== */
 .form-control {
     border: 2px solid var(--border-color);
     border-radius: 8px;
@@ -267,10 +273,33 @@
     color: var(--text-color);
 }
 
-.form-control:focus {
-    border-color: #667eea;
+/* 👇 CORREÇÃO: Fundo mais claro no modo escuro */
+html.dark .form-control {
+    background-color: #2d2d2d !important;  /* Cinza mais claro que o fundo */
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
+}
+
+/* 👇 CORREÇÃO: Inputs específicos */
+html.dark input.form-control,
+html.dark select.form-control,
+html.dark textarea.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* 👇 CORREÇÃO: Inputs desabilitados */
+html.dark .form-control:disabled,
+html.dark .form-control[readonly] {
+    background-color: #3a3a3a !important;
+    color: #cccccc !important;
+}
+
+/* 👇 CORREÇÃO: Foco nos inputs */
+html.dark .form-control:focus {
+    background-color: #333333 !important;
+    border-color: #667eea !important;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-    outline: none;
 }
 
 .form-control::placeholder {
@@ -278,10 +307,27 @@
     opacity: 0.7;
 }
 
-/* Para selects */
+/* Placeholders no modo escuro */
+html.dark .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
+}
+
+/* Selects */
 select.form-control {
     background-color: var(--input-bg);
     color: var(--text-color);
+}
+
+/* Selects no modo escuro */
+html.dark select.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+html.dark select.form-control option {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
 }
 
 /* ==================== AJUSTES DE ESPAÇAMENTO ==================== */
@@ -336,6 +382,12 @@ select.form-control {
     display: none;
 }
 
+/* Autocomplete no modo escuro */
+html.dark #sugestoes-busca {
+    background: #2d2d2d !important;
+    border-color: #4a4a4a !important;
+}
+
 #sugestoes-busca .list-group-item {
     display: block !important;
     padding: 12px 15px !important;
@@ -347,6 +399,13 @@ select.form-control {
     font-size: 14px !important;
     font-weight: 500 !important;
     background: var(--input-bg) !important;
+}
+
+/* Autocomplete items no modo escuro */
+html.dark #sugestoes-busca .list-group-item {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+    border-bottom-color: #4a4a4a !important;
 }
 
 #sugestoes-busca .list-group-item:hover {
@@ -383,13 +442,13 @@ select.form-control {
     animation: fadeIn 0.3s ease forwards;
 }
 
-/* ==================== MODAL DE EDIÇÃO DE CLIENTES ==================== */
+/* ==================== MODAL DE EDIÇÃO DE CLIENTES - CORRIGIDO ==================== */
 .modal-cliente .modal-content {
     border-radius: 15px;
     border: none;
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
     background: var(--card-bg);
-    color: var(--text-color) !important;  /* Usa a variável que já controla claro/escuro */
+    color: var(--text-color) !important;
 }
 
 .modal-cliente .modal-header {
@@ -413,18 +472,24 @@ select.form-control {
     padding: 15px 20px;
 }
 
-/* ===== CORREÇÃO PRINCIPAL: LABELS (NOME, TELEFONE, OBSERVAÇÃO) ===== */
+/* ===== CORREÇÃO: LABELS DO MODAL ===== */
 .modal-cliente .form-label,
 .modal-cliente label {
-    font-weight: 600 !important;  /* Mais negrito para destacar */
-    color: var(--text-color) !important;  /* FORÇA COR BRANCA NO MODO ESCURO */
+    font-weight: 600 !important;
+    color: var(--text-color) !important;
     margin-bottom: 8px;
     font-size: 1rem;
     display: block;
-    opacity: 1 !important;  /* Garante que não fique transparente */
+    opacity: 1 !important;
 }
 
-/* Campos de input */
+/* Labels no modo escuro */
+html.dark .modal-cliente .form-label,
+html.dark .modal-cliente label {
+    color: #ffffff !important;
+}
+
+/* Campos de input no modal - CORRIGIDOS */
 .modal-cliente .form-control {
     border: 2px solid var(--border-color) !important;
     border-radius: 8px;
@@ -436,6 +501,13 @@ select.form-control {
     width: 100%;
 }
 
+/* Campos de input no modal - modo escuro */
+html.dark .modal-cliente .form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
+}
+
 .modal-cliente .form-control:focus {
     border-color: #667eea !important;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
@@ -445,6 +517,12 @@ select.form-control {
 .modal-cliente .form-control::placeholder {
     color: var(--text-muted);
     opacity: 0.7;
+}
+
+/* Placeholders no modal - modo escuro */
+html.dark .modal-cliente .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
 }
 
 /* Para textarea (observação) */
@@ -523,12 +601,22 @@ label.form-label[for="nome"] {
     display: block;
 }
 
+/* Labels no modo escuro */
+html.dark .mb-3.position-relative label.form-label[for="nome"],
+html.dark label.form-label[for="nome"] {
+    color: #ffffff !important;
+}
+
 /* Label "Telefone" */
 label.form-label[for="telefone"] {
     color: var(--text-color) !important;
     font-weight: 600;
     margin-bottom: 0.5rem;
     display: block;
+}
+
+html.dark label.form-label[for="telefone"] {
+    color: #ffffff !important;
 }
 
 /* Label "Observação" */
@@ -539,10 +627,18 @@ label.form-label[for="observacao"] {
     display: block;
 }
 
-/* Caso queira aplicar a todos os labels com form-label dentro de .mb-3 */
+html.dark label.form-label[for="observacao"] {
+    color: #ffffff !important;
+}
+
+/* Para todos os labels */
 .mb-3 label.form-label {
     color: var(--text-color) !important;
     font-weight: 600;
     margin-bottom: 0.5rem;
     display: block;
+}
+
+html.dark .mb-3 label.form-label {
+    color: #ffffff !important;
 }

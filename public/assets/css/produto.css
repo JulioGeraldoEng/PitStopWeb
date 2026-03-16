@@ -64,6 +64,11 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+/* Garantir que o texto das células fique branco no modo escuro */
+html.dark .tabela-produto td {
+    color: #ffffff !important;
+}
+
 .tabela-produto tbody tr:last-child td {
     border-bottom: none;
 }
@@ -235,6 +240,7 @@
     margin-bottom: 0.3rem;
 }
 
+/* ==================== CAMPOS DE FORMULÁRIO - CORRIGIDOS ==================== */
 .form-control {
     border: 2px solid var(--border-color);
     border-radius: 8px;
@@ -244,15 +250,61 @@
     color: var(--text-color);
 }
 
-.form-control:focus {
-    border-color: #667eea;
+/* 👇 CORREÇÃO: Fundo mais claro no modo escuro */
+html.dark .form-control {
+    background-color: #2d2d2d !important;  /* Cinza mais claro que o fundo */
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
+}
+
+/* 👇 CORREÇÃO: Inputs específicos */
+html.dark input.form-control,
+html.dark select.form-control,
+html.dark textarea.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* 👇 CORREÇÃO: Inputs desabilitados */
+html.dark .form-control:disabled,
+html.dark .form-control[readonly] {
+    background-color: #3a3a3a !important;
+    color: #cccccc !important;
+}
+
+/* 👇 CORREÇÃO: Foco nos inputs */
+html.dark .form-control:focus {
+    background-color: #333333 !important;
+    border-color: #667eea !important;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-    outline: none;
 }
 
 .form-control::placeholder {
     color: var(--text-muted);
     opacity: 0.7;
+}
+
+/* Placeholders no modo escuro */
+html.dark .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
+}
+
+/* Selects */
+select.form-control {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+/* Selects no modo escuro */
+html.dark select.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+html.dark select.form-control option {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
 }
 
 /* ==================== AUTOCOMPLETE ==================== */
@@ -277,6 +329,13 @@
     display: none;
 }
 
+/* Autocomplete no modo escuro */
+html.dark #sugestoes-produto,
+html.dark #sugestoes-busca {
+    background: #2d2d2d !important;
+    border-color: #4a4a4a !important;
+}
+
 #sugestoes-produto .list-group-item,
 #sugestoes-busca .list-group-item {
     display: block !important;
@@ -289,6 +348,14 @@
     font-size: 14px !important;
     font-weight: 500 !important;
     background: var(--input-bg) !important;
+}
+
+/* Autocomplete items no modo escuro */
+html.dark #sugestoes-produto .list-group-item,
+html.dark #sugestoes-busca .list-group-item {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+    border-bottom-color: #4a4a4a !important;
 }
 
 #sugestoes-produto .list-group-item:hover,
@@ -325,6 +392,99 @@
 
 .tabela-produto tbody tr {
     animation: fadeIn 0.3s ease forwards;
+}
+
+/* ==================== MODAL DE PRODUTOS - CORRIGIDO ==================== */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.modal-header {
+    border-radius: 15px 15px 0 0;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-body {
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color);
+    padding: 15px 20px;
+}
+
+/* Labels do modal */
+.modal .form-label,
+.modal label {
+    color: var(--text-color) !important;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
+
+html.dark .modal .form-label,
+html.dark .modal label {
+    color: #ffffff !important;
+}
+
+/* Campos de input no modal */
+.modal .form-control {
+    border: 2px solid var(--border-color) !important;
+    border-radius: 8px;
+    padding: 10px 12px;
+    background-color: var(--input-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* Campos de input no modal - modo escuro */
+html.dark .modal .form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
+}
+
+.modal .form-control:focus {
+    border-color: #0078d7 !important;
+    box-shadow: 0 0 0 3px rgba(0,120,215,0.2);
+    outline: none;
+}
+
+.modal .form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Placeholders no modal - modo escuro */
+html.dark .modal .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
+}
+
+/* Selects no modal */
+.modal select.form-control {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+html.dark .modal select.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+html.dark .modal select.form-control option {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
 }
 
 /* ==================== BOTÕES DO MODAL ==================== */
@@ -403,4 +563,9 @@ form .form-label,
     color: var(--text-color) !important;
     font-weight: 500;
     margin-bottom: 0.3rem;
+}
+
+html.dark form .form-label,
+html.dark .form-label {
+    color: #ffffff !important;
 }

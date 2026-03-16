@@ -186,6 +186,7 @@
     margin-bottom: 0.3rem;
 }
 
+/* ==================== CAMPOS DE FORMULÁRIO - CORRIGIDOS ==================== */
 .form-control {
     border: 2px solid var(--border-color) !important;
     border-radius: 8px;
@@ -195,16 +196,51 @@
     color: var(--text-color) !important;
 }
 
-.form-control:focus {
+/* 👇 CORREÇÃO: Fundo mais claro no modo escuro */
+html.dark .form-control {
+    background-color: #2d2d2d !important;  /* Cinza mais claro que o fundo */
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
+}
+
+/* 👇 CORREÇÃO: Inputs específicos */
+html.dark input.form-control,
+html.dark select.form-control,
+html.dark textarea.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* 👇 CORREÇÃO: Campos de data */
+html.dark input[type="date"].form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* 👇 CORREÇÃO: Inputs desabilitados */
+html.dark .form-control:disabled,
+html.dark .form-control[readonly] {
+    background-color: #3a3a3a !important;
+    color: #cccccc !important;
+}
+
+/* 👇 CORREÇÃO: Foco nos inputs */
+html.dark .form-control:focus {
+    background-color: #333333 !important;
     border-color: #667eea !important;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-    outline: none;
 }
 
 /* Placeholders */
 .form-control::placeholder {
     color: var(--text-muted);
     opacity: 0.7;
+}
+
+/* Placeholders no modo escuro */
+html.dark .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
 }
 
 /* Selects */
@@ -218,7 +254,18 @@ select.form-control option {
     color: var(--text-color);
 }
 
-/* ==================== MODAL DE EDIÇÃO ==================== */
+/* Selects no modo escuro */
+html.dark select.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+html.dark select.form-control option {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+/* ==================== MODAL DE EDIÇÃO - CORREÇÃO DAS INFORMAÇÕES ==================== */
 .modal-content {
     border-radius: 15px;
     border: none;
@@ -274,7 +321,7 @@ select.form-control option {
     padding: 15px;
 }
 
-/* 👇 CORREÇÃO PRINCIPAL: Informações da venda */
+/* ==================== INFORMAÇÕES DA VENDA - CORRIGIDO ==================== */
 .modal .table-borderless {
     width: 100%;
     margin-bottom: 0;
@@ -290,51 +337,79 @@ select.form-control option {
 
 .modal .table-borderless th {
     width: 40%;
-    color: var(--text-muted) !important;
-    font-weight: 500;
-    padding: 10px 5px;
+    color: var(--text-color) !important;  /* Mudado de text-muted para text-color */
+    font-weight: 600;  /* Aumentado de 500 para 600 */
+    padding: 12px 5px;  /* Aumentado padding */
     text-align: left;
+    font-size: 0.95rem;
 }
 
-/* 👇 OS VALORES (Venda, Cliente, Data, etc.) */
+/* 👇 CORREÇÃO: Forçar cor branca no modo escuro */
+html.dark .modal .table-borderless th {
+    color: #ffffff !important;
+    opacity: 1;
+    font-weight: 600;
+}
+
 .modal .table-borderless td {
     font-weight: 500;
-    color: var(--text-color) !important;  /* FORÇA COR BRANCA NO MODO ESCURO */
-    padding: 10px 5px;
-    text-align: left;
-}
-
-/* Para garantir que IDs e números fiquem visíveis */
-.modal .table-borderless td strong,
-.modal .table-borderless td span {
     color: var(--text-color) !important;
+    padding: 12px 5px;
+    text-align: left;
+    font-size: 0.95rem;
 }
 
-/* Se houver elementos com classes específicas */
+/* 👇 CORREÇÃO: Forçar cor branca no modo escuro para os valores */
+html.dark .modal .table-borderless td {
+    color: #ffffff !important;
+    opacity: 1;
+}
+
+/* IDs e números específicos */
 #modal-venda-id,
 #modal-cliente,
 #modal-data-venda,
 #modal-valor-total {
     color: var(--text-color) !important;
-    font-weight: 600;
+    font-weight: 700;  /* Aumentado para bold */
+    font-size: 1rem;
 }
 
-/* 👇 Títulos das seções (Informações da Venda, Dados do Pagamento) */
-.modal .card-title,
-.modal h5,
-.modal h6 {
-    color: white !important;
+/* 👇 CORREÇÃO: Forçar cores no modo escuro */
+html.dark #modal-venda-id,
+html.dark #modal-cliente,
+html.dark #modal-data-venda,
+html.dark #modal-valor-total {
+    color: #ffffff !important;
+    font-weight: 700;
 }
 
-/* 👇 Labels dos campos editáveis */
+/* Linhas de informação com fundo sutil no hover */
+.modal .table-borderless tr:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+}
+
+/* 👇 CORREÇÃO: Hover no modo escuro */
+html.dark .modal .table-borderless tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==================== CAMPOS EDITÁVEIS DO MODAL ==================== */
+/* Labels dos campos editáveis */
 .modal label {
-    color: var(--text-muted) !important;
-    font-weight: 500;
+    color: var(--text-color) !important;  /* Mudado de text-muted para text-color */
+    font-weight: 600;
     margin-bottom: 5px;
     display: block;
 }
 
-/* 👇 Campos de input */
+/* 👇 CORREÇÃO: Labels no modo escuro */
+html.dark .modal label {
+    color: #ffffff !important;
+    opacity: 0.9;
+}
+
+/* Campos de input no modal */
 .modal .form-control,
 .modal .input-group-text {
     border-radius: 8px;
@@ -342,6 +417,13 @@ select.form-control option {
     padding: 10px 12px;
     background-color: var(--input-bg) !important;
     color: var(--text-color) !important;
+}
+
+/* Campos no modo escuro dentro do modal */
+html.dark .modal .form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
 }
 
 .modal .input-group-text {
@@ -355,7 +437,13 @@ select.form-control option {
     opacity: 0.7;
 }
 
-/* 👇 Selects */
+/* Placeholders no modo escuro */
+html.dark .modal .form-control::placeholder {
+    color: #aaaaaa !important;
+    opacity: 0.8;
+}
+
+/* Selects no modal */
 .modal select.form-control {
     background-color: var(--input-bg);
     color: var(--text-color);
@@ -366,19 +454,54 @@ select.form-control option {
     color: var(--text-color);
 }
 
+/* Selects no modal - modo escuro */
+html.dark .modal select.form-control {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+html.dark .modal select.form-control option {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
 .modal .form-control:focus {
     border-color: #0078d7 !important;
     box-shadow: 0 0 0 3px rgba(0,120,215,0.2);
     outline: none;
 }
 
-/* 👇 Botões */
+/* ==================== BOTÕES DO MODAL ==================== */
 .modal .btn {
     padding: 10px 20px;
     border-radius: 50px;
     font-weight: 600;
     width: auto;
     min-width: 120px;
+}
+
+/* Botão Salvar */
+.modal .btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border: none;
+}
+
+.modal .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Botão Cancelar */
+.modal .btn-secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    color: white;
+    border: none;
+}
+
+.modal .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
 }
 
 /* ==================== AUTOCOMPLETE ==================== */
@@ -398,6 +521,12 @@ select.form-control option {
     margin-top: 2px;
 }
 
+/* Autocomplete no modo escuro */
+html.dark #sugestoes-cliente {
+    background: #2d2d2d !important;
+    border-color: #4a4a4a !important;
+}
+
 #sugestoes-cliente .list-group-item {
     padding: 10px 15px;
     cursor: pointer;
@@ -405,6 +534,13 @@ select.form-control option {
     transition: all 0.2s ease;
     color: var(--text-color);
     background: var(--input-bg);
+}
+
+/* Autocomplete items no modo escuro */
+html.dark #sugestoes-cliente .list-group-item {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+    border-bottom-color: #4a4a4a !important;
 }
 
 #sugestoes-cliente .list-group-item:hover {
@@ -570,3 +706,121 @@ select.form-control option {
 .tabela-recebimento tbody tr {
     animation: slideIn 0.4s ease forwards;
 }
+
+/* ==================== CORREÇÃO ESPECÍFICA DAS INFORMAÇÕES DA VENDA ==================== */
+
+/* Forçar todas as linhas da tabela de informações a ficarem brancas no modo escuro */
+html.dark .modal .table-borderless tr,
+html.dark .modal .table-borderless td,
+html.dark .modal .table-borderless th,
+html.dark #modal-venda-id,
+html.dark #modal-cliente,
+html.dark #modal-data-venda,
+html.dark #modal-valor-total {
+    color: #ffffff !important;
+    background-color: transparent !important;
+}
+
+/* Aplicar especificamente a cada linha */
+.modal .table-borderless tr td:nth-child(1),
+.modal .table-borderless tr td:nth-child(2) {
+    color: var(--text-color) !important;
+}
+
+/* Forçar no modo escuro */
+html.dark .modal .table-borderless tr td:nth-child(1),
+html.dark .modal .table-borderless tr td:nth-child(2) {
+    color: #ffffff !important;
+}
+
+/* Valores específicos */
+#modal-venda-id,
+#modal-cliente,
+#modal-data-venda,
+#modal-valor-total {
+    color: var(--text-color) !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+}
+
+/* Modo escuro para os valores específicos */
+html.dark #modal-venda-id,
+html.dark #modal-cliente,
+html.dark #modal-data-venda,
+html.dark #modal-valor-total {
+    color: #ffffff !important;
+    background-color: transparent !important;
+    text-shadow: none !important;
+}
+
+/* Garantir que os textos não fiquem transparentes */
+.modal .table-borderless td,
+.modal .table-borderless th {
+    opacity: 1 !important;
+}
+
+html.dark .modal .table-borderless td,
+html.dark .modal .table-borderless th {
+    opacity: 1 !important;
+    color: #ffffff !important;
+}
+
+/* Forçar todas as células da tabela a serem brancas no escuro */
+html.dark .modal table td,
+html.dark .modal table th,
+html.dark .modal table tr {
+    color: #ffffff !important;
+    border-color: #4a4a4a !important;
+}
+
+/* Se os valores estiverem dentro de spans ou divs */
+.modal .table-borderless td span,
+.modal .table-borderless td strong,
+.modal .table-borderless td div {
+    color: inherit !important;
+}
+
+/* Modo escuro para spans e strongs */
+html.dark .modal .table-borderless td span,
+html.dark .modal .table-borderless td strong,
+html.dark .modal .table-borderless td div {
+    color: #ffffff !important;
+}
+
+/* Caso os valores estejam em elementos com classes específicas */
+[class*="venda-id"],
+[class*="cliente"],
+[class*="data-venda"],
+[class*="valor-total"] {
+    color: var(--text-color) !important;
+}
+
+html.dark [class*="venda-id"],
+html.dark [class*="cliente"],
+html.dark [class*="data-venda"],
+html.dark [class*="valor-total"] {
+    color: #ffffff !important;
+}
+
+/* Forçar brutalmente todas as informações da venda */
+html.dark .modal .card-body .table-borderless tr td:last-child {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+html.dark .modal .card-body .table-borderless tr td:first-child {
+    color: #cccccc !important;  /* Labels um pouco mais suaves */
+    font-weight: 500 !important;
+}
+
+/* Debug - borda vermelha para identificar o elemento (remova depois) */
+/*
+html.dark #modal-venda-id,
+html.dark #modal-cliente,
+html.dark #modal-data-venda,
+html.dark #modal-valor-total {
+    border: 2px solid red !important;
+    background-color: yellow !important;
+    color: black !important;
+}
+*/
