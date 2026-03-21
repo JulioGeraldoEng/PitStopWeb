@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clientes', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id'); // SQLite friendly
             $table->string('nome');
-            $table->string('telefone')->unique()->nullable();
+            $table->string('telefone')->nullable();
             $table->text('observacao')->nullable();
             $table->timestamps();
         });

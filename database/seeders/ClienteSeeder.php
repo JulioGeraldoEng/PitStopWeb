@@ -40,5 +40,7 @@ class ClienteSeeder extends Seeder
         foreach ($clientes as $cliente) {
             Cliente::create($cliente);
         }
+        
+        $this->command->info('✅ ' . count($clientes) . ' clientes criados com sucesso!');
     }
 }

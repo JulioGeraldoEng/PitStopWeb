@@ -10,14 +10,19 @@ class AdminUserSeeder extends Seeder
 {
     public function run()
     {
-        User::create([
-            'name' => 'Administrador',
-            'email' => 'admin@pitstop.com',
-            'password' => Hash::make('admin123'),
-            'tipo' => 'admin',
-            'telefone' => '(18) 99798-7391',
-        ]);
-
-        $this->command->info('✅ Usuário admin criado com sucesso!');
+        if (!User::where('email', 'admin@pitstop.com')->exists()) {
+            User::create([
+                'name' => 'Administrador',
+                'email' => 'admin@pitstop.com',
+                'password' => Hash::make('admin123'),
+                'tipo' => 'admin',
+                'telefone' => '(18) 99798-7391',
+                'email_verified_at' => now(),
+            ]);
+            
+            $this->command->info('✅ Usuário admin criado com sucesso!');
+        } else {
+            $this->command->info('⚠️ Usuário admin já existe!');
+        }
     }
 }

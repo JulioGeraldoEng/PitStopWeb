@@ -40,5 +40,7 @@ class ProdutoSeeder extends Seeder
         foreach ($produtos as $produto) {
             Produto::create($produto);
         }
+        
+        $this->command->info('✅ ' . count($produtos) . ' produtos criados com sucesso!');
     }
 }

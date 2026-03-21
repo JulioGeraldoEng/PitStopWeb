@@ -1,5 +1,4 @@
 <?php
-// database/migrations/xxxx_add_whatsapp_column_to_user_settings.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('user_settings', function (Blueprint $table) {
             if (!Schema::hasColumn('user_settings', 'notificacoes_whatsapp')) {
-                $table->boolean('notificacoes_whatsapp')->default(false)->after('notificacoes_sistema');
+                $table->boolean('notificacoes_whatsapp')->default(false);
             }
             
             if (!Schema::hasColumn('user_settings', 'notif_atrasados')) {
@@ -39,14 +38,20 @@ return new class extends Migration
     public function down()
     {
         Schema::table('user_settings', function (Blueprint $table) {
-            $table->dropColumn([
+            $columns = [
                 'notificacoes_whatsapp',
                 'notif_atrasados',
                 'notif_pendentes',
                 'notif_estoque_baixo',
                 'notif_produto_zerado',
                 'frequencia_whatsapp'
-            ]);
+            ];
+            
+            foreach ($columns as $column) {
+                if (Schema::hasColumn('user_settings', $column)) {
+                    $table->dropColumn($column);
+                }
+            }
         });
     }
 };

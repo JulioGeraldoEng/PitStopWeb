@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produtos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id'); // SQLite friendly
             $table->string('nome');
             $table->decimal('preco', 10, 2);
             $table->integer('quantidade')->default(0);
