@@ -281,8 +281,8 @@
                     container.style.display = 'block';
                     tabela.innerHTML = '<tr><td colspan="5" class="text-center"><div class="loading-spinner"></div> Carregando...</td></tr>';
                     
-                    // Buscar clientes via AJAX
-                    fetch('{{ route("clientes.api.index") }}')
+                    // CORREÇÃO 1: Substituir route() por URL direta
+                    fetch('/api/clientes')
                         .then(response => response.json())
                         .then(clientes => {
                             if (clientes.length === 0) {
@@ -322,7 +322,8 @@
                                     modalExcluir.show();
                                     
                                     document.getElementById('btnConfirmarExclusao').onclick = function() {
-                                        fetch(`/clientes/api/${id}`, {
+                                        // CORREÇÃO 2: URL correta para exclusão
+                                        fetch(`/api/clientes/${id}`, {
                                             method: 'DELETE',
                                             headers: {
                                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',

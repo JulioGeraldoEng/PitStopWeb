@@ -122,9 +122,7 @@ class ClienteController extends Controller
     public function verificarCliente(Request $request)
     {
         $nome = $request->get('nome');
-        
         $existe = Cliente::where('nome', $nome)->exists();
-        
         return response()->json(['existe' => $existe]);
     }
 
@@ -133,27 +131,18 @@ class ClienteController extends Controller
         try {
             $request->validate([
                 'nome' => 'required|max:255',
-                'telefone' => [
-                    'nullable',
-                    'string',
-                    'max:20',
-                    function ($attribute, $value, $fail) use ($request) {
-                        if (!empty($value)) {
-                            $exists = Cliente::where('telefone', $value)->exists();
-                            if ($exists) {
-                                $fail('O telefone já está em uso.');
-                            }
-                        }
-                    }
-                ]
+                'telefone' => 'nullable|string|max:20'
             ]);
 
-            $cliente = Cliente::create($request->all());
+            $cliente = Cliente::create([
+                'nome' => $request->nome,
+                'telefone' => $request->telefone,
+                'observacao' => $request->observacao
+            ]);
+            
             return response()->json(['success' => true, 'cliente' => $cliente]);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json(['success' => false, 'errors' => $e->errors()], 422);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Erro ao salvar cliente: ' . $e->getMessage()], 422);
+            return response()->json(['success' => false, 'message' => 'Erro ao salvar cliente.'], 422);
         }
     }
 
