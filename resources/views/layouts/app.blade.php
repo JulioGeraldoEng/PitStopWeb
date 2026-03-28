@@ -61,52 +61,60 @@
     @if(!request()->routeIs('login') && !request()->routeIs('register'))
         <div id="top-bar-container">
             <div class="top-bar">
-                <!-- Logo -->
-                <div class="logo-area">
-                    <div class="logo-icon" style="background: transparent; box-shadow: none;">
-                        <img src="{{ asset('assets/icon/pitstop_icon.ico') }}" alt="PitStop" style="width: 45px; height: 45px;">
+                <!-- Logo e Botão Mobile -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <!-- Botão do Menu Mobile (hambúrguer) -->
+                    <button class="menu-mobile-btn" id="menuMobileBtn" style="background: rgba(255,255,255,0.2); border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; color: white;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <!-- Logo -->
+                    <div class="logo-area">
+                        <div class="logo-icon" style="background: transparent; box-shadow: none;">
+                            <img src="{{ asset('assets/icon/pitstop_icon.ico') }}" alt="PitStop" style="width: 45px; height: 45px;">
+                        </div>
+                        <span class="logo-text">PitStop</span>
                     </div>
-                    <span class="logo-text">PitStop</span>
                 </div>
 
-                <!-- Menu Central -->
+                <!-- Menu Central (desktop) -->
                 <div class="menu-center">
                     <a href="{{ route('dashboard') }}" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <i class="fas fa-home"></i>
-                        <span>Início</span>
+                        <span>{{ __('messages.inicio') }}</span>
                     </a>
                     <a href="{{ route('vendas.index') }}" class="menu-item {{ request()->routeIs('vendas.*') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart"></i>
-                        <span>Vendas</span>
+                        <span>{{ __('messages.vendas') }}</span>
                     </a>
                     <a href="{{ route('recebimentos.index') }}" class="menu-item {{ request()->routeIs('recebimentos.*') ? 'active' : '' }}">
                         <i class="fas fa-hand-holding-usd"></i>
-                        <span>Recebimentos</span>
+                        <span>{{ __('messages.recebimentos') }} </span>
                     </a>
                     <a href="{{ route('relatorios.index') }}" class="menu-item {{ request()->routeIs('relatorios.*') ? 'active' : '' }}">
                         <i class="fas fa-chart-line"></i>
-                        <span>Relatórios</span>
+                        <span>{{ __('messages.relatorios') }}</span>
                     </a>
                     <a href="{{ route('clientes.index') }}" class="menu-item {{ request()->routeIs('clientes.*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
-                        <span>Clientes</span>
+                        <span>{{ __('messages.clientes') }} </span>
                     </a>
                     <a href="{{ route('produtos.index') }}" class="menu-item {{ request()->routeIs('produtos.*') ? 'active' : '' }}">
                         <i class="fas fa-box"></i>
-                        <span>Produtos</span>
+                        <span>{{ __('messages.produtos') }}</span>
                     </a>
                     <a href="{{ route('whatsapp.index') }}" class="menu-item {{ request()->routeIs('whatsapp.*') ? 'active' : '' }}">
                         <i class="fab fa-whatsapp"></i>
-                        <span>WhatsApp</span>
+                        <span>{{ __('messages.whatsapp') }}</span>
                     </a>
                     <a href="{{ route('sobre.index') }}" class="menu-item {{ request()->routeIs('sobre.*') ? 'active' : '' }}">
                         <i class="fas fa-info-circle"></i>
-                        <span>Sobre</span>
+                        <span>{{ __('messages.sobre') }}</span>
                     </a>
                     @if(Auth::user()->tipo === 'admin')
                         <a href="{{ route('admin.dashboard') }}" class="menu-item {{ request()->routeIs('admin.*') ? 'active' : '' }}">
                             <i class="fas fa-shield-alt"></i>
-                            <span>Admin</span>
+                            <span>{{ __('messages.admin') }}</span>
                         </a>
                     @endif
                 </div>
@@ -153,11 +161,12 @@
                             </div>
                         </div>
                         
-                        <!-- 👇 NOVO: SEÇÃO DE IDIOMAS -->
+                        <!-- SEÇÃO DE IDIOMAS -->
+                        <!-- SEÇÃO DE IDIOMAS -->
                         <div class="user-dropdown-divider"></div>
                         <div class="user-dropdown-header">
                             <strong>Idioma / Language</strong>
-                        </div>
+                        </div> 
                         <a href="{{ route('language.switch', 'pt-BR') }}" class="user-dropdown-item {{ session('locale') == 'pt-BR' ? 'active' : '' }}">
                             <img src="{{ asset('assets/img/br.svg') }}" style="width: 20px; height: 15px; margin-right: 8px;">
                             Português
@@ -171,7 +180,7 @@
                             Español
                         </a>
                         
-                        <!-- SAIR (já existente) -->
+                        <!-- SAIR -->
                         <div class="user-dropdown-divider"></div>
                         <a href="#" class="user-dropdown-item danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fas fa-sign-out-alt"></i> Sair
@@ -181,6 +190,56 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Overlay do Menu Mobile -->
+        <div class="menu-mobile-overlay" id="menuMobileOverlay"></div>
+
+        <!-- Menu Mobile (side menu) -->
+        <div class="menu-mobile" id="menuMobile">
+            <div class="menu-mobile-header">
+                <h3>Menu</h3>
+            </div>
+            <div class="menu-mobile-items">
+                <a href="{{ route('dashboard') }}" class="menu-mobile-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <i class="fas fa-home"></i>
+                    <span>Início</span>
+                </a>
+                <a href="{{ route('vendas.index') }}" class="menu-mobile-item {{ request()->routeIs('vendas.*') ? 'active' : '' }}">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Vendas</span>
+                </a>
+                <a href="{{ route('recebimentos.index') }}" class="menu-mobile-item {{ request()->routeIs('recebimentos.*') ? 'active' : '' }}">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Recebimentos</span>
+                </a>
+                <a href="{{ route('relatorios.index') }}" class="menu-mobile-item {{ request()->routeIs('relatorios.*') ? 'active' : '' }}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Relatórios</span>
+                </a>
+                <a href="{{ route('clientes.index') }}" class="menu-mobile-item {{ request()->routeIs('clientes.*') ? 'active' : '' }}">
+                    <i class="fas fa-users"></i>
+                    <span>Clientes</span>
+                </a>
+                <a href="{{ route('produtos.index') }}" class="menu-mobile-item {{ request()->routeIs('produtos.*') ? 'active' : '' }}">
+                    <i class="fas fa-box"></i>
+                    <span>Produtos</span>
+                </a>
+                <a href="{{ route('whatsapp.index') }}" class="menu-mobile-item {{ request()->routeIs('whatsapp.*') ? 'active' : '' }}">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="{{ route('sobre.index') }}" class="menu-mobile-item {{ request()->routeIs('sobre.*') ? 'active' : '' }}">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Sobre</span>
+                </a>
+                @if(Auth::user()->tipo === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" class="menu-mobile-item {{ request()->routeIs('admin.*') ? 'active' : '' }}">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Admin</span>
+                    </a>
+                @endif
             </div>
         </div>
     @endif
@@ -198,9 +257,10 @@
     <script src="{{ asset('assets/js/global-scripts.js') }}" defer></script>
     <script src="{{ asset('assets/js/datepicker-init.js') }}"></script>
     
-    <!-- Script da Top Bar -->
+    <!-- Script da Top Bar e Menu Mobile -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Dropdown do usuário
             const userBtn = document.getElementById('userDropdownBtn');
             const userDropdown = document.getElementById('userDropdown');
             
@@ -217,6 +277,106 @@
                 userDropdown.addEventListener('click', function(e) {
                     e.stopPropagation();
                 });
+            }
+            
+            // ========== MENU MOBILE MELHORADO ==========
+            const menuMobileBtn = document.getElementById('menuMobileBtn');
+            const menuMobile = document.getElementById('menuMobile');
+            const menuMobileOverlay = document.getElementById('menuMobileOverlay');
+            
+            // Verificar se todos os elementos existem
+            if (menuMobileBtn && menuMobile && menuMobileOverlay) {
+                
+                // Função para abrir o menu
+                function openMenu() {
+                    menuMobile.classList.add('open');
+                    menuMobileOverlay.style.display = 'block';
+                    document.body.style.overflow = 'hidden'; // Impede scroll da página
+                    
+                    // Pequeno delay para garantir a animação
+                    setTimeout(() => {
+                        document.body.style.touchAction = 'none';
+                    }, 10);
+                }
+                
+                // Função para fechar o menu
+                function closeMenu() {
+                    menuMobile.classList.remove('open');
+                    menuMobileOverlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                    document.body.style.touchAction = '';
+                }
+                
+                // Função para alternar o menu
+                function toggleMenu() {
+                    if (menuMobile.classList.contains('open')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                }
+                
+                // Evento de clique no botão hambúrguer
+                menuMobileBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+                
+                // Evento de clique no overlay (fundo escuro)
+                menuMobileOverlay.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeMenu();
+                });
+                
+                // Fechar menu ao clicar em qualquer link do menu mobile
+                const mobileLinks = document.querySelectorAll('.menu-mobile-item');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        closeMenu();
+                    });
+                });
+                
+                // Fechar menu ao redimensionar a tela para desktop (acima de 768px)
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && menuMobile.classList.contains('open')) {
+                        closeMenu();
+                    }
+                });
+                
+                // Impedir que o menu feche ao clicar dentro dele
+                menuMobile.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+                
+                // Fechar menu ao pressionar a tecla ESC
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && menuMobile.classList.contains('open')) {
+                        closeMenu();
+                    }
+                });
+            }
+            
+            // ========== CORREÇÃO DO PADDING DO MAIN ==========
+            function adjustMainPadding() {
+                const topBar = document.getElementById('top-bar-container');
+                const mainContent = document.querySelector('main');
+                
+                if (topBar && mainContent) {
+                    const topBarHeight = topBar.offsetHeight;
+                    mainContent.style.paddingTop = topBarHeight + 'px';
+                }
+            }
+            
+            // Ajustar padding ao carregar e ao redimensionar
+            adjustMainPadding();
+            window.addEventListener('resize', adjustMainPadding);
+            
+            // Observar mudanças no DOM (caso a top bar mude de altura)
+            const observer = new MutationObserver(adjustMainPadding);
+            const topBarContainer = document.getElementById('top-bar-container');
+            if (topBarContainer) {
+                observer.observe(topBarContainer, { attributes: true, childList: true, subtree: true });
             }
         });
     </script>

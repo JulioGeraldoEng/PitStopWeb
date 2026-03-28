@@ -28,7 +28,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/FormatarTelefone.php"
+            "app/Helpers/FormatarTelefone.php",
+            "app/Helpers/helpers.php"
         ]
     },
     "autoload-dev": {

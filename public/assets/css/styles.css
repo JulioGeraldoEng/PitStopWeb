@@ -10,13 +10,14 @@ body {
     background-color: rgb(173, 216, 230);
     text-align: center;
     color: #000000;
-    padding-top: 70px;      /* Espaço para top-bar fixa */
-    padding-bottom: 60px;    /* Espaço para footer fixo */
-    margin: 0;               /* ← IMPORTANTE: remover margem */
+    padding-top: 70px;
+    padding-bottom: 60px;
+    margin: 0;
     min-height: 100vh;
 }
 
 main {
+    width: 90%;
     max-width: 1200px;
     margin: 20px auto;
     background: rgba(240, 240, 240, 0.7);
@@ -27,6 +28,7 @@ main {
 
 /* ==================== FORMULÁRIOS ==================== */
 .formulario {
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
     text-align: left;
@@ -350,7 +352,6 @@ input {
 
 /* ==================== VARIÁVEIS DE TEMA ==================== */
 :root {
-    /* Cores do modo claro */
     --bg-color: rgb(173, 216, 230);
     --card-bg: rgba(240, 240, 240, 0.9);
     --text-color: #000000;
@@ -363,7 +364,6 @@ input {
     --hover-bg: #f8f9fa;
 }
 
-/* Modo escuro */
 html.dark {
     --bg-color: #1a1a2e;
     --card-bg: #16213e;
@@ -405,8 +405,6 @@ body {
 }
 
 /* ==================== CORREÇÃO DOS CAMPOS DATEPICKER ==================== */
-
-/* Ajuste para TODOS os campos datepicker-field */
 .datepicker-field {
     height: 38px !important;
     padding: 0.375rem 0.75rem !important;
@@ -416,12 +414,10 @@ body {
     border-bottom-left-radius: 0 !important;
 }
 
-/* Ajuste para o input-group inteiro */
 .input-group:has(.datepicker-field) {
     height: 38px !important;
 }
 
-/* Ajuste para o ícone do lado */
 .input-group:has(.datepicker-field) .input-group-text {
     height: 38px !important;
     display: flex !important;
@@ -433,21 +429,282 @@ body {
     border: none !important;
 }
 
-/* Modo escuro para o ícone */
 html.dark .input-group:has(.datepicker-field) .input-group-text {
     background: linear-gradient(135deg, #1a2634 0%, #0f1a24 100%) !important;
     color: white !important;
     border: 1px solid var(--border-color) !important;
 }
 
-/* Ajuste para o label */
 label[for="{{ $id }}"] {
     color: var(--text-color);
     margin-bottom: 5px;
     display: block;
 }
 
-/* Responsividade */
+/* ==================== MEDIA QUERIES RESPONSIVAS ==================== */
+
+/* Celulares (até 767px) */
+@media (max-width: 767px) {
+    body {
+        padding-top: 60px;
+        padding-bottom: 80px;
+        font-size: 14px;
+    }
+    
+    main {
+        width: 95%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+    
+    .formulario {
+        max-width: 100%;
+    }
+    
+    .form-linha {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .form-linha .campo,
+    .form-linha .botao {
+        width: 100%;
+        min-width: 100%;
+    }
+    
+    .form-linha .botao button,
+    .form-linha button {
+        width: 100%;
+    }
+    
+    .menu button {
+        padding: 8px 15px;
+        margin: 5px;
+        font-size: 14px;
+        width: calc(50% - 10px);
+    }
+    
+    .btn-secundario {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    #sugestoes-cliente,
+    #sugestoes-produto {
+        min-width: 250px;
+        max-width: 90vw;
+    }
+    
+    .input-group {
+        flex-wrap: wrap;
+    }
+    
+    .input-group-text {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    #app-footer {
+        padding: 8px 5px;
+        font-size: 0.75em;
+    }
+    
+    #app-footer-content p {
+        white-space: normal;
+        word-wrap: break-word;
+    }
+    
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table-responsive table {
+        width: 100%;
+        min-width: 600px;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+    
+    .modal-content {
+        border-radius: 8px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+}
+
+/* Tablets (768px a 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    main {
+        width: 95%;
+        margin: 15px auto;
+        padding: 18px;
+    }
+    
+    .form-linha {
+        gap: 15px;
+    }
+    
+    .form-linha .campo {
+        min-width: 120px;
+    }
+    
+    .menu button {
+        padding: 10px 18px;
+        margin: 8px;
+    }
+    
+    .card-body {
+        padding: 1.2rem !important;
+    }
+    
+    #sugestoes-cliente,
+    #sugestoes-produto {
+        min-width: 280px;
+    }
+}
+
+/* Desktop pequeno (1024px a 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+    main {
+        max-width: 1000px;
+        width: 95%;
+    }
+    
+    .formulario {
+        max-width: 900px;
+    }
+}
+
+/* Desktop grande (1280px ou mais) */
+@media (min-width: 1280px) {
+    main {
+        max-width: 1200px;
+        width: 90%;
+    }
+    
+    .formulario {
+        max-width: 1100px;
+    }
+    
+    body {
+        font-size: 16px;
+    }
+}
+
+/* Telas muito pequenas (até 480px) */
+@media (max-width: 480px) {
+    body {
+        padding-top: 55px;
+        padding-bottom: 70px;
+        font-size: 13px;
+    }
+    
+    main {
+        width: 96%;
+        padding: 12px;
+        margin: 8px auto;
+    }
+    
+    .menu button {
+        padding: 6px 12px;
+        font-size: 12px;
+        width: calc(100% - 10px);
+        margin: 5px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    h3 {
+        font-size: 1.1rem;
+    }
+    
+    .btn-alterar,
+    .btn-remover,
+    .btn-salvar {
+        font-size: 16px;
+        padding: 5px;
+    }
+    
+    .input-group-text {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    input, button {
+        font-size: 14px;
+    }
+}
+
+/* Orientação paisagem em celulares */
+@media (max-width: 767px) and (orientation: landscape) {
+    body {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    
+    main {
+        margin: 5px auto;
+        padding: 10px;
+    }
+    
+    .form-linha {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .form-linha .campo {
+        min-width: 150px;
+        flex: 1;
+    }
+}
+
+/* Melhoria para botões em touch */
+@media (hover: none) and (pointer: coarse) {
+    button, 
+    .btn,
+    .btn-alterar,
+    .btn-remover,
+    .btn-salvar,
+    .menu button {
+        min-height: 44px;
+    }
+    
+    .form-linha .botao button,
+    .form-linha button {
+        min-height: 44px;
+    }
+    
+    a, button {
+        padding: 8px 12px;
+    }
+}
+
+/* Ajustes responsivos para datepicker */
 @media (max-width: 768px) {
     .datepicker-field,
     .input-group:has(.datepicker-field) {

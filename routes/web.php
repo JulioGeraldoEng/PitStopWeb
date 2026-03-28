@@ -13,6 +13,7 @@ use App\Http\Controllers\BackupController; // Opcional
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Helpers\WPPConnect;
+use App\Http\Controllers\LanguageController; // ADICIONAR ESTA LINHA
 
 // ==================== PÁGINA INICIAL ====================
 Route::get('/', function () {

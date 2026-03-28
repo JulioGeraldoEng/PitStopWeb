@@ -29,6 +29,7 @@ body .top-bar {
     height: 100% !important;
     max-width: 1400px !important;
     margin: 0 auto !important;
+    position: relative !important;
 }
 
 /* Logo */
@@ -46,9 +47,6 @@ body .logo-icon {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    color: #667eea !important;
-    font-size: 1.2rem !important;
-    box-shadow: none !important;
     transition: transform 0.3s ease !important;
 }
 
@@ -60,8 +58,8 @@ body .logo-icon img {
 
 /* LOGO - SEM FILTRO NO MODO ESCURO (mantém cores originais) */
 html.dark .logo-icon img {
-    filter: none !important;  /* Remove qualquer filtro */
-    opacity: 1 !important;     /* Mantém opacidade normal */
+    filter: none !important;
+    opacity: 1 !important;
 }
 
 body .logo-text {
@@ -71,7 +69,7 @@ body .logo-text {
     letter-spacing: 0.5px !important;
 }
 
-/* Menu Central */
+/* Menu Central - SEMPRE VISÍVEL EM DESKTOP */
 body .menu-center {
     display: flex !important;
     gap: 5px !important;
@@ -79,6 +77,110 @@ body .menu-center {
     justify-content: center !important;
 }
 
+/* Botão do Menu Mobile (hambúrguer) - OCULTO EM DESKTOP */
+body .menu-mobile-btn {
+    display: none !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    cursor: pointer !important;
+    color: white !important;
+    font-size: 1.2rem !important;
+    transition: all 0.3s ease !important;
+}
+
+body .menu-mobile-btn:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: scale(1.05);
+}
+
+/* Menu Mobile Overlay */
+body .menu-mobile-overlay {
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 9998 !important;
+    transition: all 0.3s ease !important;
+}
+
+body .menu-mobile {
+    position: fixed !important;
+    top: 0 !important;
+    left: -100% !important; /* Mudado de -280px para -100% para garantir que suma completamente */
+    width: 280px !important;
+    max-width: 85% !important;
+    height: 100% !important;
+    background: var(--card-bg, #ffffff) !important;
+    z-index: 10000 !important;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2) !important;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow-y: auto !important;
+    display: block !important; /* Garantir que o elemento exista mesmo fechado */
+}
+
+/* Modo escuro para o menu mobile */
+html.dark .menu-mobile {
+    background: #1a1a2e !important;
+}
+
+body .menu-mobile.open {
+    left: 0 !important;
+}
+
+body .menu-mobile-header {
+    padding: 20px !important;
+    background: var(--topbar-gradient) !important;
+    color: white !important;
+    text-align: center !important;
+}
+
+body .menu-mobile-header h3 {
+    margin: 0 !important;
+    font-size: 1.2rem !important;
+}
+
+body .menu-mobile-items {
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+body .menu-mobile-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 15px !important;
+    border-radius: 8px !important;
+    color: var(--text-color, #333) !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    background: rgba(102, 126, 234, 0.08) !important;
+}
+
+body .menu-mobile-item i {
+    width: 24px !important;
+    font-size: 1.1rem !important;
+}
+
+body .menu-mobile-item:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    transform: translateX(8px) !important;
+}
+
+body .menu-mobile-item.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+/* Menu Items - Estilos base */
 body .menu-item {
     display: flex !important;
     align-items: center !important;
@@ -185,13 +287,19 @@ body .user-dropdown {
     top: calc(100% + 8px) !important;
     right: 0 !important;
     width: 220px !important;
-    background: var(--card-bg) !important;
+    background: var(--card-bg, #ffffff) !important;
     border-radius: 12px !important;
     box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
     padding: 8px 0 !important;
     display: none !important;
-    z-index: 1000 !important;
-    border: 1px solid var(--border-color) !important;
+    z-index: 1001 !important;
+    border: 1px solid var(--border-color, #e0e0e0) !important;
+}
+
+/* Modo escuro para dropdown */
+html.dark .user-dropdown {
+    background: #1a1a2e !important;
+    border-color: #2d2d3a !important;
 }
 
 body .user-dropdown.show {
@@ -201,16 +309,20 @@ body .user-dropdown.show {
 
 body .user-dropdown-header {
     padding: 12px 15px !important;
-    border-bottom: 1px solid var(--border-color) !important;
+    border-bottom: 1px solid var(--border-color, #e0e0e0) !important;
+}
+
+html.dark .user-dropdown-header {
+    border-color: #2d2d3a !important;
 }
 
 body .user-dropdown-header strong {
-    color: var(--text-color) !important;
+    color: var(--text-color, #333) !important;
     font-size: 0.95rem !important;
 }
 
 body .user-dropdown-header small {
-    color: var(--text-muted) !important;
+    color: var(--text-muted, #666) !important;
     font-size: 0.8rem !important;
 }
 
@@ -219,10 +331,11 @@ body .user-dropdown-item {
     align-items: center !important;
     gap: 8px !important;
     padding: 10px 15px !important;
-    color: var(--text-color) !important;
+    color: var(--text-color, #333) !important;
     text-decoration: none !important;
     font-size: 0.9rem !important;
     transition: background 0.3s ease !important;
+    cursor: pointer !important;
 }
 
 body .user-dropdown-item i {
@@ -232,7 +345,11 @@ body .user-dropdown-item i {
 }
 
 body .user-dropdown-item:hover {
-    background: var(--hover-bg) !important;
+    background: var(--hover-bg, #f5f5f5) !important;
+}
+
+html.dark .user-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
 body .user-dropdown-item.danger {
@@ -248,27 +365,126 @@ body .user-dropdown-item.active {
     color: white !important;
 }
 
-body .user-dropdown-item.active i,
-body .user-dropdown-item.active img {
-    filter: brightness(0) invert(1);
+body .user-dropdown-item.active i {
+    color: white !important;
 }
 
 body .user-dropdown-divider {
     height: 1px !important;
-    background: var(--border-color) !important;
+    background: var(--border-color, #e0e0e0) !important;
     margin: 8px 0 !important;
 }
 
-/* Responsividade */
-@media (max-width: 1024px) {
+/* ==================== RESPONSIVIDADE ==================== */
+
+/* Tablets (768px a 1024px) - Menu central reduzido */
+@media (max-width: 1024px) and (min-width: 769px) {
     body .menu-center {
-        display: none !important;
+        gap: 3px !important;
+    }
+    
+    body .menu-item {
+        padding: 4px 8px !important;
+        font-size: 0.8rem !important;
+    }
+    
+    body .menu-item i {
+        font-size: 0.9rem !important;
+    }
+    
+    body .logo-text {
+        font-size: 1.1rem !important;
     }
 }
 
+/* Celulares (até 768px) - Mostrar botão hambúrguer */
 @media (max-width: 768px) {
+    :root {
+        --topbar-height: 60px !important;
+    }
+    
+    body #top-bar-container {
+        height: var(--topbar-height) !important;
+    }
+    
+    body .top-bar {
+        padding: 0 15px !important;
+    }
+    
+    /* Esconder menu central */
+    body .menu-center {
+        display: none !important;
+    }
+    
+    /* Mostrar botão do menu mobile */
+    body .menu-mobile-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Ajustar logo para caber melhor */
+    body .logo-text {
+        font-size: 1rem !important;
+    }
+    
+    body .logo-icon {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    
+    body .logo-icon img {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    /* Esconder nome do usuário em telas pequenas */
     body .user-name {
         display: none !important;
+    }
+    
+    body .user-dropdown-btn {
+        padding: 4px 8px !important;
+    }
+    
+    body .user-avatar {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    /* Ajustar main para não ficar atrás da top bar */
+    main {
+        padding-top: 60px !important;
+    }
+}
+
+/* Celulares muito pequenos (até 480px) */
+@media (max-width: 480px) {
+    body .top-bar {
+        padding: 0 10px !important;
+    }
+    
+    body .logo-text {
+        font-size: 0.9rem !important;
+    }
+    
+    body .logo-icon {
+        width: 25px !important;
+        height: 25px !important;
+    }
+    
+    body .logo-icon img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    
+    body .menu-mobile {
+        width: 260px !important;
+    }
+    
+    body .menu-mobile-item {
+        padding: 10px 12px !important;
+        font-size: 0.9rem !important;
     }
 }
 
@@ -281,5 +497,12 @@ body .user-dropdown-divider {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Garantir que o menu mobile funcione corretamente em todas as telas */
+@media (max-width: 768px) {
+    body .menu-mobile {
+        display: block !important;
     }
 }

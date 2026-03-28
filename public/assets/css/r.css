@@ -16,6 +16,11 @@ body #top-bar-container {
     height: var(--topbar-height) !important;
 }
 
+/* MODO ESCURO - Topbar mais escura */
+html.dark #top-bar-container {
+    background: linear-gradient(135deg, #2c425c 0%, #4f7573 100%) !important;
+}
+
 body .top-bar {
     display: flex !important;
     align-items: center !important;
@@ -36,15 +41,27 @@ body .logo-area {
 body .logo-icon {
     width: 35px !important;
     height: 35px !important;
-    background: white !important;
+    background: transparent !important;
     border-radius: 8px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     color: #667eea !important;
     font-size: 1.2rem !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: none !important;
     transition: transform 0.3s ease !important;
+}
+
+body .logo-icon img {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain;
+}
+
+/* LOGO - SEM FILTRO NO MODO ESCURO (mantém cores originais) */
+html.dark .logo-icon img {
+    filter: none !important;  /* Remove qualquer filtro */
+    opacity: 1 !important;     /* Mantém opacidade normal */
 }
 
 body .logo-text {
@@ -77,6 +94,12 @@ body .menu-item {
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
+/* Menu items no modo escuro */
+html.dark .menu-item {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
 body .menu-item i {
     font-size: 1rem !important;
     transition: transform 0.3s ease !important;
@@ -88,14 +111,25 @@ body .menu-item:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
 }
 
+/* Hover no modo escuro */
+html.dark .menu-item:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
 body .menu-item.active {
     background: white !important;
     color: #667eea !important;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
 }
 
-body .menu-item.active i {
-    color: #667eea !important;
+/* Active no modo escuro */
+html.dark .menu-item.active {
+    background: #2c3e50 !important;
+    color: white !important;
+}
+
+html.dark .menu-item.active i {
+    color: white !important;
 }
 
 /* Área do Usuário */
@@ -114,6 +148,12 @@ body .user-dropdown-btn {
     color: white !important;
     cursor: pointer !important;
     transition: all 0.3s ease !important;
+}
+
+/* Dropdown btn no modo escuro */
+html.dark .user-dropdown-btn {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 body .user-avatar {
@@ -139,17 +179,19 @@ body .user-name {
     color: white !important;
 }
 
+/* ===== DROPDOWN COM VARIÁVEIS ===== */
 body .user-dropdown {
     position: absolute !important;
     top: calc(100% + 8px) !important;
     right: 0 !important;
     width: 220px !important;
-    background: white !important;
+    background: var(--card-bg) !important;
     border-radius: 12px !important;
     box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
     padding: 8px 0 !important;
     display: none !important;
     z-index: 1000 !important;
+    border: 1px solid var(--border-color) !important;
 }
 
 body .user-dropdown.show {
@@ -159,16 +201,16 @@ body .user-dropdown.show {
 
 body .user-dropdown-header {
     padding: 12px 15px !important;
-    border-bottom: 1px solid #e9ecef !important;
+    border-bottom: 1px solid var(--border-color) !important;
 }
 
 body .user-dropdown-header strong {
-    color: #333 !important;
+    color: var(--text-color) !important;
     font-size: 0.95rem !important;
 }
 
 body .user-dropdown-header small {
-    color: #666 !important;
+    color: var(--text-muted) !important;
     font-size: 0.8rem !important;
 }
 
@@ -177,7 +219,7 @@ body .user-dropdown-item {
     align-items: center !important;
     gap: 8px !important;
     padding: 10px 15px !important;
-    color: #333 !important;
+    color: var(--text-color) !important;
     text-decoration: none !important;
     font-size: 0.9rem !important;
     transition: background 0.3s ease !important;
@@ -190,7 +232,7 @@ body .user-dropdown-item i {
 }
 
 body .user-dropdown-item:hover {
-    background: #f8f9fa !important;
+    background: var(--hover-bg) !important;
 }
 
 body .user-dropdown-item.danger {
@@ -201,9 +243,19 @@ body .user-dropdown-item.danger i {
     color: #dc3545 !important;
 }
 
+body .user-dropdown-item.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+body .user-dropdown-item.active i,
+body .user-dropdown-item.active img {
+    filter: brightness(0) invert(1);
+}
+
 body .user-dropdown-divider {
     height: 1px !important;
-    background: #e9ecef !important;
+    background: var(--border-color) !important;
     margin: 8px 0 !important;
 }
 
@@ -230,26 +282,4 @@ body .user-dropdown-divider {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-body .user-dropdown-item.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    color: white !important;
-}
-
-body .user-dropdown-item.active i,
-body .user-dropdown-item.active img {
-    filter: brightness(0) invert(1);
-}
-
-body .logo-icon {
-    background: transparent !important;  /* Remove fundo branco */
-    box-shadow: none !important;        /* Remove sombra */
-    padding: 0 !important;
-}
-
-body .logo-icon img {
-    width: 35px;
-    height: 35px;
-    object-fit: contain;
 }

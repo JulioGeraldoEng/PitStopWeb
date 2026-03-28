@@ -1,23 +1,55 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
+    // Main menu
+    'inicio' => 'Home',
     'vendas' => 'Sales',
-    'recebimentos' => 'Receivables',
+    'recebimentos' => 'Receipts',
     'relatorios' => 'Reports',
-    'clientes' => 'Clients',
+    'clientes' => 'Customers',
     'produtos' => 'Products',
     'whatsapp' => 'WhatsApp',
     'sobre' => 'About',
-    'perfil' => 'Profile',
+    'admin' => 'Admin',
+    
+    // Profile and settings
+    'meu_perfil' => 'My Profile',
     'configuracoes' => 'Settings',
+    'area_admin' => 'Admin Area',
     'sair' => 'Logout',
-    'welcome' => 'Welcome',
-    'nova_venda' => 'New Sale',
-    'buscar' => 'Search',
-    'limpar' => 'Clear',
-    'editar' => 'Edit',
-    'excluir' => 'Delete',
+    'idioma' => 'Language',
+    
+    // Common messages
+    'bem_vindo' => 'Welcome',
+    'dashboard' => 'Dashboard',
     'salvar' => 'Save',
     'cancelar' => 'Cancel',
+    'excluir' => 'Delete',
+    'editar' => 'Edit',
+    'voltar' => 'Back',
+    
+    // Tables
+    'nome' => 'Name',
+    'email' => 'Email',
+    'telefone' => 'Phone',
+    'endereco' => 'Address',
+    'acao' => 'Action',
+    
+    // Products
+    'produto' => 'Product',
+    'preco' => 'Price',
+    'estoque' => 'Stock',
+    'categoria' => 'Category',
+    
+    // Sales
+    'data' => 'Date',
+    'total' => 'Total',
+    'status' => 'Status',
+    'pagamento' => 'Payment',
+    
+    // WhatsApp
+    'conectar' => 'Connect',
+    'desconectar' => 'Disconnect',
+    'status_conexao' => 'Connection Status',
+    'enviar_mensagem' => 'Send Message',
 ];

@@ -33,8 +33,77 @@ document.addEventListener('DOMContentLoaded', () => {
         mudarCorBody(corSalva);
     }
 
-    //carregarTopBar(); // ← chamada do carregador da top-bar
+    // ========== NOVO: INICIALIZAR MENU MOBILE ==========
+    initMobileMenu();
+    
+    // ========== NOVO: GARANTIR QUE O MAIN NÃO FIQUE SOBREPOSTO ==========
+    adjustMainPadding();
+    
+    // ========== NOVO: AJUSTAR AO REDIMENSIONAR TELA ==========
+    window.addEventListener('resize', function() {
+        adjustMainPadding();
+        // Fechar menu mobile se estiver aberto em telas maiores
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
+    
+    //carregarTopBar(); // ← chamada do carregador da top-bar (se necessário)
 });
+
+// ========== NOVAS FUNÇÕES PARA MENU MOBILE ==========
+function initMobileMenu() {
+    const menuMobileBtn = document.getElementById('menuMobileBtn');
+    const menuMobile = document.getElementById('menuMobile');
+    const menuMobileOverlay = document.getElementById('menuMobileOverlay');
+    
+    if (!menuMobileBtn || !menuMobile || !menuMobileOverlay) return;
+    
+    function toggleMenu() {
+        menuMobile.classList.toggle('open');
+        menuMobileOverlay.style.display = menuMobile.classList.contains('open') ? 'block' : 'none';
+        
+        // Impedir scroll quando menu estiver aberto
+        if (menuMobile.classList.contains('open')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+    
+    function closeMenu() {
+        menuMobile.classList.remove('open');
+        menuMobileOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    
+    menuMobileBtn.addEventListener('click', toggleMenu);
+    menuMobileOverlay.addEventListener('click', closeMenu);
+    
+    // Fechar menu ao clicar em qualquer item
+    document.querySelectorAll('.menu-mobile-item').forEach(item => {
+        item.addEventListener('click', closeMenu);
+    });
+}
+
+function closeMobileMenu() {
+    const menuMobile = document.getElementById('menuMobile');
+    const menuMobileOverlay = document.getElementById('menuMobileOverlay');
+    
+    if (menuMobile) menuMobile.classList.remove('open');
+    if (menuMobileOverlay) menuMobileOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+function adjustMainPadding() {
+    const topBar = document.getElementById('top-bar-container');
+    const main = document.querySelector('main');
+    
+    if (topBar && main) {
+        const topBarHeight = topBar.offsetHeight;
+        main.style.paddingTop = `${topBarHeight}px`;
+    }
+}
 
 function aplicarCorSidebarComBaseNoBody() {
     const corBody = getComputedStyle(document.body).backgroundColor;
@@ -80,6 +149,10 @@ async function carregarTopBar() {
         if (!response.ok) throw new Error('Erro ao carregar top-bar');
         const html = await response.text();
         container.innerHTML = html;
+        
+        // ========== NOVO: REINICIALIZAR MENU MOBILE APÓS CARREGAR ==========
+        initMobileMenu();
+        adjustMainPadding();
     } catch (erro) {
         console.error('Falha ao carregar a top-bar:', erro);
     }
@@ -119,7 +192,7 @@ function exibirMensagem(texto, tipo) {
   div.style.padding = '12px 20px';
   div.style.borderRadius = '10px';
   div.style.fontWeight = 'bold';
-  div.style.zIndex = '9999';
+  div.style.zIndex = '10001'; // Aumentado para ficar acima do menu mobile
   div.style.color = '#fff';
   div.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
   div.style.fontSize = '14px';
@@ -187,6 +260,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (themeIcon) themeIcon.className = 'fas fa-sun';
             if (themeText) themeText.textContent = 'Modo Claro';
         }
+        
+        // ========== NOVO: ATUALIZAR CORES DO MENU MOBILE ==========
+        updateMobileMenuColors();
     }
     
     // Evento de clique no item do dropdown
@@ -204,3 +280,17 @@ document.addEventListener('DOMContentLoaded', function() {
         darkModeSwitch.addEventListener('change', toggleTheme);
     }
 });
+
+// ========== NOVA FUNÇÃO: ATUALIZAR CORES DO MENU MOBILE ==========
+function updateMobileMenuColors() {
+    const menuMobile = document.getElementById('menuMobile');
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    if (menuMobile) {
+        if (isDark) {
+            menuMobile.style.backgroundColor = '#1a1f2e';
+        } else {
+            menuMobile.style.backgroundColor = '#ffffff';
+        }
+    }
+}
