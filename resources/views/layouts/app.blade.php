@@ -291,24 +291,38 @@
                 function openMenu() {
                     menuMobile.classList.add('open');
                     menuMobileOverlay.style.display = 'block';
-                    document.body.style.overflow = 'hidden'; // Impede scroll da página
+                    // Impedir scroll da página de forma mais eficaz
+                    document.body.style.overflow = 'hidden';
+                    document.body.style.position = 'fixed';
+                    document.body.style.width = '100%';
+                    document.body.style.top = `-${window.scrollY}px`;
                     
-                    // Pequeno delay para garantir a animação
-                    setTimeout(() => {
-                        document.body.style.touchAction = 'none';
-                    }, 10);
+                    // Guardar a posição do scroll para restaurar depois
+                    window.scrollYPosition = window.scrollY;
                 }
                 
                 // Função para fechar o menu
                 function closeMenu() {
                     menuMobile.classList.remove('open');
                     menuMobileOverlay.style.display = 'none';
+                    // Restaurar scroll
                     document.body.style.overflow = '';
-                    document.body.style.touchAction = '';
+                    document.body.style.position = '';
+                    document.body.style.width = '';
+                    
+                    // Restaurar a posição do scroll
+                    if (window.scrollYPosition !== undefined) {
+                        window.scrollTo(0, window.scrollYPosition);
+                    }
                 }
                 
                 // Função para alternar o menu
-                function toggleMenu() {
+                function toggleMenu(e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    
                     if (menuMobile.classList.contains('open')) {
                         closeMenu();
                     } else {
@@ -317,10 +331,12 @@
                 }
                 
                 // Evento de clique no botão hambúrguer
-                menuMobileBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleMenu();
+                menuMobileBtn.addEventListener('click', toggleMenu);
+                
+                // Evento de toque no botão para celular (garantir que funciona)
+                menuMobileBtn.addEventListener('touchstart', function(e) {
+                    // Não faz nada, só garante que o evento de clique vai funcionar
+                    // Isso ajuda em alguns dispositivos móveis
                 });
                 
                 // Evento de clique no overlay (fundo escuro)
@@ -355,6 +371,14 @@
                         closeMenu();
                     }
                 });
+                
+                // Debug: mostrar no console que o menu foi inicializado
+                console.log('✅ Menu mobile inicializado com sucesso');
+            } else {
+                console.error('❌ Elementos do menu não encontrados');
+                console.log('menuMobileBtn:', menuMobileBtn);
+                console.log('menuMobile:', menuMobile);
+                console.log('menuMobileOverlay:', menuMobileOverlay);
             }
             
             // ========== CORREÇÃO DO PADDING DO MAIN ==========
